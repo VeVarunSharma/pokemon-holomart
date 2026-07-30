@@ -2,15 +2,15 @@
   "$schema": "./roadmap.schema.json",
   "schemaVersion": "1.0.0",
   "metadata": {
-    "product": "Signal Desk",
+    "product": "HoloMart",
     "title": "Evidence-backed synthetic product roadmap",
-    "updatedAt": "2026-07-29T23:54:18Z",
+    "updatedAt": "2026-07-30T14:00:00Z",
     "authoritative": true,
     "provenance": {
       "label": "SYNTHETIC / DEMO-ONLY",
-      "description": "All initiatives, evidence references, dates, owners, and issue drafts are fictional planning material created for a Copilot-for-Product demo.",
+      "description": "All initiatives, evidence references, dates, owners, prices, and issue drafts are fictional planning material created for a Copilot-for-Product demo.",
       "limitations": [
-        "No item is a customer promise or production commitment.",
+        "No item is a shopper, seller, or production commitment.",
         "Evidence is deliberately small, invented, and contradictory.",
         "Targets are proposed decision aids rather than measured baselines.",
         "Human decision flags must not be resolved automatically."
@@ -18,10 +18,10 @@
     },
     "sources": [
       "./brief.md",
-      "./saved-views-spec.md",
-      "./decisions/0001-saved-views-local-preview.md",
+      "./saved-searches-spec.md",
+      "./decisions/0001-saved-searches-local-preview.md",
       "./evidence/README.md",
-      "../design/saved-views-ux-brief.md",
+      "../design/saved-searches-ux-brief.md",
       "../design/local-design-context.json"
     ]
   },
@@ -47,9 +47,9 @@
   ],
   "initiatives": [
     {
-      "id": "init-saved-views-preview",
-      "title": "Harden personal Saved Views preview",
-      "outcome": "Frequent feedback triagers can safely reuse and understand a browser-local filter configuration without mistaking it for synced or shared state.",
+      "id": "init-saved-searches-preview",
+      "title": "Harden personal Saved Searches preview",
+      "outcome": "Repeat collectors can safely reuse and understand a browser-local card search without mistaking it for account sync or a price alert.",
       "horizon": "now",
       "status": "in-progress",
       "confidence": "medium",
@@ -60,43 +60,49 @@
         "start": "2026-08-03",
         "end": "2026-09-25"
       },
-      "ownerRole": "Product manager, Feedback workflows",
+      "ownerRole": "Product manager, Collector experience",
       "dependencies": [],
       "evidenceReferences": [
         {
           "id": "CI-01",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-01--repeat-triage-setup",
-          "summary": "A fictional frequent triager repeatedly rebuilds the same filters."
+          "path": "./evidence/shopper-research-signals.md#ci-01--repeat-chase-card-search",
+          "summary": "A fictional collector repeatedly rebuilds the same narrow chase-card search."
         },
         {
           "id": "CI-03",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-03--provenance-and-stale-filters",
-          "summary": "A synthetic participant values explanation and stale-filter recovery."
+          "path": "./evidence/shopper-research-signals.md#ci-03--stale-criteria-and-trust",
+          "summary": "A synthetic participant prioritizes explanation when catalog taxonomy changes."
         },
         {
           "id": "CI-04",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-04--low-frequency-reviewer",
-          "summary": "An occasional reviewer questions whether the feature is relevant."
+          "path": "./evidence/shopper-research-signals.md#ci-04--occasional-gift-buyer",
+          "summary": "An occasional buyer questions whether Saved Searches is relevant."
+        },
+        {
+          "id": "SS-01",
+          "type": "support-signal",
+          "path": "./evidence/shopper-research-signals.md#ss-01--saved-searches-disappeared",
+          "summary": "A fictional ticket exposes an expectation that local searches follow an account."
         },
         {
           "id": "SS-02",
           "type": "support-signal",
-          "path": "./evidence/customer-support-signals.md#ss-02--duplicate-view-names",
-          "summary": "A fictional duplicate-name ticket exposes an unresolved naming rule."
+          "path": "./evidence/shopper-research-signals.md#ss-02--duplicate-search-names",
+          "summary": "Duplicate local names make search management ambiguous."
         },
         {
           "id": "SS-03",
           "type": "support-signal",
-          "path": "./evidence/customer-support-signals.md#ss-03--restricted-source-after-role-change",
-          "summary": "A stored criterion must not restore access after a role change."
+          "path": "./evidence/shopper-research-signals.md#ss-03--stale-expansion-filter",
+          "summary": "Removed expansion values require explicit recovery."
         },
         {
           "id": "SS-05",
           "type": "support-signal",
-          "path": "./evidence/customer-support-signals.md#ss-05--accidental-overwrite-concern",
+          "path": "./evidence/shopper-research-signals.md#ss-05--accidental-overwrite-concern",
           "summary": "Apply, update, and save-as-new semantics need separation."
         },
         {
@@ -112,241 +118,229 @@
           "summary": "Invented parse errors make safe recovery a preview requirement."
         },
         {
-          "id": "MK-01",
-          "type": "market-note",
-          "path": "./evidence/market-notes.md#market-and-competitive-notes",
-          "summary": "Named personal views may use a recognizable mental model."
-        },
-        {
           "id": "MK-06",
           "type": "market-note",
           "path": "./evidence/market-notes.md#market-and-competitive-notes",
-          "summary": "Mutable-schema products suggest warning and recovery patterns."
+          "summary": "Mutable marketplace taxonomies make stale-search recovery foundational."
         }
       ],
       "evidenceCount": 10,
       "risks": [
         {
-          "id": "risk-silent-stale-state",
-          "description": "Renamed, removed, or restricted fields could silently change results.",
+          "id": "risk-silent-stale-search",
+          "description": "Removed expansion or rarity values could silently broaden results.",
           "likelihood": "medium",
           "impact": "high",
-          "mitigation": "Version and validate stored state, explain omissions, and re-check current access on apply."
+          "mitigation": "Version and validate stored state, explain omissions, and never substitute criteria silently."
         },
         {
           "id": "risk-local-expectation-gap",
-          "description": "People may expect views to follow them across devices.",
+          "description": "Shoppers may expect searches to follow their account across devices.",
           "likelihood": "high",
           "impact": "medium",
-          "mitigation": "Repeat clear local-only language at create and manage surfaces."
+          "mitigation": "Repeat clear device-local language at create and manage surfaces."
         },
         {
-          "id": "risk-preview-clutter",
-          "description": "Ambiguous names and accidental creation may create local clutter.",
+          "id": "risk-alert-consent-confusion",
+          "description": "Saving could be mistaken for subscribing to price alerts.",
           "likelihood": "medium",
-          "impact": "low",
-          "mitigation": "Resolve naming policy and keep rename/delete accessible."
+          "impact": "high",
+          "mitigation": "State that no alert is created and keep future opt-in separate."
         }
       ],
       "humanDecisionFlags": [
         {
-          "id": "decision-duplicate-names",
-          "question": "Should local view names be unique, repeatable, or automatically disambiguated?",
+          "id": "decision-duplicate-search-names",
+          "question": "Should local search names be unique, repeatable, or automatically disambiguated?",
           "requiredBy": "Before create-flow acceptance criteria are finalized",
           "status": "open",
           "options": ["Require unique names", "Allow duplicates with metadata", "Automatically disambiguate"]
         },
         {
-          "id": "decision-invalid-criteria",
-          "question": "Should a partly invalid view apply valid criteria or stop for review?",
+          "id": "decision-invalid-search-criteria",
+          "question": "Should a partly invalid search apply safe criteria or stop for review?",
           "requiredBy": "Before recovery behavior ships",
           "status": "open",
-          "options": ["Explain and partially apply", "Stop and require review", "Choose based on criterion sensitivity"]
+          "options": ["Explain and partially apply", "Stop and require review", "Choose by criterion type"]
         },
         {
-          "id": "decision-preview-exit",
-          "question": "What combination of reliability, accessibility, and reuse evidence is sufficient to reconsider account sync?",
+          "id": "decision-search-preview-exit",
+          "question": "What reliability, accessibility, and reuse evidence is sufficient to reconsider account sync?",
           "requiredBy": "September 2026 roadmap review",
           "status": "open",
-          "options": ["Keep local preview", "Run a bounded sync experiment", "Remove the preview"]
+          "options": ["Keep local preview", "Run bounded account-sync experiment", "Remove the preview"]
         }
       ],
       "successMeasures": [
         {
           "metric": "Later-session reuse rate",
-          "criterion": "Review directional movement among eligible synthetic preview users; do not use a single threshold as an automatic ship gate.",
+          "criterion": "Review directional movement among eligible synthetic shoppers; no single threshold triggers release.",
           "source": "./evidence/usage-analytics.json#proposedMetricDefinitions",
           "guardrail": false
         },
         {
           "metric": "Accessible core-flow completion",
           "criterion": "Create, apply, rename, delete, and recover complete with keyboard and supported screen-reader checks.",
-          "source": "../design/saved-views-ux-brief.md#accessibility",
+          "source": "../design/saved-searches-ux-brief.md#accessibility",
           "guardrail": true
         },
         {
-          "metric": "Permission broadening incidents",
-          "criterion": "Zero in preview validation.",
-          "source": "./saved-views-spec.md#proposed-acceptance-boundaries",
-          "guardrail": true
-        },
-        {
-          "metric": "Recoverable storage failures",
-          "criterion": "Invalid records do not block Feedback and provide an actionable explanation.",
-          "source": "./saved-views-spec.md#invalid-or-restricted-criteria",
+          "metric": "Unintended alert subscriptions",
+          "criterion": "Zero; saving a search never creates an alert.",
+          "source": "./saved-searches-spec.md#proposed-acceptance-boundaries",
           "guardrail": true
         }
       ],
       "issueDraft": {
-        "title": "[Synthetic demo] Harden browser-local Saved Views preview",
-        "body": "## Outcome\nMake personal Saved Views reliable, understandable, and accessible while keeping them explicitly browser-local.\n\n## Evidence\nReview the synthetic references on initiative `init-saved-views-preview`; they include reuse signals and counter-signals about reach, stale state, and sharing.\n\n## Boundaries\nNo account sync, team sharing, result snapshots, or sensitive telemetry. Human decisions in the roadmap remain open.\n\n## Done when\nCore flows meet the approved acceptance boundary, corrupt state is recoverable, current permissions always win, and local-only language is visible.",
-        "labels": ["synthetic-demo", "product", "saved-views", "preview"],
+        "title": "[Synthetic demo] Harden browser-local Saved Searches preview",
+        "body": "## Outcome\nMake personal Saved Searches reliable, understandable, and accessible while keeping them explicitly device-local.\n\n## Evidence\nReview the synthetic references on initiative `init-saved-searches-preview`; they include repeat-use signals and counter-signals about reach, stale taxonomy, sync expectations, and alert consent.\n\n## Boundaries\nNo account sync, price alerts, listing snapshots, card images, or sensitive telemetry. Human decisions remain open.\n\n## Done when\nCore flows meet the approved acceptance boundary, corrupt state is recoverable, stale criteria are explained, and saving never implies notification consent.",
+        "labels": ["synthetic-demo", "product", "saved-searches", "preview"],
         "childWorkItems": [
           {
-            "id": "work-view-storage-validation",
-            "title": "Version and validate local view records",
+            "id": "work-search-storage-validation",
+            "title": "Version and validate local search records",
             "acceptanceCriteria": [
-              "Unsupported or corrupt records cannot block the Feedback page.",
-              "Stored records exclude result content, access state, names from telemetry, and filter values from telemetry."
+              "Unsupported or corrupt records cannot block the card catalog.",
+              "Stored records exclude listing snapshots, prices, card identities, and alert consent."
             ],
             "dependencies": []
           },
           {
-            "id": "work-view-core-flows",
+            "id": "work-search-core-flows",
             "title": "Complete create, apply, rename, and delete flows",
             "acceptanceCriteria": [
-              "Local-only persistence is explained during creation and management.",
-              "Active and edited state are distinct without relying on color."
+              "Device-local persistence is explained during creation and management.",
+              "Active and edited states are distinct without relying on color."
             ],
-            "dependencies": ["work-view-storage-validation"]
+            "dependencies": ["work-search-storage-validation"]
           },
           {
-            "id": "work-view-recovery",
-            "title": "Explain stale and restricted criteria",
+            "id": "work-search-recovery",
+            "title": "Explain stale expansion and rarity criteria",
             "acceptanceCriteria": [
-              "Current permissions are evaluated on every apply.",
-              "The user can review, update, or delete an invalid view without leaked restricted context."
+              "Unavailable criteria are never silently substituted.",
+              "The shopper can review, update, or delete an invalid search."
             ],
-            "dependencies": ["work-view-storage-validation"]
+            "dependencies": ["work-search-storage-validation"]
           },
           {
-            "id": "work-view-accessibility",
+            "id": "work-search-accessibility",
             "title": "Validate keyboard, screen-reader, reflow, and status behavior",
             "acceptanceCriteria": [
               "Core flows work without pointer input.",
               "Save, apply, and recovery outcomes are programmatically announced."
             ],
-            "dependencies": ["work-view-core-flows", "work-view-recovery"]
+            "dependencies": ["work-search-core-flows", "work-search-recovery"]
           }
         ]
       }
     },
     {
-      "id": "init-filter-provenance",
-      "title": "Make feedback result provenance legible",
-      "outcome": "Reviewers can understand which filters and omissions shaped a result set, whether or not it came from a saved view.",
+      "id": "init-listing-trust",
+      "title": "Make listing trust signals easier to compare",
+      "outcome": "Shoppers can compare price, condition, seller reputation, and market context without mistaking any one signal for a guarantee.",
       "horizon": "now",
       "status": "planned",
       "confidence": "medium",
-      "impact": "medium",
+      "impact": "high",
       "effort": "small",
       "targetWindow": {
         "label": "Discovery and prototype, September 2026",
         "start": "2026-09-01",
         "end": "2026-09-30"
       },
-      "ownerRole": "Product designer, Feedback workflows",
-      "dependencies": ["init-saved-views-preview"],
+      "ownerRole": "Product designer, Marketplace trust",
+      "dependencies": [],
       "evidenceReferences": [
+        {
+          "id": "CI-02",
+          "type": "customer-interview",
+          "path": "./evidence/shopper-research-signals.md#ci-02--price-context-before-purchase",
+          "summary": "A fictional shopper weighs condition and seller history alongside price."
+        },
         {
           "id": "CI-03",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-03--provenance-and-stale-filters",
-          "summary": "A fictional participant prioritizes explaining why an item appears."
+          "path": "./evidence/shopper-research-signals.md#ci-03--stale-criteria-and-trust",
+          "summary": "A synthetic collector prioritizes explanation over shortcut speed."
         },
         {
-          "id": "SS-03",
-          "type": "support-signal",
-          "path": "./evidence/customer-support-signals.md#ss-03--restricted-source-after-role-change",
-          "summary": "Permission changes create an omission-explanation need."
-        },
-        {
-          "id": "MK-06",
+          "id": "MK-04",
           "type": "market-note",
           "path": "./evidence/market-notes.md#market-and-competitive-notes",
-          "summary": "Generic market patterns suggest stale-filter warnings."
+          "summary": "Generic collectible marketplaces emphasize condition, seller, and price context."
         }
       ],
       "evidenceCount": 3,
       "risks": [
         {
-          "id": "risk-provenance-overload",
-          "description": "Detailed explanations could overwhelm routine review.",
+          "id": "risk-trust-signal-overload",
+          "description": "Dense badges and metadata could make listings harder to scan.",
           "likelihood": "medium",
           "impact": "medium",
-          "mitigation": "Test progressive disclosure and concise summaries."
+          "mitigation": "Test hierarchy and progressive disclosure across expertise levels."
         },
         {
-          "id": "risk-restricted-context-leak",
-          "description": "An omission explanation could reveal a restricted source or field.",
-          "likelihood": "unknown",
+          "id": "risk-price-guarantee-impression",
+          "description": "A market comparison could be mistaken for an appraisal or guaranteed resale value.",
+          "likelihood": "medium",
           "impact": "high",
-          "mitigation": "Threat-model content and use non-identifying explanations."
+          "mitigation": "Use contextual language, freshness labels, and explicit synthetic-demo boundaries."
         }
       ],
       "humanDecisionFlags": [
         {
-          "id": "decision-provenance-detail",
-          "question": "Which filter details stay visible and which use progressive disclosure?",
+          "id": "decision-listing-signal-priority",
+          "question": "Which trust signals must remain visible in every listing card?",
           "requiredBy": "Before prototype selection",
           "status": "open",
-          "options": ["Always-expanded summary", "Concise summary with details", "Context-dependent treatment"]
+          "options": ["Price and condition only", "Add seller reputation", "Add market comparison with freshness"]
         }
       ],
       "successMeasures": [
         {
-          "metric": "Filter-summary comprehension",
-          "criterion": "Synthetic research participants can explain the active criteria and whether any were omitted.",
-          "source": "../design/saved-views-ux-brief.md#research-questions",
+          "metric": "Listing comparison comprehension",
+          "criterion": "Synthetic participants can explain price, condition, seller, and market context without prompting.",
+          "source": "../design/saved-searches-ux-brief.md#research-questions",
           "guardrail": false
         },
         {
-          "metric": "Restricted context disclosure",
-          "criterion": "Zero disclosures in permission-focused review.",
-          "source": "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
+          "metric": "Guaranteed-value misinterpretation",
+          "criterion": "Zero participants interpret market context as a guaranteed appraisal.",
+          "source": "./brief.md#constraints",
           "guardrail": true
         }
       ],
       "issueDraft": {
-        "title": "[Synthetic demo] Prototype feedback filter provenance",
-        "body": "## Outcome\nHelp reviewers understand the filters and safe omissions shaping the current result set.\n\n## Scope\nPrototype progressive disclosure, active/edited language, and permission-safe omission messages. Do not expose restricted field or source details.",
-        "labels": ["synthetic-demo", "design", "discovery"],
+        "title": "[Synthetic demo] Prototype comparable card listing trust signals",
+        "body": "## Outcome\nHelp shoppers compare condition, seller reputation, price, and market context without overclaiming authenticity or value.\n\n## Scope\nTest information hierarchy, contextual language, and responsive behavior. No real grading, authentication, seller scoring, or pricing integration.",
+        "labels": ["synthetic-demo", "design", "marketplace-trust"],
         "childWorkItems": [
           {
-            "id": "work-provenance-content",
-            "title": "Draft filter-summary and omission content",
+            "id": "work-trust-content",
+            "title": "Define listing signal hierarchy and language",
             "acceptanceCriteria": [
-              "Copy distinguishes active, edited, stale, and restricted states.",
-              "Restricted explanations do not identify inaccessible context."
+              "Price, condition, seller, and market language has a documented hierarchy.",
+              "No content implies guaranteed authenticity or resale value."
             ],
             "dependencies": []
           },
           {
-            "id": "work-provenance-prototype",
-            "title": "Prototype progressive disclosure across viewports",
+            "id": "work-trust-prototype",
+            "title": "Prototype listing comparison across viewports",
             "acceptanceCriteria": [
-              "Summary remains understandable at 320 CSS px.",
-              "Details are keyboard and screen-reader accessible."
+              "Core trust context remains readable at 320 CSS px.",
+              "The listing can be understood with keyboard and screen reader."
             ],
-            "dependencies": ["work-provenance-content"]
+            "dependencies": ["work-trust-content"]
           }
         ]
       }
     },
     {
-      "id": "init-personal-view-sync",
-      "title": "Evaluate account-synced personal views",
-      "outcome": "The team can decide whether cross-device continuity merits durable account storage without conflating it with sharing.",
+      "id": "init-account-search-sync",
+      "title": "Evaluate account-synced Saved Searches",
+      "outcome": "The team can decide whether cross-device continuity merits durable account storage without conflating it with price alerts.",
       "horizon": "next",
       "status": "gated",
       "confidence": "low",
@@ -357,14 +351,14 @@
         "start": "2026-10-05",
         "end": "2026-11-20"
       },
-      "ownerRole": "Product manager, Platform workflows",
-      "dependencies": ["init-saved-views-preview", "identity and data-retention review"],
+      "ownerRole": "Product manager, Shopper platform",
+      "dependencies": ["init-saved-searches-preview", "identity and data-lifecycle review"],
       "evidenceReferences": [
         {
           "id": "SS-01",
           "type": "support-signal",
-          "path": "./evidence/customer-support-signals.md#ss-01--filters-disappeared",
-          "summary": "One fictional ticket expected a view on another device."
+          "path": "./evidence/shopper-research-signals.md#ss-01--saved-searches-disappeared",
+          "summary": "One fictional ticket expected a saved search on another device."
         },
         {
           "id": "AN-03",
@@ -373,24 +367,24 @@
           "summary": "Directional later-session reuse does not establish cross-device need."
         },
         {
-          "id": "CI-02",
+          "id": "CI-05",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-02--personal-workspace-preference",
-          "summary": "Private exploratory configurations remain important."
+          "path": "./evidence/shopper-research-signals.md#ci-05--mobile-stock-check",
+          "summary": "A synthetic collector checks saved hunts on mobile after creating them on desktop."
         }
       ],
       "evidenceCount": 3,
       "risks": [
         {
           "id": "risk-sync-data-lifecycle",
-          "description": "Durable storage creates migration, retention, export, and deletion obligations.",
+          "description": "Durable storage creates migration, retention, export, deletion, and support obligations.",
           "likelihood": "high",
           "impact": "high",
           "mitigation": "Complete architecture, privacy, and lifecycle review before an experiment."
         },
         {
           "id": "risk-sync-without-demand",
-          "description": "Cross-device infrastructure may not address the reason most synthetic users did not create a view.",
+          "description": "Cross-device infrastructure may not address why most synthetic shoppers did not save a search.",
           "likelihood": "medium",
           "impact": "medium",
           "mitigation": "Require qualitative cross-device evidence and a bounded experiment plan."
@@ -405,8 +399,8 @@
           "options": ["Remain local-only", "Run bounded account-sync experiment", "Stop investing"]
         },
         {
-          "id": "decision-sync-retention",
-          "question": "What retention, deletion, export, and migration policy applies to saved configurations?",
+          "id": "decision-sync-lifecycle",
+          "question": "What retention, deletion, export, and migration policy applies to saved criteria?",
           "requiredBy": "Before technical design approval",
           "status": "open",
           "options": ["Use account lifecycle", "Define feature-specific lifecycle", "Do not persist"]
@@ -416,35 +410,35 @@
         {
           "metric": "Cross-device task continuity",
           "criterion": "A bounded synthetic study demonstrates a meaningful workflow that local storage cannot support.",
-          "source": "./decisions/0001-saved-views-local-preview.md#reconsideration-gates",
+          "source": "./decisions/0001-saved-searches-local-preview.md#reconsideration-gates",
           "guardrail": false
         },
         {
           "metric": "Lifecycle review",
-          "criterion": "Privacy, security, retention, deletion, and migration owners explicitly approve the experiment.",
-          "source": "./decisions/0001-saved-views-local-preview.md#why-not-sync-or-sharing-now",
+          "criterion": "Privacy, security, retention, deletion, export, and migration owners explicitly approve the experiment.",
+          "source": "./decisions/0001-saved-searches-local-preview.md#why-not-account-sync-or-alerts-now",
           "guardrail": true
         }
       ],
       "issueDraft": {
-        "title": "[Synthetic demo] Evaluate account sync for personal Saved Views",
-        "body": "## Decision to make\nDetermine whether evidence justifies a bounded cross-device personal-view experiment.\n\n## Gate\nDo not implement until local reliability, accessibility, privacy, retention, deletion, and migration questions have named owners and explicit approval. This does not include team sharing.",
+        "title": "[Synthetic demo] Evaluate account sync for Saved Searches",
+        "body": "## Decision to make\nDetermine whether evidence justifies a bounded cross-device Saved Searches experiment.\n\n## Gate\nDo not implement until local reliability, accessibility, privacy, retention, deletion, export, and migration questions have named owners and explicit approval. This does not include price alerts.",
         "labels": ["synthetic-demo", "discovery", "architecture", "gated"],
         "childWorkItems": [
           {
             "id": "work-sync-demand-study",
-            "title": "Study cross-device continuity needs",
+            "title": "Study cross-device search continuity",
             "acceptanceCriteria": [
               "Research distinguishes cross-session from cross-device reuse.",
-              "Counter-signals and non-user workflows are documented."
+              "Counter-signals and occasional-buyer workflows are documented."
             ],
-            "dependencies": ["init-saved-views-preview"]
+            "dependencies": ["init-saved-searches-preview"]
           },
           {
             "id": "work-sync-lifecycle-review",
             "title": "Define storage and data-lifecycle options",
             "acceptanceCriteria": [
-              "Options cover migration, export, retention, and deletion.",
+              "Options cover migration, export, retention, deletion, and conflict handling.",
               "Security and privacy reviewers record unresolved risks."
             ],
             "dependencies": ["work-sync-demand-study"]
@@ -462,9 +456,9 @@
       }
     },
     {
-      "id": "init-curated-team-views",
-      "title": "Research curated team views and defaults",
-      "outcome": "Cross-functional teams can evaluate a governed shared-view model without exposing restricted context or publishing private scratch work.",
+      "id": "init-price-drop-alerts",
+      "title": "Research explicit price-drop alerts",
+      "outcome": "Collectors can evaluate an opt-in alert concept without treating every saved search as notification consent or stale inventory as actionable.",
       "horizon": "next",
       "status": "discovery",
       "confidence": "low",
@@ -475,139 +469,126 @@
         "start": "2026-11-02",
         "end": "2026-12-18"
       },
-      "ownerRole": "Product operations lead",
-      "dependencies": ["init-filter-provenance", "workspace permission model review"],
+      "ownerRole": "Product manager, Collector engagement",
+      "dependencies": ["init-account-search-sync", "price-feed freshness review"],
       "evidenceReferences": [
         {
           "id": "CI-01",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-01--repeat-triage-setup",
-          "summary": "A fictional participant prefers a small curated set to many personal views."
+          "path": "./evidence/shopper-research-signals.md#ci-01--repeat-chase-card-search",
+          "summary": "A fictional repeat collector would value a narrowly targeted alert."
         },
         {
           "id": "CI-02",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-02--personal-workspace-preference",
-          "summary": "A counter-signal favors private scratch configurations."
-        },
-        {
-          "id": "SS-03",
-          "type": "support-signal",
-          "path": "./evidence/customer-support-signals.md#ss-03--restricted-source-after-role-change",
-          "summary": "Role changes make permission-safe application essential."
+          "path": "./evidence/shopper-research-signals.md#ci-02--price-context-before-purchase",
+          "summary": "Price alone does not determine purchase intent."
         },
         {
           "id": "SS-04",
           "type": "support-signal",
-          "path": "./evidence/customer-support-signals.md#ss-04--request-for-a-shared-weekly-view",
-          "summary": "One fictional request describes governed curation rather than open sharing."
+          "path": "./evidence/shopper-research-signals.md#ss-04--price-drop-alert-request",
+          "summary": "One fictional request asks for a threshold-based near-mint alert."
         },
         {
-          "id": "MK-02",
+          "id": "MK-03",
           "type": "market-note",
           "path": "./evidence/market-notes.md#market-and-competitive-notes",
-          "summary": "Generic patterns distinguish personal, shared, and default visibility."
+          "summary": "Generic search alerts combine criteria with price thresholds."
         },
         {
-          "id": "MK-04",
+          "id": "MK-05",
           "type": "market-note",
           "path": "./evidence/market-notes.md#market-and-competitive-notes",
-          "summary": "View proliferation can create administration costs."
+          "summary": "Notification products expose explicit channel, cadence, pause, and unsubscribe controls."
         }
       ],
-      "evidenceCount": 6,
+      "evidenceCount": 5,
       "risks": [
         {
-          "id": "risk-shared-permission-leak",
-          "description": "A shared definition or count could disclose restricted data.",
-          "likelihood": "unknown",
+          "id": "risk-alert-consent",
+          "description": "Saving a search could be mistaken for consent to receive notifications.",
+          "likelihood": "high",
           "impact": "high",
-          "mitigation": "Threat-model definitions, metadata, counts, and application behavior before prototyping with realistic roles."
+          "mitigation": "Require separate opt-in with explicit threshold, channel, cadence, and unsubscribe."
         },
         {
-          "id": "risk-shared-clutter",
-          "description": "Unbounded creation could replace repeated filter work with discovery and governance work.",
-          "likelihood": "medium",
+          "id": "risk-alert-stale-listing",
+          "description": "A card may sell or change condition before the shopper opens an alert.",
+          "likelihood": "high",
           "impact": "medium",
-          "mitigation": "Test curated ownership, archive, and default semantics before open publishing."
+          "mitigation": "Define freshness and sold-inventory behavior before delivery prototyping."
         }
       ],
       "humanDecisionFlags": [
         {
-          "id": "decision-team-roles",
-          "question": "Who may create, edit, archive, and designate a workspace default?",
-          "requiredBy": "Before a sharing concept is approved",
+          "id": "decision-alert-job",
+          "question": "Which price-monitoring job is frequent and valuable enough to justify notifications?",
+          "requiredBy": "Before concept selection",
           "status": "open",
-          "options": ["Owner-managed", "Role-based curation", "Administrator-only defaults"]
+          "options": ["Exact-card threshold", "Any matching listing", "No alert investment"]
         },
         {
-          "id": "decision-team-visibility",
-          "question": "How should a shared view behave when a viewer cannot access a referenced source or field?",
-          "requiredBy": "Before permission prototype testing",
+          "id": "decision-alert-consent",
+          "question": "What constitutes explicit consent and who controls frequency?",
+          "requiredBy": "Before any delivery prototype",
           "status": "open",
-          "options": ["Apply safe intersection", "Refuse and explain", "Publisher limits eligible criteria"]
-        },
-        {
-          "id": "decision-share-versus-default",
-          "question": "Should sharing and setting a default require distinct permissions?",
-          "requiredBy": "Before role model sign-off",
-          "status": "open",
-          "options": ["Distinct permissions", "Single curator permission", "No workspace defaults"]
+          "options": ["Per-search opt-in", "Central alert settings", "No outbound delivery"]
         }
       ],
       "successMeasures": [
         {
-          "metric": "Governance model comprehension",
-          "criterion": "Synthetic participants can identify owner, editor, viewer, and default responsibilities without prompting.",
-          "source": "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
+          "metric": "Explicit alert opt-in comprehension",
+          "criterion": "Synthetic participants distinguish saving from subscribing and can identify threshold, channel, cadence, and unsubscribe.",
+          "source": "../design/saved-searches-ux-brief.md#price-alerts-and-account-sync",
           "guardrail": false
         },
         {
-          "metric": "Restricted-context disclosure",
-          "criterion": "Zero disclosures across definition, metadata, counts, and results in role-based review.",
-          "source": "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
+          "metric": "Unintended subscriptions",
+          "criterion": "Zero; every delivery path has separate explicit consent.",
+          "source": "./saved-searches-spec.md#proposed-acceptance-boundaries",
           "guardrail": true
         }
       ],
       "issueDraft": {
-        "title": "[Synthetic demo] Research governed team views",
-        "body": "## Outcome\nTest whether curated team views solve coordination needs while preserving private scratch work and current permissions.\n\n## Non-goal\nThis issue does not authorize implementation or promise sharing. Permission and governance decisions remain human-owned.",
-        "labels": ["synthetic-demo", "research", "permissions", "gated"],
+        "title": "[Synthetic demo] Research opt-in price-drop alerts",
+        "body": "## Question\nWould a separately configured price alert help repeat collectors, and can it remain clearly distinct from Saved Searches?\n\n## Guardrails\nSaving is never notification consent. Define threshold, freshness, sold-inventory behavior, channel, cadence, quiet hours, pause, and unsubscribe before implementation.",
+        "labels": ["synthetic-demo", "research", "notifications", "gated"],
         "childWorkItems": [
           {
-            "id": "work-team-role-model",
-            "title": "Map owner, editor, viewer, and default-view responsibilities",
+            "id": "work-alert-job-study",
+            "title": "Study collector price-monitoring jobs",
             "acceptanceCriteria": [
-              "Role options cover create, update, archive, transfer, and default designation.",
-              "Private-to-shared transition is always intentional."
+              "Research distinguishes exact-card thresholds from broad inventory monitoring.",
+              "Counter-signals and non-alert alternatives are documented."
             ],
             "dependencies": []
           },
           {
-            "id": "work-team-threat-model",
-            "title": "Threat-model shared criteria and metadata",
+            "id": "work-alert-consent-model",
+            "title": "Define explicit alert preferences and lifecycle",
             "acceptanceCriteria": [
-              "Review includes names, criteria, result counts, omission messages, and revoked access.",
-              "Current viewer access remains authoritative."
+              "Save and subscribe remain separate actions.",
+              "Threshold, channel, cadence, quiet hours, pause, and unsubscribe are covered."
             ],
-            "dependencies": ["work-team-role-model"]
+            "dependencies": ["work-alert-job-study"]
           },
           {
-            "id": "work-team-concept-test",
-            "title": "Test a governed sharing concept",
+            "id": "work-alert-trigger-contract",
+            "title": "Define price freshness and sold-inventory behavior",
             "acceptanceCriteria": [
-              "Research includes curation and private-work counter-scenarios.",
-              "Findings state sample and synthetic limitations."
+              "Trigger inputs and freshness expectations are explicit.",
+              "Sold or changed-condition listings cannot produce a success-shaped outcome."
             ],
-            "dependencies": ["work-team-threat-model"]
+            "dependencies": ["work-alert-consent-model"]
           }
         ]
       }
     },
     {
-      "id": "init-feedback-digests",
-      "title": "Explore view-based feedback digests",
-      "outcome": "The team can assess whether an intentionally subscribed digest helps periodic reviewers without treating every saved view as a notification.",
+      "id": "init-collector-lists",
+      "title": "Explore collection and wishlist lists",
+      "outcome": "The team can decide whether stable card lists solve a distinct collection-management job rather than duplicating dynamic Saved Searches.",
       "horizon": "later",
       "status": "candidate",
       "confidence": "low",
@@ -618,91 +599,77 @@
         "start": null,
         "end": null
       },
-      "ownerRole": "Product manager, Engagement",
-      "dependencies": ["init-personal-view-sync", "notification consent and delivery review"],
+      "ownerRole": "Product manager, Collector tools",
+      "dependencies": [],
       "evidenceReferences": [
         {
           "id": "CI-04",
           "type": "customer-interview",
-          "path": "./evidence/customer-support-signals.md#ci-04--low-frequency-reviewer",
-          "summary": "A fictional monthly reviewer may need a different workflow than frequent triagers."
+          "path": "./evidence/shopper-research-signals.md#ci-04--occasional-gift-buyer",
+          "summary": "An occasional buyer needs guidance rather than another persistent personal tool."
         },
         {
-          "id": "MK-05",
+          "id": "MK-02",
           "type": "market-note",
           "path": "./evidence/market-notes.md#market-and-competitive-notes",
-          "summary": "Generic products sometimes connect saved searches to alerts, but consent and freshness differ."
+          "summary": "Generic collector products distinguish stable lists from dynamic searches."
         }
       ],
       "evidenceCount": 2,
       "risks": [
         {
-          "id": "risk-digest-consent",
-          "description": "Saving a view could be mistaken for consent to receive notifications.",
-          "likelihood": "high",
-          "impact": "high",
-          "mitigation": "Require a separate explicit subscription with frequency and unsubscribe controls."
-        },
-        {
-          "id": "risk-digest-staleness",
-          "description": "Stale criteria could produce misleading or empty digests outside the product context.",
+          "id": "risk-list-search-overlap",
+          "description": "Wishlist, binder, and search concepts could create overlapping destinations and unclear ownership state.",
           "likelihood": "medium",
           "impact": "medium",
-          "mitigation": "Define freshness checks and an in-product recovery path before delivery."
+          "mitigation": "Define distinct jobs and data models before solution testing."
         }
       ],
       "humanDecisionFlags": [
         {
-          "id": "decision-digest-problem",
-          "question": "Does a digest solve an observed periodic-review problem better than an in-product reminder or history?",
+          "id": "decision-collector-list-problem",
+          "question": "Is the primary unmet job wishlisting, collection ownership, gifting, or none?",
           "requiredBy": "Before discovery investment",
           "status": "deferred",
-          "options": ["Explore digest", "Explore in-product reminder", "Do not pursue"]
-        },
-        {
-          "id": "decision-digest-subscription",
-          "question": "What constitutes explicit consent and who controls frequency?",
-          "requiredBy": "Before any delivery prototype",
-          "status": "open",
-          "options": ["Per-view opt-in", "Central subscription settings", "No outbound delivery"]
+          "options": ["Wishlist", "Owned collection", "Gift list", "Do not pursue"]
         }
       ],
       "successMeasures": [
         {
-          "metric": "Periodic-review problem evidence",
-          "criterion": "Multiple observed workflows establish a recurring need before solution testing.",
-          "source": "./evidence/customer-support-signals.md#ci-04--low-frequency-reviewer",
+          "metric": "Distinct collector-list problem evidence",
+          "criterion": "Multiple observed workflows establish a job that Saved Searches cannot meet.",
+          "source": "./evidence/market-notes.md#market-and-competitive-notes",
           "guardrail": false
         },
         {
-          "metric": "Unintended subscriptions",
-          "criterion": "Zero; save and subscribe remain separate explicit actions.",
-          "source": "./evidence/market-notes.md#market-and-competitive-notes",
+          "metric": "Accidental ownership state",
+          "criterion": "Zero; saving or buying never silently marks a card as owned.",
+          "source": "./brief.md#non-goals",
           "guardrail": true
         }
       ],
       "issueDraft": {
-        "title": "[Synthetic demo] Explore opt-in feedback digests",
-        "body": "## Question\nWould a separately subscribed digest help periodic reviewers, and is it better than in-product history or reminders?\n\n## Guardrails\nA saved view is never notification consent. This is an uncommitted research candidate dependent on durable view semantics and delivery review.",
+        "title": "[Synthetic demo] Explore collector wishlists and owned-card lists",
+        "body": "## Question\nDo collectors need a stable wishlist or owned-card list that is meaningfully different from a dynamic Saved Search?\n\n## Boundary\nThis is an uncommitted research candidate. Saving a search or adding to cart never implies ownership.",
         "labels": ["synthetic-demo", "later", "research"],
         "childWorkItems": [
           {
-            "id": "work-digest-problem-study",
-            "title": "Observe periodic feedback review workflows",
+            "id": "work-lists-problem-study",
+            "title": "Observe wishlist and collection-management workflows",
             "acceptanceCriteria": [
-              "Study compares digest, history, reminder, and no-change options.",
+              "Study distinguishes wishlisting, ownership, gifting, and dynamic search.",
               "Evidence limitations and counter-signals are recorded."
             ],
             "dependencies": []
           },
           {
-            "id": "work-digest-consent-model",
-            "title": "Define explicit subscription and unsubscribe model",
+            "id": "work-lists-model",
+            "title": "Define list concepts without ownership ambiguity",
             "acceptanceCriteria": [
-              "Save and subscribe are separate actions.",
-              "Frequency, pause, unsubscribe, and stale-view behavior are covered."
+              "Candidate models specify item state, provenance, edit, archive, and delete behavior.",
+              "Save, cart, purchase, and ownership remain distinct actions."
             ],
-            "dependencies": ["work-digest-problem-study"]
+            "dependencies": ["work-lists-problem-study"]
           }
         ]
       }

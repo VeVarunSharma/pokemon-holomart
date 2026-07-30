@@ -1,5 +1,5 @@
 name: Design review
-description: Review a Signal Desk flow using supplied design context or the committed local fallback.
+description: Review a HoloMart flow using supplied design context or the committed local fallback.
 title: "[Design review] "
 labels:
   - design
@@ -19,7 +19,7 @@ body:
     id: flow
     attributes:
       label: Flow or state under review
-      placeholder: Saved Views — invalid criterion recovery
+      placeholder: Saved Searches — stale expansion recovery
     validations:
       required: true
   - type: textarea

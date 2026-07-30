@@ -5,7 +5,7 @@ argument-hint: "[initiatives or scenario question]"
 agent: product-strategist
 ---
 
-Compare roadmap scenarios for `${input:focus:Initiatives or scenario question}` using [the authoritative roadmap](../../product/roadmap.json), [product brief](../../product/brief.md), [evidence index](../../product/evidence/README.md), [decision record](../../product/decisions/0001-saved-views-local-preview.md), and verified implementation constraints.
+Compare roadmap scenarios for `${input:focus:Initiatives or scenario question}` using [the authoritative roadmap](../../product/roadmap.json), [product brief](../../product/brief.md), [evidence index](../../product/evidence/README.md), [decision record](../../product/decisions/0001-saved-searches-local-preview.md), and verified implementation constraints.
 
 ## Evidence rules
 

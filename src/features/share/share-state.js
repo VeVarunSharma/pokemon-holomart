@@ -1,6 +1,6 @@
 import { DEFAULT_FILTERS, normalizeFilters } from "../filters/filter-state.js";
 
-const PARAMS = Object.freeze({ query: "q", sentiment: "sentiment", channel: "channel" });
+const PARAMS = Object.freeze({ query: "q", rarity: "rarity", expansion: "expansion" });
 
 export function filtersToUrl(input, baseUrl) {
   const filters = normalizeFilters(input);
@@ -14,11 +14,11 @@ export function filtersToUrl(input, baseUrl) {
 
 export function filtersFromUrl(urlLike) {
   try {
-    const url = new URL(urlLike, "http://signal-desk.local");
+    const url = new URL(urlLike, "http://holomart.local");
     return normalizeFilters({
       query: url.searchParams.get(PARAMS.query) ?? "",
-      sentiment: url.searchParams.get(PARAMS.sentiment) ?? "All",
-      channel: url.searchParams.get(PARAMS.channel) ?? "All"
+      rarity: url.searchParams.get(PARAMS.rarity) ?? "All",
+      expansion: url.searchParams.get(PARAMS.expansion) ?? "All"
     });
   } catch {
     return { ...DEFAULT_FILTERS };

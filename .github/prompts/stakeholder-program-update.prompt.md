@@ -1,11 +1,11 @@
 ---
 name: stakeholder-program-update
-description: Draft a traceable stakeholder update from approved Signal Desk evidence, decisions, risks, and delivery previews.
+description: Draft a traceable stakeholder update from approved HoloMart evidence, decisions, risks, and delivery previews.
 argument-hint: "[audience and reporting window]"
 agent: delivery-planner
 ---
 
-Draft a stakeholder/program update for `${input:focus:Audience and reporting window}` from [the authoritative roadmap](../../product/roadmap.json), [product brief](../../product/brief.md), [current spec](../../product/saved-views-spec.md), [evidence index](../../product/evidence/README.md), and verified code, test, design, and issue-preview context in this conversation.
+Draft a stakeholder/program update for `${input:focus:Audience and reporting window}` from [the authoritative roadmap](../../product/roadmap.json), [product brief](../../product/brief.md), [current spec](../../product/saved-searches-spec.md), [evidence index](../../product/evidence/README.md), and verified code, test, design, and issue-preview context in this conversation.
 
 ## Evidence rules
 

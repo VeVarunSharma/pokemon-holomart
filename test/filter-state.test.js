@@ -1,14 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { activeFilterCount, DEFAULT_FILTERS, filterFeedback, normalizeFilters } from "../src/features/filters/filter-state.js";
+import { activeFilterCount, DEFAULT_FILTERS, filterCards, normalizeFilters } from "../src/features/filters/filter-state.js";
 
 const items = [
-  { company: "Alpha", contact: "A", excerpt: "Needs team sharing", theme: "Collaboration", plan: "Enterprise", sentiment: "Negative", channel: "Interview" },
-  { company: "Beta", contact: "B", excerpt: "Fast and clear", theme: "Performance", plan: "Starter", sentiment: "Positive", channel: "Survey" }
+  { name: "Pikachu ex", set: "Surging Sparks", number: "238/191", rarity: "Special Illustration Rare", condition: "Near Mint", seller: "Mossdeep Cards" },
+  { name: "Bulbasaur", set: "Scarlet & Violet—151", number: "166/165", rarity: "Illustration Rare", condition: "Near Mint", seller: "Viridian Vault" }
 ];
 
 test("invalid filters safely normalize to defaults", () => {
-  assert.deepEqual(normalizeFilters({ query: 42, sentiment: "Angry", channel: null }), DEFAULT_FILTERS);
+  assert.deepEqual(normalizeFilters({ query: 42, rarity: "Legendary", expansion: null }), DEFAULT_FILTERS);
 });
 
 test("query is trimmed and capped", () => {
@@ -17,10 +17,10 @@ test("query is trimmed and capped", () => {
 });
 
 test("filtering searches text and combines exact facets", () => {
-  assert.deepEqual(filterFeedback(items, { query: "team", sentiment: "Negative", channel: "Interview" }), [items[0]]);
-  assert.deepEqual(filterFeedback(items, { query: "team", sentiment: "Positive" }), []);
+  assert.deepEqual(filterCards(items, { query: "pikachu", rarity: "Special Illustration Rare", expansion: "Surging Sparks" }), [items[0]]);
+  assert.deepEqual(filterCards(items, { query: "pikachu", rarity: "Illustration Rare" }), []);
 });
 
 test("active filter count ignores defaults and invalid values", () => {
-  assert.equal(activeFilterCount({ query: "alpha", sentiment: "Negative", channel: "bogus" }), 2);
+  assert.equal(activeFilterCount({ query: "pikachu", rarity: "Special Illustration Rare", expansion: "bogus" }), 2);
 });

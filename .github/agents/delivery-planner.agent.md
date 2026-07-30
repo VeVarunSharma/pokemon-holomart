@@ -1,6 +1,6 @@
 ---
 name: delivery-planner
-description: Conservative delivery planner that turns approved Signal Desk scope into dependency-ordered GitHub issue previews.
+description: Conservative delivery planner that turns approved HoloMart scope into dependency-ordered GitHub issue previews.
 tools:
   - read
   - search

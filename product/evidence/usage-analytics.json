@@ -2,7 +2,7 @@
   "artifactType": "synthetic-usage-evidence",
   "provenance": {
     "label": "SYNTHETIC / DEMO-ONLY",
-    "description": "Hand-authored aggregate events for an invented Signal Desk preview cohort. No real telemetry, users, tenants, or customer content are included.",
+    "description": "Hand-authored aggregate events for an invented HoloMart preview cohort. No real telemetry, shoppers, sellers, searches, listings, or prices are included.",
     "generatedFor": "Copilot-for-Product demo",
     "period": {
       "start": "2026-07-01",
@@ -11,93 +11,93 @@
     "limitations": [
       "Small fictional cohort and short observation window",
       "No control group, statistical inference, or causal attribution",
-      "Event counts are illustrative and may contain repeat actions by the same synthetic user",
-      "Free-text view names and filter values are intentionally excluded"
+      "Event counts may contain repeat actions by the same synthetic shopper",
+      "Search names, query text, filter values, card identities, and prices are intentionally excluded"
     ]
   },
   "cohort": {
-    "eligiblePreviewUsers": 120,
-    "activeFeedbackUsers": 74,
-    "savedViewCreators": 19
+    "eligiblePreviewShoppers": 180,
+    "activeCatalogShoppers": 112,
+    "savedSearchCreators": 31
   },
   "signals": [
     {
       "id": "AN-01",
-      "name": "saved_view_created",
-      "eventCount": 31,
-      "uniqueSyntheticActors": 19,
-      "interpretation": "Some active users tried creation, but most eligible users did not.",
-      "tension": "Low adoption could mean low value, poor discoverability, or a narrow repeat-triage audience."
+      "name": "saved_search_created",
+      "eventCount": 49,
+      "uniqueSyntheticActors": 31,
+      "interpretation": "Some active shoppers tried creation, but most eligible shoppers did not.",
+      "tension": "Low adoption could mean low value, weak discoverability, or a narrow repeat-collector audience."
     },
     {
       "id": "AN-02",
-      "name": "saved_view_opened",
-      "eventCount": 88,
-      "uniqueSyntheticActors": 17,
-      "interpretation": "Most creators reopened at least one view during the window.",
-      "tension": "The aggregate does not distinguish deliberate reuse from repeated prototype testing."
+      "name": "saved_search_opened",
+      "eventCount": 146,
+      "uniqueSyntheticActors": 28,
+      "interpretation": "Most creators reopened at least one search during the window.",
+      "tension": "The aggregate does not distinguish genuine shopping from repeated prototype testing."
     },
     {
       "id": "AN-03",
-      "name": "saved_view_opened_later_session",
-      "eventCount": 39,
-      "uniqueSyntheticActors": 12,
-      "interpretation": "Twelve creators show directional cross-session reuse.",
-      "tension": "Browser-local storage means this cannot reveal cross-device need."
+      "name": "saved_search_opened_later_session",
+      "eventCount": 64,
+      "uniqueSyntheticActors": 21,
+      "interpretation": "Twenty-one creators show directional later-session reuse.",
+      "tension": "Browser-local storage cannot reveal whether cross-device continuity matters."
     },
     {
       "id": "AN-04",
-      "name": "filters_changed_after_view_open",
-      "eventCount": 27,
-      "uniqueSyntheticActors": 11,
-      "interpretation": "Saved configurations may serve as starting points rather than fixed destinations.",
-      "tension": "Edits might instead indicate stale or incorrect saved state."
+      "name": "filters_changed_after_search_open",
+      "eventCount": 38,
+      "uniqueSyntheticActors": 17,
+      "interpretation": "Saved criteria may serve as a starting point rather than a fixed destination.",
+      "tension": "Edits might instead indicate stale or overly broad saved state."
     },
     {
       "id": "AN-05",
-      "name": "saved_view_deleted",
-      "eventCount": 9,
-      "uniqueSyntheticActors": 7,
-      "interpretation": "Deletion is used and should remain easy and recoverable.",
-      "tension": "The synthetic event model does not capture why a view was deleted."
+      "name": "saved_search_deleted",
+      "eventCount": 13,
+      "uniqueSyntheticActors": 9,
+      "interpretation": "Deletion is used and should remain understandable and recoverable.",
+      "tension": "The synthetic event model does not capture why a search was deleted."
     },
     {
       "id": "AN-06",
-      "name": "saved_view_storage_parse_error",
-      "eventCount": 4,
-      "uniqueSyntheticActors": 3,
+      "name": "saved_search_storage_parse_error",
+      "eventCount": 5,
+      "uniqueSyntheticActors": 4,
       "interpretation": "Local state can fail and requires a safe recovery path.",
-      "tension": "The sample is too small to estimate a reliable failure rate."
+      "tension": "The sample is too small to estimate a failure rate."
     },
     {
       "id": "AN-07",
-      "name": "mobile_saved_view_opened",
-      "eventCount": 14,
-      "uniqueSyntheticActors": 8,
-      "interpretation": "Opening on a narrow viewport is plausible.",
-      "tension": "There are no synthetic mobile creation events; instrumentation coverage may be incomplete."
+      "name": "mobile_saved_search_opened",
+      "eventCount": 27,
+      "uniqueSyntheticActors": 15,
+      "interpretation": "Opening a saved search on a narrow viewport is plausible.",
+      "tension": "There are no synthetic mobile creation events; coverage may be incomplete."
     }
   ],
   "proposedMetricDefinitions": [
     {
       "name": "laterSessionReuseRate",
-      "definition": "Unique creators who open a view in a later session divided by unique creators.",
-      "illustrativeValue": 0.632,
+      "definition": "Unique creators who open a search in a later session divided by unique creators.",
+      "illustrativeValue": 0.677,
       "numeratorSignal": "AN-03",
       "denominatorSignal": "AN-01"
     },
     {
       "name": "creatorPenetration",
-      "definition": "Unique creators divided by active Feedback users.",
-      "illustrativeValue": 0.257,
+      "definition": "Unique creators divided by active catalog shoppers.",
+      "illustrativeValue": 0.277,
       "numeratorSignal": "AN-01",
-      "denominator": "cohort.activeFeedbackUsers"
+      "denominator": "cohort.activeCatalogShoppers"
     }
   ],
   "relatedArtifacts": [
     "../brief.md",
-    "../saved-views-spec.md",
+    "../saved-searches-spec.md",
     "../roadmap.json",
-    "../../design/saved-views-ux-brief.md"
+    "../../design/saved-searches-ux-brief.md"
   ]
 }

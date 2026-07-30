@@ -1,6 +1,6 @@
 ---
 name: roadmap-planning
-description: Use this skill whenever a user asks to plan, review, draft, or turn a Signal Desk roadmap initiative into an epic, sub-issues, delivery work, or GitHub Project updates—even if they do not say “roadmap planning.”
+description: Use this skill whenever a user asks to plan, review, draft, or turn a HoloMart roadmap initiative into an epic, sub-issues, delivery work, or GitHub Project updates—even if they do not say “roadmap planning.”
 ---
 
 # Roadmap planning
@@ -9,7 +9,7 @@ Create an evidence-backed, GitHub-ready plan while keeping product decisions and
 
 ## Use cases
 
-1. “Turn Saved Views into an epic” → draft the epic and dependency-ordered child issues.
+1. “Turn Saved Searches into an epic” → draft the epic and dependency-ordered child issues.
 2. “Review the Next horizon” → assess evidence, gates, sequencing, and options.
 3. “Prepare roadmap items for GitHub Projects” → map approved work to issue and Project fields without creating resources.
 
@@ -24,7 +24,7 @@ Create an evidence-backed, GitHub-ready plan while keeping product decisions and
 
 ### 1. Select and verify
 
-1. Read `product/roadmap.json`; select the requested initiative, defaulting to `init-saved-views-preview`.
+1. Read `product/roadmap.json`; select the requested initiative, defaulting to `init-saved-searches-preview`.
 2. Confirm its initiative ID, horizon, status, confidence, dependencies, decision flags, and existing `issueDraft`.
 3. State that the roadmap and all evidence are **SYNTHETIC / DEMO-ONLY**.
 
@@ -50,7 +50,7 @@ Produce:
 - open `humanDecisionFlags`;
 - dependencies and release gates.
 
-Do not resolve a decision flag, move a horizon, or expand local Saved Views into sync/sharing without a supplied human decision.
+Do not resolve a decision flag, move a horizon, or expand local Saved Searches into account sync or price alerts without a supplied human decision.
 
 **Checkpoint 2 — evidence and scope:** stop for human review of the trace, boundaries, and proposed choices.
 

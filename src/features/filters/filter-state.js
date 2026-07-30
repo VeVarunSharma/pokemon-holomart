@@ -1,36 +1,52 @@
-export const SENTIMENTS = Object.freeze(["All", "Positive", "Neutral", "Negative"]);
-export const CHANNELS = Object.freeze(["All", "Interview", "Support", "Survey", "Community"]);
+export const RARITIES = Object.freeze([
+  "All",
+  "Illustration Rare",
+  "Special Illustration Rare",
+  "Hyper Rare",
+  "Secret Rare"
+]);
+export const EXPANSIONS = Object.freeze([
+  "All",
+  "Scarlet & Violet",
+  "Scarlet & Violet—151",
+  "Paldean Fates",
+  "Paldea Evolved",
+  "Twilight Masquerade",
+  "Surging Sparks",
+  "Crown Zenith",
+  "Evolving Skies"
+]);
 export const DEFAULT_FILTERS = Object.freeze({
   query: "",
-  sentiment: "All",
-  channel: "All"
+  rarity: "All",
+  expansion: "All"
 });
 
 export function normalizeFilters(input = {}) {
   const query = typeof input.query === "string" ? input.query.trim().slice(0, 120) : "";
   return {
     query,
-    sentiment: SENTIMENTS.includes(input.sentiment) ? input.sentiment : DEFAULT_FILTERS.sentiment,
-    channel: CHANNELS.includes(input.channel) ? input.channel : DEFAULT_FILTERS.channel
+    rarity: RARITIES.includes(input.rarity) ? input.rarity : DEFAULT_FILTERS.rarity,
+    expansion: EXPANSIONS.includes(input.expansion) ? input.expansion : DEFAULT_FILTERS.expansion
   };
 }
 
-export function filterFeedback(items, input) {
+export function filterCards(items, input) {
   const filters = normalizeFilters(input);
   const needle = filters.query.toLocaleLowerCase();
   return items.filter((item) => {
-    const haystack = [item.company, item.contact, item.excerpt, item.theme, item.plan]
+    const haystack = [item.name, item.set, item.number, item.rarity, item.condition, item.seller]
       .join(" ")
       .toLocaleLowerCase();
     return (!needle || haystack.includes(needle))
-      && (filters.sentiment === "All" || item.sentiment === filters.sentiment)
-      && (filters.channel === "All" || item.channel === filters.channel);
+      && (filters.rarity === "All" || item.rarity === filters.rarity)
+      && (filters.expansion === "All" || item.set === filters.expansion);
   });
 }
 
 export function activeFilterCount(input) {
   const filters = normalizeFilters(input);
   return Number(Boolean(filters.query))
-    + Number(filters.sentiment !== "All")
-    + Number(filters.channel !== "All");
+    + Number(filters.rarity !== "All")
+    + Number(filters.expansion !== "All");
 }

@@ -1,5 +1,5 @@
 name: Product epic
-description: Propose an evidence-backed Signal Desk epic with boundaries, gates, and child work.
+description: Propose an evidence-backed HoloMart epic with boundaries, gates, and child work.
 title: "[Epic] "
 labels:
   - product
@@ -12,7 +12,7 @@ body:
     id: initiative-id
     attributes:
       label: Roadmap initiative ID
-      placeholder: init-saved-views-preview
+      placeholder: init-saved-searches-preview
     validations:
       required: true
   - type: textarea
@@ -33,7 +33,7 @@ body:
     id: scope
     attributes:
       label: Scope and non-goals
-      description: Keep local Saved Views separate from sync and team sharing unless explicitly approved.
+      description: Keep local Saved Searches separate from account sync and price alerts unless explicitly approved.
     validations:
       required: true
   - type: textarea

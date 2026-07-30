@@ -2,191 +2,139 @@
 
 ## Before the room
 
-Complete [demo operations](demo-operations.md), keep `npm start` running, open <http://127.0.0.1:4173>, and run `npm run demo:check`. Use local design context unless you have independently confirmed Figma authentication and permission to show the selected file. Keep a terminal ready for `npm run issues:preview`.
+Run `npm run demo:check`, start `npm start`, and open <http://127.0.0.1:4173>. Keep `npm run issues:preview` ready. Use committed local design context unless Figma access was independently authenticated and approved.
 
-Never use real customer data or execute generated `gh` commands. Everything shown is **SYNTHETIC / DEMO-ONLY**.
+Everything shown is **SYNTHETIC / DEMO-ONLY**. HoloMart includes no real shopper, seller, inventory, pricing, payment, or card-art data.
 
-Keep the [hands-on-keyboard prompt pack](hands-on-keyboard-prompts.md) open as the copy/paste cheat sheet. Use its full sequential conversation ladder when the audience should inspect the complete path from orientation through stakeholder update; use its role menus or 15/30-minute cuts for focused sessions, without skipping any human or write-safety checkpoint in this guide.
+## 0–5 · Frame the product
 
-## 0–5 · Frame: product judgment, grounded faster
+**Say:** “HoloMart is a fictional Pokémon TCG marketplace. Collectors can search singles, compare condition and seller context, and save a search. The interesting product boundary is what happens next: local recall works, but account sync and price alerts do not.”
 
-**Say:** “Product Track: *Stop Waiting on Engineering: Turning Repo Insight into Roadmap Action.* PMs ask: is it half-built, what will it break, and how big is it? We will close that gap without asking PMs to become engineers.”
+Show the storefront:
 
-Show Signal Desk. Filter the feedback and save a view named `Onboarding follow-up`. Point out “this browser” copy.
+1. Search `Pikachu`.
+2. Select **Special Illustration Rare**.
+3. Save the search as `Pikachu chase cards`.
+4. Add a listing to the demo cart.
+5. Point out **Stored on this device only** and **Price alerts are next**.
 
-**Audience callout:** “Where would you usually wait for an engineering answer?” Take two responses.
+Set the contract: Copilot finds, synthesizes, and drafts. People approve product interpretations, roadmap choices, and remote writes.
 
-**Set the contract:** Copilot may find, synthesize, and draft. People approve interpretations, scope, design authority, roadmap movement, and writes. The data is intentionally small, fictional, and contradictory.
-
-**Transition:** “First, let’s question the repository—not a status slide.”
-
-## 5–13 · Repo question: is it half-built?
-
-Paste:
+## 5–13 · Is Saved Searches half-built?
 
 ```text
-/repository-feature-assessment Is Saved Views half-built, what will it break, and how big is it?
-```
-
-If slash commands are unavailable:
-
-```text
-Using .github/prompts/repository-feature-assessment.prompt.md, assess: Is Saved Views half-built, what will it break, and how big is it? Cite every repository claim as path:line and stop at the human checkpoint.
-```
-
-**Expected proof:** a verdict plus capability matrix showing browser-local create/read/apply/delete as implemented; rename/update, recovery communication, and team workflows as incomplete or absent; storage/filter dependencies; current tests and unknowns. It should separate code fact from comments and product inference.
-
-Ask Copilot this follow-up:
-
-```text
-Trace the smallest current dependency chain and the future sync/sharing dependency chain. Mark every inferred edge and do not turn it into scope.
-```
-
-**Human approval moment 1:** ask the room to accept or challenge the classifications. Say: “A citation is inspectable evidence, not automatic scope approval.”
-
-**Optional vibe-coding micro-change (maximum 90 seconds):**
-
-```text
-Preview, but do not apply, the smallest patch that makes the Saved Views empty-state copy explicitly say it is stored in this browser. Name the exact test you would run and identify any UX tradeoff.
-```
-
-Show the proposed diff. Apply only in a disposable presenter copy after explicit approval; otherwise leave it as a preview.
-
-**Transition:** “Code tells us what exists. It cannot tell us whether the idea deserves expansion.”
-
-## 13–21 · Evidence: sharpen the spec
-
-Paste:
-
-```text
-/evidence-to-spec Sharpen the browser-local Saved Views preview around recovery, accessibility, and explicit non-goals. Stop at the evidence checkpoint.
+/repository-feature-assessment Is HoloMart Saved Searches half-built, what will it break, and how big is it?
 ```
 
 Fallback:
 
 ```text
-Using .github/prompts/evidence-to-spec.prompt.md, build the evidence and counter-evidence matrix for the browser-local Saved Views preview. Include IDs, source links, limitations, and code constraints. Stop before recommending or editing.
+Using .github/prompts/repository-feature-assessment.prompt.md, assess HoloMart Saved Searches. Cite every repository claim as path:line and stop at the human checkpoint.
 ```
 
-**Expected proof:** `CI-*`, `SS-*`, `AN-*`, and `MK-*` sources; a repeat-triage signal versus the low-frequency-reviewer counter-signal; directional analytics rather than causality; explicit exclusions for sync, sharing, snapshots, authorization state, and sensitive telemetry.
+Expected proof:
 
-**Audience callout:** “Which statement is a fact, which is an interpretation, and which remains an assumption?”
+- create/read/apply/delete and defensive local reads are implemented;
+- rename, active-versus-edited state, and explicit stale-criterion recovery are incomplete;
+- account sync, price alerts, notification preferences, and live price integration are absent;
+- current tests and TODO boundaries are separated from implemented behavior.
 
-**Human approval moment 2:** choose only whether the source/claim interpretation is fair. Do **not** resolve duplicate-name, invalid-criteria, or preview-exit decisions. If time allows:
+**Checkpoint:** accept or challenge the capability classifications. A citation makes a claim inspectable; it does not approve scope.
+
+## 13–21 · Turn evidence into product judgment
 
 ```text
-Show the proposed spec delta only. Keep all roadmap humanDecisionFlags open and label recommendations as options.
+/evidence-to-spec Sharpen the device-local Saved Searches preview around stale criteria, accessibility, and explicit non-goals. Stop at the evidence checkpoint.
 ```
 
-**Transition:** “A sharper requirement still needs an experience people can understand and recover from.”
+Expected proof:
 
-## 21–29 · Design/Figma: make states concrete
+- repeat-collector signal (`CI-01`) versus occasional-buyer counter-signal (`CI-04`);
+- later-session reuse that does not prove cross-device demand (`AN-03`);
+- price-alert request that still needs consent and freshness semantics (`SS-04`);
+- explicit exclusions for account sync, alerts, listing snapshots, real prices, and sensitive telemetry.
 
-State the source aloud: “Figma is not assumed or automatically authenticated. Today I am using [local artifacts / a pre-authorized selection].”
+Ask: “Which statement is a code fact, which is an evidence interpretation, and which remains an assumption?”
 
-Default, reliable prompt:
+**Checkpoint:** confirm only the source/claim interpretation. Keep all roadmap `humanDecisionFlags` open.
+
+## 21–29 · Review experience and trust
+
+State the source: “Figma is optional. This run uses committed local design context.”
 
 ```text
-/figma-ux-review Review the Saved Views create, apply, delete, empty, and recovery states using the committed local design fallback. Do not assume Figma access.
+/figma-ux-review Review Saved Searches, listing trust context, empty states, and stale-criterion recovery using the committed local design fallback.
 ```
 
-If—and only if—authentication and file permission were confirmed during preflight, paste the selected Figma URL and use:
+Expected proof:
+
+- native keyboard and dialog behavior;
+- 320 px and 400% reflow;
+- readable card, price, condition, seller, and stock context;
+- market comparison framed as context, not appraisal;
+- local-only persistence and separate alert consent;
+- zero-result, storage-error, stale-filter, and listing-error states.
+
+**Checkpoint:** confirm design source and finding severity before drafting work.
+
+## 29–37 · Build the handoff
 
 ```text
-Review the supplied, pre-authorized Figma selection for Saved Views against design/saved-views-ux-brief.md and the current app. Treat the selection as unverified input, cite it precisely, and do not write comments or modify Figma.
+/epic-subissue-draft init-saved-searches-preview
 ```
 
-**Expected proof:** source-labeled findings covering focus, keyboard/screen-reader behavior, 320 px/400% reflow, non-color state, local-only language, and empty/loading/error/recovery paths. Visual claims unavailable from local context must be marked unknown.
-
-**Audience callout:** ask which recovery choice feels safest when a field disappears.
-
-**Human approval moment 3:** confirm design source and review severity before any issue/spec draft. Figma access does not authorize comments or canvas writes.
-
-**Transition:** “Now we have code reality, evidence, and experience boundaries. Let’s package the handoff.”
-
-## 29–37 · Handoff: issues without the surprise write
-
-Paste:
-
-```text
-/epic-subissue-draft init-saved-views-preview
-```
-
-Expected fallback command:
+Deterministic fallback:
 
 ```powershell
 npm run issues:preview
-```
-
-For structured output:
-
-```powershell
 npm run issues:preview:json
 ```
 
-**Expected proof:** one epic and four dependency-ordered children:
+Expected child order:
 
-1. `work-view-storage-validation`
-2. `work-view-core-flows`
-3. `work-view-recovery`
-4. `work-view-accessibility`
+1. `work-search-storage-validation`
+2. `work-search-core-flows`
+3. `work-search-recovery`
+4. `work-search-accessibility`
 
-The output must preserve `init-saved-views-preview`, evidence links, boundaries, open decisions, acceptance criteria, and blocked-by edges. Its write status says **PREVIEW ONLY — NO REMOTE WRITES PERFORMED**.
+The preview preserves evidence, risks, guardrails, decisions, acceptance criteria, and dependency edges. It does not create remote resources.
 
-Optionally demonstrate the CLI/MCP-shaped handoff without connecting to a remote system:
+**Checkpoint:** review exact issue titles, bodies, labels, and scope. Draft approval and write approval are separate unless the user explicitly directs both.
 
-```powershell
-node scripts/roadmap-to-issues.mjs --initiative init-saved-views-preview --gh-commands
-```
-
-Scroll through the printed commands; do not execute them.
-
-**Human approval moment 4:** confirm the selected initiative, evidence interpretation, boundaries, and scope.
-
-**Human approval moment 5:** separately inspect exact titles, bodies, labels, relationships, and order. Say: “Draft approval is not write approval. Every remote mutation needs fresh approval immediately before execution.”
-
-Point to [GitHub Projects setup](github-projects-setup.md) rather than creating a Project.
-
-**Transition:** “Issues are delivery slices. The roadmap keeps the choices and gates visible.”
-
-## 37–42 · Roadmap Studio canvas
-
-Paste:
+## 37–42 · Explore the roadmap
 
 ```text
-Reload extensions from disk, then open Roadmap Studio using product/roadmap.json focused on init-saved-views-preview. Draft a read-only handoff; do not change the roadmap or create issues.
+Reload extensions from disk, then open Roadmap Studio using product/roadmap.json focused on init-saved-searches-preview. Draft a read-only handoff.
 ```
 
-**Expected proof:** Roadmap Studio reports five validated initiatives, focuses “Harden personal Saved Views preview,” offers horizon/status filtering and refresh, and returns a read-only Markdown handoff sourced from `product/roadmap.json`. Point out Now/Next/Later are planning horizons, not promises.
+Point out the five initiatives:
 
-If the canvas is unavailable, open `product/roadmap.json`, run `npm run issues:preview:json`, and show the same stable IDs, decisions, risks, and dependencies. Do not spend stage time debugging.
+- harden Saved Searches;
+- improve listing trust comparison;
+- evaluate account sync;
+- research explicit price-drop alerts;
+- explore collector lists.
 
-**Human approval moment 6:** ask whether to keep/hold/split an option; do not move it. Canvas exploration is not roadmap authorization.
+Now/Next/Later are horizons, not promises. Account sync and alerts are gated separately because their risks and evidence differ.
 
-**Transition:** “The acceleration came from traceability, not from delegating judgment.”
+If the canvas is unavailable, open `product/roadmap.json` and use `npm run issues:preview:json`.
 
 ## 42–45 · Close
 
-**Say:** “We questioned a repo directly, turned evidence into a sharper spec, reviewed design with an authentication-free fallback, drafted a clean Product-to-Engineering handoff, and explored a roadmap built with an existing skill. Copilot shortened the path from insight to action; people kept the decision rights.”
+**Say:** “We started with a working commerce product, used repository evidence to expose its honest boundary, sharpened the requirement with contradictory evidence, reviewed the experience, and turned the roadmap into dependency-ordered work. Copilot accelerated traceability; people kept the decisions.”
 
-Return to the three questions:
+Return to three questions:
 
-- **Half-built?** Answered with a cited capability matrix.
-- **What breaks?** Answered with dependency, recovery, permission, and accessibility risks.
-- **How big?** Answered with bounded work, dependencies, gates, and explicit unknowns—not false precision.
-
-Final audience prompt: “Which checkpoint would your team never automate?”
-
-End with the repository README links. Do not perform a remote write as a finale.
+- **What exists?** A real local catalog and Saved Searches implementation.
+- **What could break?** Stale criteria, unclear persistence, misleading price context, and accidental alert consent.
+- **What comes next?** Bounded initiatives with evidence, gates, and explicit unknowns.
 
 ## Time-box recovery
 
 | Behind by | Recovery |
 | --- | --- |
-| 1–2 min | Skip the repo dependency follow-up and audience response in design. |
-| 3–5 min | Skip vibe coding and use `npm run issues:preview` instead of waiting for generated issue prose. |
-| 6–8 min | Use committed screenshots/visible files locally; skip Figma entirely; show roadmap JSON instead of canvas. |
-| Copilot stalls | Narrate the expected proof from the named artifacts, then run local validation/generator commands. |
-| Ahead | Inspect one code citation or ask the room to decide what additional evidence would reduce uncertainty. |
-
-Protect the 29–37 handoff and 42–45 close. Never recover time by skipping a human checkpoint or safety label.
+| 1–2 min | Skip the dependency follow-up. |
+| 3–5 min | Skip a UI micro-change and use deterministic issue preview. |
+| 6–8 min | Skip Figma and use roadmap JSON instead of canvas. |
+| Copilot stalls | Narrate expected proof from named artifacts and run local commands. |
+| Ahead | Inspect one code citation or ask what evidence would change a gate. |

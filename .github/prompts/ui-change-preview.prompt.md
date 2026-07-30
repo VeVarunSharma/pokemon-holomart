@@ -1,10 +1,10 @@
 ---
 name: ui-change-preview
-description: Preview one small Signal Desk UI change and its validation before any file edit.
+description: Preview one small HoloMart UI change and its validation before any file edit.
 argument-hint: "[small UI change to preview]"
 ---
 
-Preview `${input:change:Small UI change to preview}` against [the current UI](../../app/app.js), [styles](../../app/styles.css), [Saved Views tests](../../test/saved-views.test.js), [UX brief](../../design/saved-views-ux-brief.md), [local design context](../../design/local-design-context.json), and [tokens](../../design/tokens.json).
+Preview `${input:change:Small UI change to preview}` against [the current UI](../../app/app.js), [styles](../../app/styles.css), [Saved Searches tests](../../test/saved-searches.test.js), [UX brief](../../design/saved-searches-ux-brief.md), [local design context](../../design/local-design-context.json), and [tokens](../../design/tokens.json).
 
 ## Evidence rules
 

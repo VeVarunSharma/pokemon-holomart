@@ -10,29 +10,29 @@ const ROOT = path.resolve(SCRIPT_DIR, "..");
 const ROADMAP_PATH = path.join(ROOT, "product", "roadmap.json");
 
 const CHILD_CONTEXT = Object.freeze({
-  "work-view-storage-validation": {
-    "rationale": "Defensive reads already keep malformed browser storage from blocking the dashboard; explicit record versioning and data-boundary checks are still needed for a reliable local preview.",
+  "work-search-storage-validation": {
+    "rationale": "Defensive reads already keep malformed browser storage from blocking the catalog; explicit record versioning and data-boundary checks are still needed for a reliable Saved Searches preview.",
     "exclusions": [
-      "No server persistence, account sync, team sharing, or permissions infrastructure."
+      "No account persistence, price alerts, listing snapshots, or notification infrastructure."
     ],
     "evidenceReferences": [
       "AN-06",
       "SS-03"
     ],
     "references": [
-      "../src/features/saved-views/storage.js#L3-L57",
-      "../test/saved-views.test.js#L34-L68",
-      "./saved-views-spec.md#proposed-acceptance-boundaries"
+      "../src/features/saved-searches/storage.js#L3-L57",
+      "../test/saved-searches.test.js#L34-L68",
+      "./saved-searches-spec.md#proposed-acceptance-boundaries"
     ],
     "validation": [
-      "Run the saved-view storage tests for malformed, unsupported, and quota-failure records.",
+      "Run the saved-search storage tests for malformed, unsupported, and quota-failure records.",
       "Inspect persisted records and telemetry touchpoints against the documented data exclusions."
     ]
   },
-  "work-view-core-flows": {
-    "rationale": "Create, apply, and delete are present in the browser-local preview, while rename and a clear active-versus-edited state remain necessary for safe reuse.",
+  "work-search-core-flows": {
+    "rationale": "Create, apply, and delete are present in the device-local preview, while rename and a clear active-versus-edited state remain necessary for safe reuse.",
     "exclusions": [
-      "No cross-device sync, team ownership, or automatic duplicate-name policy decision."
+      "No cross-device sync, price alerts, or automatic duplicate-name policy decision."
     ],
     "evidenceReferences": [
       "CI-01",
@@ -40,19 +40,19 @@ const CHILD_CONTEXT = Object.freeze({
       "SS-05"
     ],
     "references": [
-      "../app/app.js#L104-L175",
-      "../app/index.html#L56-L74",
-      "./saved-views-spec.md#proposed-acceptance-boundaries"
+      "../app/app.js#L111-L248",
+      "../app/index.html#L124-L171",
+      "./saved-searches-spec.md#proposed-acceptance-boundaries"
     ],
     "validation": [
-      "Exercise create, apply, rename, and delete without leaving the browser-local boundary.",
-      "Verify local-only and active-versus-edited states with keyboard use and non-color cues."
+      "Exercise create, apply, rename, and delete without leaving the device-local boundary.",
+      "Verify local-only, no-alert, and active-versus-edited states with keyboard use and non-color cues."
     ]
   },
-  "work-view-recovery": {
-    "rationale": "Current filter normalization repairs some invalid values, but the preview does not yet explain omissions or model permission changes safely.",
+  "work-search-recovery": {
+    "rationale": "Current filter normalization repairs invalid values, but the preview does not yet explain removed expansion or rarity criteria.",
     "exclusions": [
-      "No role-based permissions implementation or disclosure of inaccessible source and field details."
+      "No silent substitution of a different expansion or rarity and no account migration implementation."
     ],
     "evidenceReferences": [
       "CI-03",
@@ -60,88 +60,89 @@ const CHILD_CONTEXT = Object.freeze({
       "AN-06"
     ],
     "references": [
-      "../src/features/saved-views/storage.js#L15-L27",
+      "../src/features/saved-searches/storage.js#L15-L27",
       "../src/features/filters/filter-state.js#L1-L16",
-      "./saved-views-spec.md#invalid-or-restricted-criteria"
+      "./saved-searches-spec.md#invalid-or-unavailable-criteria"
     ],
     "validation": [
-      "Test corrupt, removed, and restricted criteria with current access re-evaluated on each apply.",
-      "Review recovery messages to ensure restricted context is not disclosed."
+      "Test corrupt, removed, and renamed criteria with no silent broadening.",
+      "Review recovery messages for specific, actionable, non-technical language."
     ]
   },
-  "work-view-accessibility": {
-    "rationale": "The preview includes dialog and live-status foundations, but all saved-view flows require explicit keyboard, screen-reader, reflow, and announcement validation.",
+  "work-search-accessibility": {
+    "rationale": "The preview includes native controls, a dialog, and live-status foundations, but all Saved Searches flows require explicit keyboard, screen-reader, reflow, and announcement validation.",
     "exclusions": [
-      "No accessibility claim beyond the saved-view core and recovery flows."
+      "No accessibility claim beyond the Saved Searches, catalog-filter, listing, and recovery flows."
     ],
     "evidenceReferences": [
       "CI-03",
       "MK-06"
     ],
     "references": [
-      "../app/index.html#L101-L137",
-      "../app/app.js#L118-L175",
-      "../design/saved-views-ux-brief.md#accessibility"
+      "../app/index.html#L114-L232",
+      "../app/app.js#L111-L248",
+      "../design/saved-searches-ux-brief.md#accessibility"
     ],
     "validation": [
       "Complete create, apply, rename, delete, and recovery using keyboard-only navigation and a supported screen reader.",
       "Check 320 CSS px reflow and programmatic status announcements."
     ]
   },
-  "work-provenance-content": {
-    "rationale": "Reviewers need concise language that distinguishes applied, edited, stale, and safely omitted criteria without exposing restricted context.",
+  "work-trust-content": {
+    "rationale": "Collectors need concise listing language that makes price, condition, seller reputation, and market context comparable without implying a guarantee.",
     "exclusions": [
-      "No disclosure of restricted source or field details and no final progressive-disclosure layout decision."
+      "No real appraisal, grading, authentication, seller score, or price-feed claim."
     ],
     "evidenceReferences": [
-      "CI-03",
-      "SS-03",
-      "MK-06"
+      "CI-02",
+      "MK-04"
     ],
     "references": [
-      "../design/saved-views-ux-brief.md#research-questions",
-      "./saved-views-spec.md#invalid-or-restricted-criteria"
+      "../design/saved-searches-ux-brief.md#price-alerts-and-account-sync",
+      "./brief.md#constraints",
+      "../app/index.html#L173-L197"
     ],
     "validation": [
-      "Review every state label for a clear active, edited, stale, or restricted meaning.",
-      "Threat-review omission copy for restricted-context disclosure."
+      "Review listing language for condition clarity, seller context, price freshness, and guarantee implications.",
+      "Confirm synthetic market context cannot be read as a real appraisal."
     ]
   },
-  "work-provenance-prototype": {
-    "rationale": "A prototype is needed to test whether filter provenance stays understandable without overwhelming routine review.",
+  "work-trust-prototype": {
+    "rationale": "A prototype is needed to test whether listing trust context remains scannable across expertise levels and narrow viewports.",
     "exclusions": [
-      "No production implementation and no exposure of restricted criterion details."
+      "No production trust system or integration with real card, seller, grading, or pricing data."
     ],
     "evidenceReferences": [
+      "CI-02",
       "CI-03",
-      "SS-03",
-      "MK-06"
+      "MK-04"
     ],
     "references": [
-      "../design/saved-views-ux-brief.md#research-questions",
-      "../design/saved-views-ux-brief.md#accessibility"
+      "../design/saved-searches-ux-brief.md#research-questions",
+      "../design/saved-searches-ux-brief.md#accessibility",
+      "../app/styles.css#L780-L1040"
     ],
     "validation": [
-      "Test comprehension of the summary and omissions at desktop and 320 CSS px.",
-      "Complete disclosure interactions with keyboard and a supported screen reader."
+      "Test comparison comprehension at desktop and 320 CSS px.",
+      "Complete listing navigation and cart actions with keyboard and a supported screen reader."
     ]
   },
   "work-sync-demand-study": {
-    "rationale": "Directional later-session reuse does not establish cross-device demand, so the workflow need must be studied before durable storage is designed.",
+    "rationale": "Directional later-session reuse and one mobile workflow do not establish cross-device demand, so the need must be studied before durable account storage is designed.",
     "exclusions": [
-      "No account-sync implementation, team sharing, or inference that later-session reuse proves cross-device demand."
+      "No account-sync implementation, price alerts, or inference that later-session reuse proves cross-device demand."
     ],
     "evidenceReferences": [
       "SS-01",
       "AN-03",
-      "CI-02"
+      "CI-05"
     ],
     "references": [
-      "./decisions/0001-saved-views-local-preview.md#reconsideration-gates",
-      "../src/features/saved-views/implementation-notes.js#L4-L19"
+      "./decisions/0001-saved-searches-local-preview.md#reconsideration-gates",
+      "../src/features/saved-searches/implementation-notes.js#L4-L19"
     ],
     "validation": [
-      "Document observed cross-session and cross-device workflows separately, including counter-signals.",
+      "Document cross-session, cross-device, desktop-creation, and mobile-check workflows separately.",
       "Review findings against the local-preview reconsideration gates."
     ]
   },
@@ -152,11 +153,11 @@ const CHILD_CONTEXT = Object.freeze({
     ],
     "evidenceReferences": [
       "SS-01",
-      "CI-02"
+      "CI-05"
     ],
     "references": [
-      "./decisions/0001-saved-views-local-preview.md#why-not-sync-or-sharing-now",
-      "../src/features/saved-views/dependency-map.js#L12-L19"
+      "./decisions/0001-saved-searches-local-preview.md#why-not-account-sync-or-alerts-now",
+      "../src/features/saved-searches/dependency-map.js#L12-L19"
     ],
     "validation": [
       "Compare options across migration, export, retention, deletion, privacy, and security.",
@@ -171,10 +172,10 @@ const CHILD_CONTEXT = Object.freeze({
     "evidenceReferences": [
       "SS-01",
       "AN-03",
-      "CI-02"
+      "CI-05"
     ],
     "references": [
-      "./decisions/0001-saved-views-local-preview.md#reconsideration-gates",
+      "./decisions/0001-saved-searches-local-preview.md#reconsideration-gates",
       "./evidence/usage-analytics.json#proposedMetricDefinitions"
     ],
     "validation": [
@@ -182,99 +183,98 @@ const CHILD_CONTEXT = Object.freeze({
       "Confirm the record leaves execution subject to separate approval."
     ]
   },
-  "work-team-role-model": {
-    "rationale": "Governed team views require explicit responsibilities so private scratch work is not published and default designation is not implied by sharing.",
+  "work-alert-job-study": {
+    "rationale": "One price-drop request and one repeat-collector workflow are insufficient to choose exact-card thresholds, broad matching, in-product reminders, or no alert.",
     "exclusions": [
-      "No team-view implementation, open publishing, or automatic conversion of personal views."
+      "No notification prototype, subscription assumption, or commitment to an alert solution."
     ],
     "evidenceReferences": [
       "CI-01",
       "CI-02",
       "SS-04",
-      "MK-02"
+      "MK-03"
     ],
     "references": [
-      "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
-      "./decisions/0001-saved-views-local-preview.md#why-not-sync-or-sharing-now"
+      "../design/saved-searches-ux-brief.md#research-questions",
+      "./decisions/0001-saved-searches-local-preview.md#why-not-account-sync-or-alerts-now"
     ],
     "validation": [
-      "Walk create, update, archive, transfer, and default designation through each proposed role.",
-      "Verify every private-to-shared transition requires an intentional action."
-    ]
-  },
-  "work-team-threat-model": {
-    "rationale": "Shared definitions, names, counts, and omission messages could reveal restricted context even when result access is enforced.",
-    "exclusions": [
-      "No assumption that publisher access transfers to viewers and no realistic customer data."
-    ],
-    "evidenceReferences": [
-      "SS-03",
-      "MK-02",
-      "MK-04"
-    ],
-    "references": [
-      "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
-      "../src/features/saved-views/implementation-notes.js#L4-L19"
-    ],
-    "validation": [
-      "Review names, criteria, counts, omissions, and revoked-access scenarios for disclosure.",
-      "Verify each scenario evaluates the current viewer's access."
-    ]
-  },
-  "work-team-concept-test": {
-    "rationale": "A bounded concept test can compare curated coordination with private-work counter-scenarios before any sharing investment is approved.",
-    "exclusions": [
-      "No production sharing, workspace default, or claim that synthetic findings establish demand."
-    ],
-    "evidenceReferences": [
-      "CI-01",
-      "CI-02",
-      "SS-04",
-      "MK-04"
-    ],
-    "references": [
-      "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
-      "./evidence/README.md"
-    ],
-    "validation": [
-      "Test curation, private scratch work, restricted access, and default-view counter-scenarios.",
-      "Report the synthetic sample, limitations, counter-signals, and unresolved governance decisions."
-    ]
-  },
-  "work-digest-problem-study": {
-    "rationale": "One fictional low-frequency workflow and generic market patterns are insufficient to choose a digest over history, reminders, or no change.",
-    "exclusions": [
-      "No notification prototype, subscription assumption, or commitment to a digest solution."
-    ],
-    "evidenceReferences": [
-      "CI-04",
-      "MK-05"
-    ],
-    "references": [
-      "./evidence/customer-support-signals.md#ci-04--low-frequency-reviewer",
-      "./evidence/market-notes.md#market-and-competitive-notes"
-    ],
-    "validation": [
-      "Observe periodic-review workflows and compare digest, history, reminder, and no-change options.",
+      "Observe exact-card, broad-match, and non-alert monitoring workflows separately.",
       "Document sample limitations, counter-signals, and whether a recurring problem was established."
     ]
   },
-  "work-digest-consent-model": {
-    "rationale": "If a digest remains viable, saving a view must stay separate from notification consent and stale criteria need a safe recovery path.",
+  "work-alert-consent-model": {
+    "rationale": "If an alert remains viable, saving must stay separate from notification consent and preferences need a complete lifecycle.",
     "exclusions": [
-      "No implicit subscription from saving a view and no outbound delivery implementation."
+      "No implicit subscription from saving a search and no outbound delivery implementation."
     ],
     "evidenceReferences": [
-      "CI-04",
+      "SS-04",
+      "MK-03",
       "MK-05"
     ],
     "references": [
-      "./evidence/market-notes.md#market-and-competitive-notes",
-      "./saved-views-spec.md#invalid-or-restricted-criteria"
+      "../design/saved-searches-ux-brief.md#price-alerts-and-account-sync",
+      "./saved-searches-spec.md#proposed-acceptance-boundaries"
     ],
     "validation": [
-      "Walk save, subscribe, frequency change, pause, unsubscribe, and stale-view recovery as distinct states.",
+      "Walk save, subscribe, threshold, channel, cadence, quiet hours, pause, and unsubscribe as distinct states.",
       "Verify no save path creates or implies notification consent."
+    ]
+  },
+  "work-alert-trigger-contract": {
+    "rationale": "Price and inventory can change between evaluation, delivery, and open, so the trigger contract must define freshness and sold-listing outcomes.",
+    "exclusions": [
+      "No live pricing integration, guaranteed price, inventory reservation, or outbound delivery."
+    ],
+    "evidenceReferences": [
+      "CI-02",
+      "SS-04",
+      "MK-03"
+    ],
+    "references": [
+      "../design/saved-searches-ux-brief.md#loading-empty-and-error-states",
+      "./brief.md#constraints"
+    ],
+    "validation": [
+      "Model price changes, condition changes, sold listings, delayed delivery, and duplicate matches.",
+      "Verify stale or sold inventory cannot produce a success-shaped outcome."
+    ]
+  },
+  "work-lists-problem-study": {
+    "rationale": "Generic marketplace patterns and one occasional-buyer counter-signal are insufficient to choose wishlists, owned collections, gift lists, or no new list.",
+    "exclusions": [
+      "No list implementation, ownership inference, social sharing, or claim that market familiarity proves demand."
+    ],
+    "evidenceReferences": [
+      "CI-04",
+      "MK-02"
+    ],
+    "references": [
+      "./evidence/shopper-research-signals.md#ci-04--occasional-gift-buyer",
+      "./evidence/market-notes.md#market-and-competitive-notes"
+    ],
+    "validation": [
+      "Observe wishlisting, collection ownership, gifting, and dynamic-search workflows separately.",
+      "Document sample limitations, counter-signals, and whether a recurring problem was established."
+    ]
+  },
+  "work-lists-model": {
+    "rationale": "If a stable list remains viable, its states and lifecycle must not blur saving, cart intent, purchase, and ownership.",
+    "exclusions": [
+      "No implementation, social graph, collection valuation, or automatic ownership state."
+    ],
+    "evidenceReferences": [
+      "CI-04",
+      "MK-02"
+    ],
+    "references": [
+      "./evidence/market-notes.md#market-and-competitive-notes",
+      "./brief.md#non-goals"
+    ],
+    "validation": [
+      "Walk add, remove, archive, purchase, return, and delete semantics for each candidate list.",
+      "Verify save, cart, purchase, and ownership remain distinct actions."
     ]
   }
 });
@@ -285,7 +285,7 @@ function usage() {
 Deterministically generate a PREVIEW-ONLY epic and child issue plan.
 
 Options:
-  --initiative <id-or-title>  Initiative ID or exact title (default: init-saved-views-preview)
+  --initiative <id-or-title>  Initiative ID or exact title (default: init-saved-searches-preview)
   --format <markdown|json>    Output format (default: markdown)
   --gh-commands               Append PowerShell issue-create commands (labels are never applied)
   --repo <owner/name>         Include --repo in previewed gh commands
@@ -303,7 +303,7 @@ function fail(message) {
 
 function parseArgs(argv) {
   const options = {
-    initiative: "init-saved-views-preview",
+    initiative: "init-saved-searches-preview",
     format: "markdown",
     ghCommands: false,
     repo: null,

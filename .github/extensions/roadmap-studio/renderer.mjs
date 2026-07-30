@@ -17,9 +17,9 @@ function list(values, renderer) {
 }
 
 function card(item, focused) {
-  const savedViews = /saved views/i.test(`${item.title} ${item.outcome}`);
-  return `<article class="initiative ${focused ? "focused" : ""} ${savedViews ? "saved-views" : ""}" id="${e(item.id)}">
-    ${savedViews ? '<div class="feature-label">Saved Views</div>' : ""}
+  const savedSearches = /saved searches/i.test(`${item.title} ${item.outcome}`);
+  return `<article class="initiative ${focused ? "focused" : ""} ${savedSearches ? "saved-searches" : ""}" id="${e(item.id)}">
+    ${savedSearches ? '<div class="feature-label">Saved Searches</div>' : ""}
     <div class="card-head">
       <div><p class="eyebrow">${e(item.id)}</p><h3>${e(item.title)}</h3></div>
       <button class="focus-button" type="button" data-focus="${e(item.id)}">${focused ? "Focused" : "Focus"}</button>
@@ -108,7 +108,7 @@ export function renderShell(roadmap, durablePath, initialFocus = null) {
     .lane-items { display:grid; gap:12px; }
     .initiative { position:relative; overflow:hidden; padding:16px; border:1px solid var(--border-color-default,#d0d7de); border-radius:12px; background:var(--background-color-default,#fff); box-shadow:0 1px 2px rgba(31,35,40,.06); }
     .initiative.focused { border:2px solid var(--color-focus-outline,#0969da); box-shadow:0 8px 28px rgba(9,105,218,.18); }
-    .initiative.saved-views { background:linear-gradient(145deg,var(--true-color-blue-muted,#ddf4ff),var(--background-color-default,#fff) 40%); }
+    .initiative.saved-searches { background:linear-gradient(145deg,var(--true-color-blue-muted,#ddf4ff),var(--background-color-default,#fff) 40%); }
     .feature-label { margin:-16px -16px 14px; padding:6px 16px; background:var(--true-color-blue,#0969da); color:var(--color-white,#fff); text-transform:uppercase; font-size:10px; font-weight:700; letter-spacing:.1em; }
     .card-head { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
     .focus-button { min-height:30px; padding:4px 8px; font-size:12px; }

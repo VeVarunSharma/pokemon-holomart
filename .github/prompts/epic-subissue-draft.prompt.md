@@ -1,11 +1,11 @@
 ---
 name: epic-subissue-draft
 description: Draft a GitHub-ready epic and dependency-ordered child issues without creating them.
-argument-hint: "[initiative id or title; defaults to Saved Views]"
+argument-hint: "[initiative id or title; defaults to Saved Searches]"
 agent: delivery-planner
 ---
 
-Draft an epic and child issue plan for `${input:initiative:Initiative ID or exact title (default: init-saved-views-preview)}`, defaulting to `init-saved-views-preview`, from [the authoritative roadmap](../../product/roadmap.json). Verify relevant product, design, code, and tests before extending the roadmap's existing `issueDraft`.
+Draft an epic and child issue plan for `${input:initiative:Initiative ID or exact title (default: init-saved-searches-preview)}`, defaulting to `init-saved-searches-preview`, from [the authoritative roadmap](../../product/roadmap.json). Verify relevant product, design, code, and tests before extending the roadmap's existing `issueDraft`.
 
 ## Human checkpoints
 

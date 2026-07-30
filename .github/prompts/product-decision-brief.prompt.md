@@ -1,11 +1,11 @@
 ---
 name: product-decision-brief
-description: Turn approved Saved Views evidence into a decision brief and spec delta while preserving open product choices.
-argument-hint: "[decision or scope; defaults to browser-local Saved Views preview]"
+description: Turn approved Saved Searches evidence into a decision brief and spec delta while preserving open product choices.
+argument-hint: "[decision or scope; defaults to device-local Saved Searches preview]"
 agent: product-strategist
 ---
 
-Prepare a decision brief for `${input:focus:Decision or scope (default: browser-local Saved Views preview)}`. Use [the product brief](../../product/brief.md), [current spec](../../product/saved-views-spec.md), [authoritative roadmap](../../product/roadmap.json), [evidence index](../../product/evidence/README.md), [UX brief](../../design/saved-views-ux-brief.md), and verified implementation/test evidence.
+Prepare a decision brief for `${input:focus:Decision or scope (default: device-local Saved Searches preview)}`. Use [the product brief](../../product/brief.md), [current spec](../../product/saved-searches-spec.md), [authoritative roadmap](../../product/roadmap.json), [evidence index](../../product/evidence/README.md), [UX brief](../../design/saved-searches-ux-brief.md), and verified implementation/test evidence.
 
 ## Evidence rules
 
