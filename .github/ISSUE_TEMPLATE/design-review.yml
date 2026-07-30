@@ -1,0 +1,61 @@
+name: Design review
+description: Review a Signal Desk flow using supplied design context or the committed local fallback.
+title: "[Design review] "
+labels:
+  - design
+body:
+  - type: dropdown
+    id: source
+    attributes:
+      label: Design source
+      description: No Figma integration is required or enabled by this template.
+      options:
+        - Committed local design context
+        - Human-supplied Figma excerpt or screenshot
+        - Other supplied artifact
+    validations:
+      required: true
+  - type: input
+    id: flow
+    attributes:
+      label: Flow or state under review
+      placeholder: Saved Views — invalid criterion recovery
+    validations:
+      required: true
+  - type: textarea
+    id: references
+    attributes:
+      label: Design and code references
+      description: Link the design source and cite implementation claims with path:line evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings by severity
+      description: Include observed behavior, expected behavior, recommendation, and unknowns.
+    validations:
+      required: true
+  - type: checkboxes
+    id: states
+    attributes:
+      label: States and access reviewed
+      options:
+        - label: Keyboard, focus, and screen-reader semantics
+        - label: Text/non-color state and status announcements
+        - label: 320 CSS px and 400% zoom/reflow
+        - label: Loading, empty, zero-result, error, and recovery states
+        - label: Permission-safe and local-browser-only language
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Human decisions, assumptions, and unavailable context
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: The review uses synthetic/demo data only and does not imply external design approval.
+          required: true

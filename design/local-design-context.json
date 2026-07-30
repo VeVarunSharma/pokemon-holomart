@@ -1,0 +1,103 @@
+{
+  "artifactType": "local-design-context-fallback",
+  "name": "Signal Desk Saved Views",
+  "version": "1.0.0",
+  "provenance": {
+    "label": "SYNTHETIC / DEMO-ONLY",
+    "description": "Authentication-independent design context authored locally for the Copilot-for-Product demo. It is not exported from Figma and contains no external design URL."
+  },
+  "sources": {
+    "uxBrief": "./saved-views-ux-brief.md",
+    "tokens": "./tokens.json",
+    "productSpec": "../product/saved-views-spec.md",
+    "decisionRecord": "../product/decisions/0001-saved-views-local-preview.md",
+    "roadmap": "../product/roadmap.json"
+  },
+  "viewportFrames": [
+    {
+      "id": "desktop-feedback",
+      "width": 1440,
+      "height": 900,
+      "purpose": "Full feedback queue with persistent filter toolbar and view picker"
+    },
+    {
+      "id": "tablet-feedback",
+      "width": 768,
+      "height": 1024,
+      "purpose": "Wrapped toolbar with active view state kept adjacent to actions"
+    },
+    {
+      "id": "mobile-feedback",
+      "width": 390,
+      "height": 844,
+      "purpose": "Apply, inspect, and recover through a full-screen picker"
+    }
+  ],
+  "regions": [
+    {
+      "id": "app-shell",
+      "role": "application shell",
+      "contains": ["navigation", "page-header", "feedback-content"]
+    },
+    {
+      "id": "view-toolbar",
+      "role": "filter controls",
+      "contains": ["saved-view-picker", "active-view-state", "filter-summary", "save-action"]
+    },
+    {
+      "id": "results",
+      "role": "feedback result region",
+      "states": ["loading", "populated", "zero-results", "load-error"]
+    }
+  ],
+  "components": [
+    {
+      "id": "saved-view-picker",
+      "nativeStartingPoint": "button plus dialog/listbox pattern selected after accessibility review",
+      "states": ["closed", "open", "empty", "selection-active", "storage-unavailable"],
+      "requiredLabels": ["Saved views", "Saved in this browser only"]
+    },
+    {
+      "id": "active-view-state",
+      "content": ["view name", "edited indicator", "filter summary"],
+      "rules": ["Do not rely on color alone", "Keep view name visible when filters wrap"]
+    },
+    {
+      "id": "save-view-dialog",
+      "fields": ["name"],
+      "context": ["current filter summary", "local-only persistence note"],
+      "actions": ["Save", "Cancel"]
+    },
+    {
+      "id": "view-row-menu",
+      "actions": ["Rename", "Delete"],
+      "rules": ["Return focus predictably", "Confirm destructive action"]
+    },
+    {
+      "id": "recovery-notice",
+      "states": ["stale-field", "permission-omission", "corrupt-record"],
+      "actions": ["Review filters", "Update view", "Delete view"]
+    }
+  ],
+  "contentSamples": {
+    "localOnlyNote": "Saved in this browser only. Clearing site data removes this view.",
+    "editedState": "Edited from {viewName}",
+    "zeroResults": "No feedback matches this view. Review its filters or choose another view.",
+    "storageError": "Views cannot be saved in this browser right now. You can continue filtering feedback."
+  },
+  "interactionNotes": [
+    "Applying a view replaces supported filters after validation.",
+    "Current permissions are evaluated each time; stored state never grants access.",
+    "Filter edits never overwrite a view without an explicit action.",
+    "Escape dismisses transient surfaces without saving and restores focus.",
+    "Reduced-motion users receive equivalent state changes without animation."
+  ],
+  "handoffChecks": [
+    "Keyboard-only create, apply, rename, delete, and recovery",
+    "Screen-reader names and outcome announcements",
+    "Reflow at 320 CSS px and 400 percent zoom",
+    "Corrupt local data and unavailable storage",
+    "Restricted or removed filter criteria",
+    "No telemetry payload contains names, values, or feedback content"
+  ]
+}

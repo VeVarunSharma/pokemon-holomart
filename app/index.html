@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Signal Desk synthetic customer-feedback dashboard demo">
+    <title>Signal Desk — Feedback overview</title>
+    <link rel="stylesheet" href="/app/styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#feedback">Skip to feedback</a>
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Signal Desk home">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>Signal Desk</span>
+      </a>
+      <div class="topbar-context">
+        <span class="demo-label">Synthetic demo data</span>
+        <span class="avatar" aria-label="Signed in as Taylor">TR</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-heading" aria-labelledby="page-title">
+        <div>
+          <p class="date-context">Feedback intelligence · July 2026</p>
+          <h1 id="page-title">Customer feedback</h1>
+          <p>Find the signals that should shape the next product decision.</p>
+        </div>
+        <div class="heading-actions">
+          <button class="button secondary" id="share-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 12h8M13 7l5 5-5 5M5 5v14"/></svg>
+            Share
+          </button>
+          <button class="button primary" id="save-view-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16l-6-3-6 3z"/></svg>
+            Save view
+          </button>
+        </div>
+      </section>
+
+      <section class="summary-strip" aria-label="Feedback summary">
+        <div class="summary-primary">
+          <span class="summary-value" id="result-count">0</span>
+          <span><strong>signals in view</strong><small>Across four research channels</small></span>
+        </div>
+        <div class="sentiment-summary">
+          <span><i class="dot negative"></i><b id="negative-count">0</b> negative</span>
+          <span><i class="dot neutral"></i><b id="neutral-count">0</b> neutral</span>
+          <span><i class="dot positive"></i><b id="positive-count">0</b> positive</span>
+        </div>
+        <p class="summary-insight"><strong>Collaboration is rising.</strong> Team sharing appears in 3 of the 5 most-supported signals.</p>
+      </section>
+
+      <section class="workspace">
+        <aside class="views-panel" aria-labelledby="views-title">
+          <div class="views-heading">
+            <div>
+              <h2 id="views-title">Saved views</h2>
+              <span class="preview-badge">Personal preview</span>
+            </div>
+            <button class="icon-button" id="quick-save-button" type="button" aria-label="Save current view">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+            </button>
+          </div>
+          <p class="local-note">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-6 6v3l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19h4"/></svg>
+            Saved in this browser only
+          </p>
+          <div id="saved-views-list"></div>
+          <div class="views-future">
+            <span class="future-icon" aria-hidden="true">⌁</span>
+            <div><strong>Team views are next</strong><p>Shared ownership and permissions aren’t connected yet.</p></div>
+          </div>
+        </aside>
+
+        <div class="feedback-pane" id="feedback">
+          <form class="filterbar" id="filter-form" role="search">
+            <label class="search-field">
+              <span class="sr-only">Search feedback</span>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+              <input id="query" name="query" type="search" placeholder="Search customers, themes, or feedback…" autocomplete="off">
+              <kbd>⌘ K</kbd>
+            </label>
+            <label>
+              <span class="sr-only">Sentiment</span>
+              <select id="sentiment" name="sentiment">
+                <option>All</option><option>Positive</option><option>Neutral</option><option>Negative</option>
+              </select>
+            </label>
+            <label>
+              <span class="sr-only">Channel</span>
+              <select id="channel" name="channel">
+                <option>All</option><option>Interview</option><option>Support</option><option>Survey</option><option>Community</option>
+              </select>
+            </label>
+            <button class="button text-button" id="clear-button" type="button">Clear <span id="filter-count"></span></button>
+          </form>
+
+          <div class="list-toolbar">
+            <p id="results-label" aria-live="polite"></p>
+            <button class="button quiet" id="export-button" type="button">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 19h14"/></svg>
+              Export CSV
+            </button>
+          </div>
+
+          <div class="feedback-list" id="feedback-list"></div>
+          <div class="empty-state" id="empty-state" hidden>
+            <span aria-hidden="true">⌕</span>
+            <h2>No signals match this view</h2>
+            <p>Try a different keyword or clear one of the filters.</p>
+            <button class="button secondary" id="empty-clear-button" type="button">Clear filters</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="save-dialog" aria-labelledby="save-dialog-title">
+      <form method="dialog" id="save-dialog-form">
+        <button class="dialog-close icon-button" value="cancel" aria-label="Close save view dialog">×</button>
+        <span class="dialog-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4h12v16l-6-3-6 3z"/></svg></span>
+        <h2 id="save-dialog-title">Save this view</h2>
+        <p>Keep these filters handy on this browser.</p>
+        <label class="dialog-field">View name
+          <input id="view-name" name="viewName" maxlength="60" required placeholder="e.g. Enterprise churn signals">
+        </label>
+        <div class="filter-preview" id="filter-preview"></div>
+        <p class="dialog-disclaimer"><strong>Personal preview:</strong> this view won’t sync to teammates or other devices.</p>
+        <div class="dialog-actions">
+          <button class="button secondary" value="cancel">Cancel</button>
+          <button class="button primary" id="confirm-save-button" value="default">Save view</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <script type="module" src="/app/app.js"></script>
+  </body>
+</html>
