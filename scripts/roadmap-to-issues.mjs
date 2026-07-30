@@ -252,7 +252,8 @@ const CHILD_CONTEXT = Object.freeze({
     ],
     "references": [
       "./evidence/shopper-research-signals.md#ci-04--occasional-gift-buyer",
-      "./evidence/market-notes.md#market-and-competitive-notes"
+      "./evidence/market-notes.md#market-and-competitive-notes",
+      "../design/collector-lists-concept-study.md#research-decision-matrix"
     ],
     "validation": [
       "Observe wishlisting, collection ownership, gifting, and dynamic-search workflows separately.",
@@ -270,7 +271,8 @@ const CHILD_CONTEXT = Object.freeze({
     ],
     "references": [
       "./evidence/market-notes.md#market-and-competitive-notes",
-      "./brief.md#non-goals"
+      "./brief.md#non-goals",
+      "../design/collector-lists-concept-study.md#guardrails"
     ],
     "validation": [
       "Walk add, remove, archive, purchase, return, and delete semantics for each candidate list.",
