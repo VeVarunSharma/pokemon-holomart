@@ -32,7 +32,7 @@ test("loads the workspace artifact and rejects paths outside the JSON boundary",
   assert.equal(loaded.durablePath, path.join("product", "roadmap.json"));
   assert.equal(loaded.roadmap.metadata.product, "Signal Desk");
   await assert.rejects(
-    resolveRoadmapPath(process.cwd(), "..\\outside.json"),
+    resolveRoadmapPath(process.cwd(), path.join("..", "outside.json")),
     (error) => error instanceof RoadmapError && error.code === "roadmap_path_invalid",
   );
   await assert.rejects(
