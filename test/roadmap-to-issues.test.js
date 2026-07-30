@@ -49,6 +49,18 @@ test("every child body carries the evidence-backed issue contract", () => {
   }
 });
 
+test("collector-list previews retain research and ownership boundaries", () => {
+  const plan = JSON.parse(run("--initiative", "init-collector-lists", "--format", "json"));
+  const problemStudy = plan.children.find(({ id }) => id === "work-lists-problem-study");
+  const listModel = plan.children.find(({ id }) => id === "work-lists-model");
+
+  assert.ok(problemStudy.references.includes("../design/collector-lists-concept-study.md#research-decision-matrix"));
+  assert.ok(listModel.references.includes("../design/collector-lists-concept-study.md#guardrails"));
+  assert.match(problemStudy.exclusions.join(" "), /No list implementation/);
+  assert.match(listModel.exclusions.join(" "), /automatic ownership state/);
+  assert.deepEqual(listModel.dependencies, ["work-lists-problem-study"]);
+});
+
 test("dependency ordering is stable when authoritative input order changes", () => {
   const initiative = structuredClone(roadmap.initiatives[0]);
   const expected = buildPlan(roadmap, initiative).children.map(({ id }) => id);
