@@ -1,0 +1,71 @@
+name: Product epic
+description: Propose an evidence-backed Signal Desk epic with boundaries, gates, and child work.
+title: "[Epic] "
+labels:
+  - product
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Start from `product/roadmap.json`. Preserve initiative/work IDs and keep human decision flags unresolved.
+  - type: input
+    id: initiative-id
+    attributes:
+      label: Roadmap initiative ID
+      placeholder: init-saved-views-preview
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Outcome and target user
+      description: Describe the outcome, not a feature inventory.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence trace
+      description: Include synthetic provenance, IDs, links, limitations, and counter-signals.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and non-goals
+      description: Keep local Saved Views separate from sync and team sharing unless explicitly approved.
+    validations:
+      required: true
+  - type: textarea
+    id: child-work
+    attributes:
+      label: Proposed child issues and dependencies
+      description: List stable work IDs, titles, blocked-by edges, and acceptance boundaries.
+      placeholder: |
+        1. work-view-storage-validation — Version and validate local records — blocked by: none
+    validations:
+      required: true
+  - type: textarea
+    id: measures
+    attributes:
+      label: Success measures and guardrails
+      description: Identify proposed measures and non-negotiable guardrails; avoid automatic ship thresholds.
+    validations:
+      required: true
+  - type: textarea
+    id: decisions
+    attributes:
+      label: Open human decisions, assumptions, and unknowns
+    validations:
+      required: true
+  - type: checkboxes
+    id: review
+    attributes:
+      label: Review gates
+      options:
+        - label: Evidence and repository claims have source links or path:line citations.
+          required: true
+        - label: This issue is SYNTHETIC / DEMO-ONLY and is not a production or customer commitment.
+          required: true
+        - label: Creating this issue does not approve its child issues, roadmap movement, or external integrations.
+          required: true

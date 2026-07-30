@@ -1,0 +1,711 @@
+{
+  "$schema": "./roadmap.schema.json",
+  "schemaVersion": "1.0.0",
+  "metadata": {
+    "product": "Signal Desk",
+    "title": "Evidence-backed synthetic product roadmap",
+    "updatedAt": "2026-07-29T23:54:18Z",
+    "authoritative": true,
+    "provenance": {
+      "label": "SYNTHETIC / DEMO-ONLY",
+      "description": "All initiatives, evidence references, dates, owners, and issue drafts are fictional planning material created for a Copilot-for-Product demo.",
+      "limitations": [
+        "No item is a customer promise or production commitment.",
+        "Evidence is deliberately small, invented, and contradictory.",
+        "Targets are proposed decision aids rather than measured baselines.",
+        "Human decision flags must not be resolved automatically."
+      ]
+    },
+    "sources": [
+      "./brief.md",
+      "./saved-views-spec.md",
+      "./decisions/0001-saved-views-local-preview.md",
+      "./evidence/README.md",
+      "../design/saved-views-ux-brief.md",
+      "../design/local-design-context.json"
+    ]
+  },
+  "horizons": [
+    {
+      "id": "now",
+      "label": "Now",
+      "order": 1,
+      "definition": "Active discovery and preview-hardening work through September 2026; timing is illustrative."
+    },
+    {
+      "id": "next",
+      "label": "Next",
+      "order": 2,
+      "definition": "Gated options for October through December 2026, entered only after explicit evidence and risk review."
+    },
+    {
+      "id": "later",
+      "label": "Later",
+      "order": 3,
+      "definition": "Uncommitted opportunities for 2027 or later; sequence and scope remain open."
+    }
+  ],
+  "initiatives": [
+    {
+      "id": "init-saved-views-preview",
+      "title": "Harden personal Saved Views preview",
+      "outcome": "Frequent feedback triagers can safely reuse and understand a browser-local filter configuration without mistaking it for synced or shared state.",
+      "horizon": "now",
+      "status": "in-progress",
+      "confidence": "medium",
+      "impact": "high",
+      "effort": "medium",
+      "targetWindow": {
+        "label": "Preview hardening, August–September 2026",
+        "start": "2026-08-03",
+        "end": "2026-09-25"
+      },
+      "ownerRole": "Product manager, Feedback workflows",
+      "dependencies": [],
+      "evidenceReferences": [
+        {
+          "id": "CI-01",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-01--repeat-triage-setup",
+          "summary": "A fictional frequent triager repeatedly rebuilds the same filters."
+        },
+        {
+          "id": "CI-03",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-03--provenance-and-stale-filters",
+          "summary": "A synthetic participant values explanation and stale-filter recovery."
+        },
+        {
+          "id": "CI-04",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-04--low-frequency-reviewer",
+          "summary": "An occasional reviewer questions whether the feature is relevant."
+        },
+        {
+          "id": "SS-02",
+          "type": "support-signal",
+          "path": "./evidence/customer-support-signals.md#ss-02--duplicate-view-names",
+          "summary": "A fictional duplicate-name ticket exposes an unresolved naming rule."
+        },
+        {
+          "id": "SS-03",
+          "type": "support-signal",
+          "path": "./evidence/customer-support-signals.md#ss-03--restricted-source-after-role-change",
+          "summary": "A stored criterion must not restore access after a role change."
+        },
+        {
+          "id": "SS-05",
+          "type": "support-signal",
+          "path": "./evidence/customer-support-signals.md#ss-05--accidental-overwrite-concern",
+          "summary": "Apply, update, and save-as-new semantics need separation."
+        },
+        {
+          "id": "AN-03",
+          "type": "usage-analytics",
+          "path": "./evidence/usage-analytics.json",
+          "summary": "Synthetic later-session reuse is directional, not causal."
+        },
+        {
+          "id": "AN-06",
+          "type": "usage-analytics",
+          "path": "./evidence/usage-analytics.json",
+          "summary": "Invented parse errors make safe recovery a preview requirement."
+        },
+        {
+          "id": "MK-01",
+          "type": "market-note",
+          "path": "./evidence/market-notes.md#market-and-competitive-notes",
+          "summary": "Named personal views may use a recognizable mental model."
+        },
+        {
+          "id": "MK-06",
+          "type": "market-note",
+          "path": "./evidence/market-notes.md#market-and-competitive-notes",
+          "summary": "Mutable-schema products suggest warning and recovery patterns."
+        }
+      ],
+      "evidenceCount": 10,
+      "risks": [
+        {
+          "id": "risk-silent-stale-state",
+          "description": "Renamed, removed, or restricted fields could silently change results.",
+          "likelihood": "medium",
+          "impact": "high",
+          "mitigation": "Version and validate stored state, explain omissions, and re-check current access on apply."
+        },
+        {
+          "id": "risk-local-expectation-gap",
+          "description": "People may expect views to follow them across devices.",
+          "likelihood": "high",
+          "impact": "medium",
+          "mitigation": "Repeat clear local-only language at create and manage surfaces."
+        },
+        {
+          "id": "risk-preview-clutter",
+          "description": "Ambiguous names and accidental creation may create local clutter.",
+          "likelihood": "medium",
+          "impact": "low",
+          "mitigation": "Resolve naming policy and keep rename/delete accessible."
+        }
+      ],
+      "humanDecisionFlags": [
+        {
+          "id": "decision-duplicate-names",
+          "question": "Should local view names be unique, repeatable, or automatically disambiguated?",
+          "requiredBy": "Before create-flow acceptance criteria are finalized",
+          "status": "open",
+          "options": ["Require unique names", "Allow duplicates with metadata", "Automatically disambiguate"]
+        },
+        {
+          "id": "decision-invalid-criteria",
+          "question": "Should a partly invalid view apply valid criteria or stop for review?",
+          "requiredBy": "Before recovery behavior ships",
+          "status": "open",
+          "options": ["Explain and partially apply", "Stop and require review", "Choose based on criterion sensitivity"]
+        },
+        {
+          "id": "decision-preview-exit",
+          "question": "What combination of reliability, accessibility, and reuse evidence is sufficient to reconsider account sync?",
+          "requiredBy": "September 2026 roadmap review",
+          "status": "open",
+          "options": ["Keep local preview", "Run a bounded sync experiment", "Remove the preview"]
+        }
+      ],
+      "successMeasures": [
+        {
+          "metric": "Later-session reuse rate",
+          "criterion": "Review directional movement among eligible synthetic preview users; do not use a single threshold as an automatic ship gate.",
+          "source": "./evidence/usage-analytics.json#proposedMetricDefinitions",
+          "guardrail": false
+        },
+        {
+          "metric": "Accessible core-flow completion",
+          "criterion": "Create, apply, rename, delete, and recover complete with keyboard and supported screen-reader checks.",
+          "source": "../design/saved-views-ux-brief.md#accessibility",
+          "guardrail": true
+        },
+        {
+          "metric": "Permission broadening incidents",
+          "criterion": "Zero in preview validation.",
+          "source": "./saved-views-spec.md#proposed-acceptance-boundaries",
+          "guardrail": true
+        },
+        {
+          "metric": "Recoverable storage failures",
+          "criterion": "Invalid records do not block Feedback and provide an actionable explanation.",
+          "source": "./saved-views-spec.md#invalid-or-restricted-criteria",
+          "guardrail": true
+        }
+      ],
+      "issueDraft": {
+        "title": "[Synthetic demo] Harden browser-local Saved Views preview",
+        "body": "## Outcome\nMake personal Saved Views reliable, understandable, and accessible while keeping them explicitly browser-local.\n\n## Evidence\nReview the synthetic references on initiative `init-saved-views-preview`; they include reuse signals and counter-signals about reach, stale state, and sharing.\n\n## Boundaries\nNo account sync, team sharing, result snapshots, or sensitive telemetry. Human decisions in the roadmap remain open.\n\n## Done when\nCore flows meet the approved acceptance boundary, corrupt state is recoverable, current permissions always win, and local-only language is visible.",
+        "labels": ["synthetic-demo", "product", "saved-views", "preview"],
+        "childWorkItems": [
+          {
+            "id": "work-view-storage-validation",
+            "title": "Version and validate local view records",
+            "acceptanceCriteria": [
+              "Unsupported or corrupt records cannot block the Feedback page.",
+              "Stored records exclude result content, access state, names from telemetry, and filter values from telemetry."
+            ],
+            "dependencies": []
+          },
+          {
+            "id": "work-view-core-flows",
+            "title": "Complete create, apply, rename, and delete flows",
+            "acceptanceCriteria": [
+              "Local-only persistence is explained during creation and management.",
+              "Active and edited state are distinct without relying on color."
+            ],
+            "dependencies": ["work-view-storage-validation"]
+          },
+          {
+            "id": "work-view-recovery",
+            "title": "Explain stale and restricted criteria",
+            "acceptanceCriteria": [
+              "Current permissions are evaluated on every apply.",
+              "The user can review, update, or delete an invalid view without leaked restricted context."
+            ],
+            "dependencies": ["work-view-storage-validation"]
+          },
+          {
+            "id": "work-view-accessibility",
+            "title": "Validate keyboard, screen-reader, reflow, and status behavior",
+            "acceptanceCriteria": [
+              "Core flows work without pointer input.",
+              "Save, apply, and recovery outcomes are programmatically announced."
+            ],
+            "dependencies": ["work-view-core-flows", "work-view-recovery"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "init-filter-provenance",
+      "title": "Make feedback result provenance legible",
+      "outcome": "Reviewers can understand which filters and omissions shaped a result set, whether or not it came from a saved view.",
+      "horizon": "now",
+      "status": "planned",
+      "confidence": "medium",
+      "impact": "medium",
+      "effort": "small",
+      "targetWindow": {
+        "label": "Discovery and prototype, September 2026",
+        "start": "2026-09-01",
+        "end": "2026-09-30"
+      },
+      "ownerRole": "Product designer, Feedback workflows",
+      "dependencies": ["init-saved-views-preview"],
+      "evidenceReferences": [
+        {
+          "id": "CI-03",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-03--provenance-and-stale-filters",
+          "summary": "A fictional participant prioritizes explaining why an item appears."
+        },
+        {
+          "id": "SS-03",
+          "type": "support-signal",
+          "path": "./evidence/customer-support-signals.md#ss-03--restricted-source-after-role-change",
+          "summary": "Permission changes create an omission-explanation need."
+        },
+        {
+          "id": "MK-06",
+          "type": "market-note",
+          "path": "./evidence/market-notes.md#market-and-competitive-notes",
+          "summary": "Generic market patterns suggest stale-filter warnings."
+        }
+      ],
+      "evidenceCount": 3,
+      "risks": [
+        {
+          "id": "risk-provenance-overload",
+          "description": "Detailed explanations could overwhelm routine review.",
+          "likelihood": "medium",
+          "impact": "medium",
+          "mitigation": "Test progressive disclosure and concise summaries."
+        },
+        {
+          "id": "risk-restricted-context-leak",
+          "description": "An omission explanation could reveal a restricted source or field.",
+          "likelihood": "unknown",
+          "impact": "high",
+          "mitigation": "Threat-model content and use non-identifying explanations."
+        }
+      ],
+      "humanDecisionFlags": [
+        {
+          "id": "decision-provenance-detail",
+          "question": "Which filter details stay visible and which use progressive disclosure?",
+          "requiredBy": "Before prototype selection",
+          "status": "open",
+          "options": ["Always-expanded summary", "Concise summary with details", "Context-dependent treatment"]
+        }
+      ],
+      "successMeasures": [
+        {
+          "metric": "Filter-summary comprehension",
+          "criterion": "Synthetic research participants can explain the active criteria and whether any were omitted.",
+          "source": "../design/saved-views-ux-brief.md#research-questions",
+          "guardrail": false
+        },
+        {
+          "metric": "Restricted context disclosure",
+          "criterion": "Zero disclosures in permission-focused review.",
+          "source": "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
+          "guardrail": true
+        }
+      ],
+      "issueDraft": {
+        "title": "[Synthetic demo] Prototype feedback filter provenance",
+        "body": "## Outcome\nHelp reviewers understand the filters and safe omissions shaping the current result set.\n\n## Scope\nPrototype progressive disclosure, active/edited language, and permission-safe omission messages. Do not expose restricted field or source details.",
+        "labels": ["synthetic-demo", "design", "discovery"],
+        "childWorkItems": [
+          {
+            "id": "work-provenance-content",
+            "title": "Draft filter-summary and omission content",
+            "acceptanceCriteria": [
+              "Copy distinguishes active, edited, stale, and restricted states.",
+              "Restricted explanations do not identify inaccessible context."
+            ],
+            "dependencies": []
+          },
+          {
+            "id": "work-provenance-prototype",
+            "title": "Prototype progressive disclosure across viewports",
+            "acceptanceCriteria": [
+              "Summary remains understandable at 320 CSS px.",
+              "Details are keyboard and screen-reader accessible."
+            ],
+            "dependencies": ["work-provenance-content"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "init-personal-view-sync",
+      "title": "Evaluate account-synced personal views",
+      "outcome": "The team can decide whether cross-device continuity merits durable account storage without conflating it with sharing.",
+      "horizon": "next",
+      "status": "gated",
+      "confidence": "low",
+      "impact": "medium",
+      "effort": "large",
+      "targetWindow": {
+        "label": "Decision window, October–November 2026",
+        "start": "2026-10-05",
+        "end": "2026-11-20"
+      },
+      "ownerRole": "Product manager, Platform workflows",
+      "dependencies": ["init-saved-views-preview", "identity and data-retention review"],
+      "evidenceReferences": [
+        {
+          "id": "SS-01",
+          "type": "support-signal",
+          "path": "./evidence/customer-support-signals.md#ss-01--filters-disappeared",
+          "summary": "One fictional ticket expected a view on another device."
+        },
+        {
+          "id": "AN-03",
+          "type": "usage-analytics",
+          "path": "./evidence/usage-analytics.json",
+          "summary": "Directional later-session reuse does not establish cross-device need."
+        },
+        {
+          "id": "CI-02",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-02--personal-workspace-preference",
+          "summary": "Private exploratory configurations remain important."
+        }
+      ],
+      "evidenceCount": 3,
+      "risks": [
+        {
+          "id": "risk-sync-data-lifecycle",
+          "description": "Durable storage creates migration, retention, export, and deletion obligations.",
+          "likelihood": "high",
+          "impact": "high",
+          "mitigation": "Complete architecture, privacy, and lifecycle review before an experiment."
+        },
+        {
+          "id": "risk-sync-without-demand",
+          "description": "Cross-device infrastructure may not address the reason most synthetic users did not create a view.",
+          "likelihood": "medium",
+          "impact": "medium",
+          "mitigation": "Require qualitative cross-device evidence and a bounded experiment plan."
+        }
+      ],
+      "humanDecisionFlags": [
+        {
+          "id": "decision-sync-gate",
+          "question": "Has the local preview met the reliability and reuse gate for a sync experiment?",
+          "requiredBy": "October 2026 roadmap review",
+          "status": "open",
+          "options": ["Remain local-only", "Run bounded account-sync experiment", "Stop investing"]
+        },
+        {
+          "id": "decision-sync-retention",
+          "question": "What retention, deletion, export, and migration policy applies to saved configurations?",
+          "requiredBy": "Before technical design approval",
+          "status": "open",
+          "options": ["Use account lifecycle", "Define feature-specific lifecycle", "Do not persist"]
+        }
+      ],
+      "successMeasures": [
+        {
+          "metric": "Cross-device task continuity",
+          "criterion": "A bounded synthetic study demonstrates a meaningful workflow that local storage cannot support.",
+          "source": "./decisions/0001-saved-views-local-preview.md#reconsideration-gates",
+          "guardrail": false
+        },
+        {
+          "metric": "Lifecycle review",
+          "criterion": "Privacy, security, retention, deletion, and migration owners explicitly approve the experiment.",
+          "source": "./decisions/0001-saved-views-local-preview.md#why-not-sync-or-sharing-now",
+          "guardrail": true
+        }
+      ],
+      "issueDraft": {
+        "title": "[Synthetic demo] Evaluate account sync for personal Saved Views",
+        "body": "## Decision to make\nDetermine whether evidence justifies a bounded cross-device personal-view experiment.\n\n## Gate\nDo not implement until local reliability, accessibility, privacy, retention, deletion, and migration questions have named owners and explicit approval. This does not include team sharing.",
+        "labels": ["synthetic-demo", "discovery", "architecture", "gated"],
+        "childWorkItems": [
+          {
+            "id": "work-sync-demand-study",
+            "title": "Study cross-device continuity needs",
+            "acceptanceCriteria": [
+              "Research distinguishes cross-session from cross-device reuse.",
+              "Counter-signals and non-user workflows are documented."
+            ],
+            "dependencies": ["init-saved-views-preview"]
+          },
+          {
+            "id": "work-sync-lifecycle-review",
+            "title": "Define storage and data-lifecycle options",
+            "acceptanceCriteria": [
+              "Options cover migration, export, retention, and deletion.",
+              "Security and privacy reviewers record unresolved risks."
+            ],
+            "dependencies": ["work-sync-demand-study"]
+          },
+          {
+            "id": "work-sync-decision",
+            "title": "Record the sync experiment decision",
+            "acceptanceCriteria": [
+              "Decision cites evidence and rejected alternatives.",
+              "No automatic launch follows from a metric threshold."
+            ],
+            "dependencies": ["work-sync-lifecycle-review"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "init-curated-team-views",
+      "title": "Research curated team views and defaults",
+      "outcome": "Cross-functional teams can evaluate a governed shared-view model without exposing restricted context or publishing private scratch work.",
+      "horizon": "next",
+      "status": "discovery",
+      "confidence": "low",
+      "impact": "high",
+      "effort": "large",
+      "targetWindow": {
+        "label": "Research option, November–December 2026",
+        "start": "2026-11-02",
+        "end": "2026-12-18"
+      },
+      "ownerRole": "Product operations lead",
+      "dependencies": ["init-filter-provenance", "workspace permission model review"],
+      "evidenceReferences": [
+        {
+          "id": "CI-01",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-01--repeat-triage-setup",
+          "summary": "A fictional participant prefers a small curated set to many personal views."
+        },
+        {
+          "id": "CI-02",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-02--personal-workspace-preference",
+          "summary": "A counter-signal favors private scratch configurations."
+        },
+        {
+          "id": "SS-03",
+          "type": "support-signal",
+          "path": "./evidence/customer-support-signals.md#ss-03--restricted-source-after-role-change",
+          "summary": "Role changes make permission-safe application essential."
+        },
+        {
+          "id": "SS-04",
+          "type": "support-signal",
+          "path": "./evidence/customer-support-signals.md#ss-04--request-for-a-shared-weekly-view",
+          "summary": "One fictional request describes governed curation rather than open sharing."
+        },
+        {
+          "id": "MK-02",
+          "type": "market-note",
+          "path": "./evidence/market-notes.md#market-and-competitive-notes",
+          "summary": "Generic patterns distinguish personal, shared, and default visibility."
+        },
+        {
+          "id": "MK-04",
+          "type": "market-note",
+          "path": "./evidence/market-notes.md#market-and-competitive-notes",
+          "summary": "View proliferation can create administration costs."
+        }
+      ],
+      "evidenceCount": 6,
+      "risks": [
+        {
+          "id": "risk-shared-permission-leak",
+          "description": "A shared definition or count could disclose restricted data.",
+          "likelihood": "unknown",
+          "impact": "high",
+          "mitigation": "Threat-model definitions, metadata, counts, and application behavior before prototyping with realistic roles."
+        },
+        {
+          "id": "risk-shared-clutter",
+          "description": "Unbounded creation could replace repeated filter work with discovery and governance work.",
+          "likelihood": "medium",
+          "impact": "medium",
+          "mitigation": "Test curated ownership, archive, and default semantics before open publishing."
+        }
+      ],
+      "humanDecisionFlags": [
+        {
+          "id": "decision-team-roles",
+          "question": "Who may create, edit, archive, and designate a workspace default?",
+          "requiredBy": "Before a sharing concept is approved",
+          "status": "open",
+          "options": ["Owner-managed", "Role-based curation", "Administrator-only defaults"]
+        },
+        {
+          "id": "decision-team-visibility",
+          "question": "How should a shared view behave when a viewer cannot access a referenced source or field?",
+          "requiredBy": "Before permission prototype testing",
+          "status": "open",
+          "options": ["Apply safe intersection", "Refuse and explain", "Publisher limits eligible criteria"]
+        },
+        {
+          "id": "decision-share-versus-default",
+          "question": "Should sharing and setting a default require distinct permissions?",
+          "requiredBy": "Before role model sign-off",
+          "status": "open",
+          "options": ["Distinct permissions", "Single curator permission", "No workspace defaults"]
+        }
+      ],
+      "successMeasures": [
+        {
+          "metric": "Governance model comprehension",
+          "criterion": "Synthetic participants can identify owner, editor, viewer, and default responsibilities without prompting.",
+          "source": "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
+          "guardrail": false
+        },
+        {
+          "metric": "Restricted-context disclosure",
+          "criterion": "Zero disclosures across definition, metadata, counts, and results in role-based review.",
+          "source": "../design/saved-views-ux-brief.md#permissions-and-future-team-sharing-concept",
+          "guardrail": true
+        }
+      ],
+      "issueDraft": {
+        "title": "[Synthetic demo] Research governed team views",
+        "body": "## Outcome\nTest whether curated team views solve coordination needs while preserving private scratch work and current permissions.\n\n## Non-goal\nThis issue does not authorize implementation or promise sharing. Permission and governance decisions remain human-owned.",
+        "labels": ["synthetic-demo", "research", "permissions", "gated"],
+        "childWorkItems": [
+          {
+            "id": "work-team-role-model",
+            "title": "Map owner, editor, viewer, and default-view responsibilities",
+            "acceptanceCriteria": [
+              "Role options cover create, update, archive, transfer, and default designation.",
+              "Private-to-shared transition is always intentional."
+            ],
+            "dependencies": []
+          },
+          {
+            "id": "work-team-threat-model",
+            "title": "Threat-model shared criteria and metadata",
+            "acceptanceCriteria": [
+              "Review includes names, criteria, result counts, omission messages, and revoked access.",
+              "Current viewer access remains authoritative."
+            ],
+            "dependencies": ["work-team-role-model"]
+          },
+          {
+            "id": "work-team-concept-test",
+            "title": "Test a governed sharing concept",
+            "acceptanceCriteria": [
+              "Research includes curation and private-work counter-scenarios.",
+              "Findings state sample and synthetic limitations."
+            ],
+            "dependencies": ["work-team-threat-model"]
+          }
+        ]
+      }
+    },
+    {
+      "id": "init-feedback-digests",
+      "title": "Explore view-based feedback digests",
+      "outcome": "The team can assess whether an intentionally subscribed digest helps periodic reviewers without treating every saved view as a notification.",
+      "horizon": "later",
+      "status": "candidate",
+      "confidence": "low",
+      "impact": "medium",
+      "effort": "unknown",
+      "targetWindow": {
+        "label": "Uncommitted 2027 opportunity",
+        "start": null,
+        "end": null
+      },
+      "ownerRole": "Product manager, Engagement",
+      "dependencies": ["init-personal-view-sync", "notification consent and delivery review"],
+      "evidenceReferences": [
+        {
+          "id": "CI-04",
+          "type": "customer-interview",
+          "path": "./evidence/customer-support-signals.md#ci-04--low-frequency-reviewer",
+          "summary": "A fictional monthly reviewer may need a different workflow than frequent triagers."
+        },
+        {
+          "id": "MK-05",
+          "type": "market-note",
+          "path": "./evidence/market-notes.md#market-and-competitive-notes",
+          "summary": "Generic products sometimes connect saved searches to alerts, but consent and freshness differ."
+        }
+      ],
+      "evidenceCount": 2,
+      "risks": [
+        {
+          "id": "risk-digest-consent",
+          "description": "Saving a view could be mistaken for consent to receive notifications.",
+          "likelihood": "high",
+          "impact": "high",
+          "mitigation": "Require a separate explicit subscription with frequency and unsubscribe controls."
+        },
+        {
+          "id": "risk-digest-staleness",
+          "description": "Stale criteria could produce misleading or empty digests outside the product context.",
+          "likelihood": "medium",
+          "impact": "medium",
+          "mitigation": "Define freshness checks and an in-product recovery path before delivery."
+        }
+      ],
+      "humanDecisionFlags": [
+        {
+          "id": "decision-digest-problem",
+          "question": "Does a digest solve an observed periodic-review problem better than an in-product reminder or history?",
+          "requiredBy": "Before discovery investment",
+          "status": "deferred",
+          "options": ["Explore digest", "Explore in-product reminder", "Do not pursue"]
+        },
+        {
+          "id": "decision-digest-subscription",
+          "question": "What constitutes explicit consent and who controls frequency?",
+          "requiredBy": "Before any delivery prototype",
+          "status": "open",
+          "options": ["Per-view opt-in", "Central subscription settings", "No outbound delivery"]
+        }
+      ],
+      "successMeasures": [
+        {
+          "metric": "Periodic-review problem evidence",
+          "criterion": "Multiple observed workflows establish a recurring need before solution testing.",
+          "source": "./evidence/customer-support-signals.md#ci-04--low-frequency-reviewer",
+          "guardrail": false
+        },
+        {
+          "metric": "Unintended subscriptions",
+          "criterion": "Zero; save and subscribe remain separate explicit actions.",
+          "source": "./evidence/market-notes.md#market-and-competitive-notes",
+          "guardrail": true
+        }
+      ],
+      "issueDraft": {
+        "title": "[Synthetic demo] Explore opt-in feedback digests",
+        "body": "## Question\nWould a separately subscribed digest help periodic reviewers, and is it better than in-product history or reminders?\n\n## Guardrails\nA saved view is never notification consent. This is an uncommitted research candidate dependent on durable view semantics and delivery review.",
+        "labels": ["synthetic-demo", "later", "research"],
+        "childWorkItems": [
+          {
+            "id": "work-digest-problem-study",
+            "title": "Observe periodic feedback review workflows",
+            "acceptanceCriteria": [
+              "Study compares digest, history, reminder, and no-change options.",
+              "Evidence limitations and counter-signals are recorded."
+            ],
+            "dependencies": []
+          },
+          {
+            "id": "work-digest-consent-model",
+            "title": "Define explicit subscription and unsubscribe model",
+            "acceptanceCriteria": [
+              "Save and subscribe are separate actions.",
+              "Frequency, pause, unsubscribe, and stale-view behavior are covered."
+            ],
+            "dependencies": ["work-digest-problem-study"]
+          }
+        ]
+      }
+    }
+  ]
+}

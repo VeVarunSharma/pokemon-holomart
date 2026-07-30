@@ -1,0 +1,62 @@
+name: Product discovery
+description: Capture a synthetic Signal Desk problem, evidence, counter-signals, and decision to make.
+title: "[Discovery] "
+labels:
+  - discovery
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use only synthetic/demo evidence. A discovery issue does not authorize implementation or create a customer commitment.
+  - type: input
+    id: problem
+    attributes:
+      label: Problem or decision
+      description: State the user problem or decision without prescribing a solution.
+      placeholder: Frequent feedback triagers repeatedly rebuild the same filter configuration.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and provenance
+      description: List evidence IDs, repository paths, provenance, confidence, and limitations.
+      placeholder: |
+        - CI-01 — SYNTHETIC / DEMO-ONLY — product/evidence/customer-support-signals.md#... — low confidence
+    validations:
+      required: true
+  - type: textarea
+    id: counter-signals
+    attributes:
+      label: Counter-signals and alternatives
+      description: What disagrees with the proposed interpretation? Include no-change alternatives.
+    validations:
+      required: true
+  - type: textarea
+    id: code-reality
+    attributes:
+      label: Repository reality
+      description: Cite implemented, partial, missing, and unknown behavior with path:line references.
+    validations:
+      required: true
+  - type: textarea
+    id: assumptions
+    attributes:
+      label: Assumptions and unknowns
+      description: Make uncertainty explicit.
+    validations:
+      required: true
+  - type: textarea
+    id: decision
+    attributes:
+      label: Human decision required
+      description: List options, tradeoffs, decision owner, and decision date or gate.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety check
+      options:
+        - label: I verified that this contains synthetic/demo data only and creates no external commitment.
+          required: true
