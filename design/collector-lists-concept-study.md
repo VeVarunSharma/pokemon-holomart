@@ -51,6 +51,30 @@ Record observations before choosing a concept. A wireframe preference or synthet
 
 If research establishes a distinct job, test keyboard and screen-reader naming for list type and item state, focus after add/remove actions, text alternatives to color-only ownership state, reflow at 320 CSS px and 400% zoom, and explicit empty, error, and confirmation states. These are research checkpoints, not claims about the uninspected Figma frames.
 
+## QA verification
+
+This change is documentation and planning only. There is no storefront UI change, no new route, no new stored data, and no screenshot to review. QA verifies text and generator output.
+
+Run from the repository root:
+
+```powershell
+npm run validate
+npm test
+node scripts/roadmap-to-issues.mjs --initiative init-collector-lists --format json
+```
+
+Expected results:
+
+| Check | Expected |
+| --- | --- |
+| `npm run validate` | Passes with no missing artifacts, and fails with the exact path if `design/collector-lists-concept-study.md` is deleted or renamed. |
+| `npm test` | Passes, including `collector-list previews retain research and ownership boundaries` in `test/roadmap-to-issues.test.js`. |
+| Issue preview JSON | `work-lists-problem-study` references `../design/collector-lists-concept-study.md#research-decision-matrix`; `work-lists-model` references `../design/collector-lists-concept-study.md#guardrails` and depends only on `work-lists-problem-study`. |
+| `product/roadmap.json` | `init-collector-lists` still reads horizon **later**, status **candidate**, low confidence, with the primary-job decision unresolved. A change to those values is a defect in this change. |
+| Storefront (`npm start`, <http://127.0.0.1:4173>) | Unchanged. No wishlist, owned-collection, or gift-list control appears, and saving, cart, or purchase produces no ownership state. |
+
+Reject the change if any of these appear: a new list UI, an ownership flag derived from save, cart, or purchase, a resolved roadmap decision flag, an alert or account-sync affordance, real shopper or recipient data, or a claim that the Figma frames were inspected or approved.
+
 ## Open human decision
 
 The primary unmet job remains **wishlisting, owned collection, gifting, or none**. Keep this decision deferred until multiple observed workflows establish a recurring problem that Saved Searches cannot meet.

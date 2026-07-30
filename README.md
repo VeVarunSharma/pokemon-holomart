@@ -105,7 +105,7 @@ If custom commands are unavailable, name the corresponding file in `.github/prom
 | `product/saved-searches-spec.md` | Deliberately incomplete feature specification |
 | `product/evidence/` | Synthetic shopper, support, usage, and market signals |
 | `product/roadmap.json` | Authoritative five-initiative roadmap |
-| `design/` | Authentication-free UX brief, design context, and tokens |
+| `design/` | Authentication-free UX brief, collector-list concept study, design context, and tokens |
 | `.github/prompts/`, `agents/`, `skills/` | Evidence-disciplined Copilot workflows |
 | `.github/extensions/roadmap-studio/` | Interactive read-only roadmap canvas |
 | `scripts/roadmap-to-issues.mjs` | Deterministic epic and child-issue preview |
