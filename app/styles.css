@@ -1170,8 +1170,7 @@ select {
   font-weight: 800;
 }
 
-.seller-row strong,
-.seller-row small {
+.seller-row strong {
   display: block;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1183,9 +1182,11 @@ select {
 }
 
 .seller-row small {
+  display: block;
   margin-top: 0.08rem;
   color: var(--muted);
-  font-size: 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
 }
 
 .seller-row em {
