@@ -5,7 +5,7 @@ argument-hint: "[initiative, horizon, or review question]"
 agent: product-strategist
 ---
 
-Review `${input:focus:Initiative, horizon, or review question}` against [the authoritative roadmap](../../product/roadmap.json), [product brief](../../product/brief.md), [evidence index](../../product/evidence/README.md), [UX brief](../../design/saved-views-ux-brief.md), and repository implementation evidence.
+Review `${input:focus:Initiative, horizon, or review question}` against [the authoritative roadmap](../../product/roadmap.json), [product brief](../../product/brief.md), [evidence index](../../product/evidence/README.md), [UX brief](../../design/saved-searches-ux-brief.md), and repository implementation evidence.
 
 ## Human checkpoint
 

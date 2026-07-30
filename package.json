@@ -1,16 +1,16 @@
 {
-  "name": "signal-desk",
+  "name": "holomart",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "A synthetic customer-feedback dashboard for the Copilot for Product demo.",
+  "description": "A synthetic Pokemon TCG marketplace for the Copilot for Product demo.",
   "scripts": {
     "start": "node scripts/serve.mjs",
     "test": "node --test",
-    "test:saved-views": "node --test test/saved-views.test.js",
+    "test:saved-searches": "node --test test/saved-searches.test.js",
     "validate": "node scripts/validate-artifacts.mjs",
-    "issues:preview": "node scripts/roadmap-to-issues.mjs --initiative init-saved-views-preview",
-    "issues:preview:json": "node scripts/roadmap-to-issues.mjs --initiative init-saved-views-preview --format json",
+    "issues:preview": "node scripts/roadmap-to-issues.mjs --initiative init-saved-searches-preview",
+    "issues:preview:json": "node scripts/roadmap-to-issues.mjs --initiative init-saved-searches-preview --format json",
     "demo:check": "npm run validate && npm test && npm run issues:preview:json",
     "demo:reset": "node scripts/reset-demo.mjs"
   },

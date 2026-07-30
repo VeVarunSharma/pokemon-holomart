@@ -1,5 +1,5 @@
 name: Product discovery
-description: Capture a synthetic Signal Desk problem, evidence, counter-signals, and decision to make.
+description: Capture a synthetic HoloMart problem, evidence, counter-signals, and decision to make.
 title: "[Discovery] "
 labels:
   - discovery
@@ -13,7 +13,7 @@ body:
     attributes:
       label: Problem or decision
       description: State the user problem or decision without prescribing a solution.
-      placeholder: Frequent feedback triagers repeatedly rebuild the same filter configuration.
+      placeholder: Repeat collectors rebuild the same Pokémon, expansion, and rarity search.
     validations:
       required: true
   - type: textarea
@@ -22,7 +22,7 @@ body:
       label: Evidence and provenance
       description: List evidence IDs, repository paths, provenance, confidence, and limitations.
       placeholder: |
-        - CI-01 — SYNTHETIC / DEMO-ONLY — product/evidence/customer-support-signals.md#... — low confidence
+        - CI-01 — SYNTHETIC / DEMO-ONLY — product/evidence/shopper-research-signals.md#... — low confidence
     validations:
       required: true
   - type: textarea

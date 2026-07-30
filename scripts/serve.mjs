@@ -49,7 +49,7 @@ const server = createServer(async (request, response) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`Signal Desk running at http://${host}:${port}`);
+  console.log(`HoloMart running at http://${host}:${port}`);
 });
 
 for (const signal of ["SIGINT", "SIGTERM"]) {

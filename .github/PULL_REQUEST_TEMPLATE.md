@@ -10,7 +10,7 @@
 
 ## Evidence and repository grounding
 
-> Signal Desk evidence is **SYNTHETIC / DEMO-ONLY**.
+> HoloMart evidence is **SYNTHETIC / DEMO-ONLY**.
 
 | Claim | Evidence ID / `path:line` | Provenance and limitation |
 | --- | --- | --- |
@@ -22,11 +22,11 @@
 - Explicitly not included:
 - Assumptions/unknowns:
 
-## Saved Views boundary
+## Saved Searches boundary
 
-- [ ] This preserves browser-local-only language and behavior, or the approved decision changing that boundary is linked above.
-- [ ] Current permissions remain authoritative; stored state does not grant access.
-- [ ] No view names, filter values, feedback content, credentials, or real customer data enter telemetry/config.
+- [ ] This preserves device-local-only language and behavior, or the approved decision changing that boundary is linked above.
+- [ ] Saving remains separate from account sync and notification consent.
+- [ ] No search names, filter values, card identities, prices, credentials, or real shopper/seller data enter telemetry/config.
 
 ## UX and resilience
 

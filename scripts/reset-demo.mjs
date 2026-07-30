@@ -12,14 +12,14 @@ try {
   const port = getPort(process.env.PORT);
   const origin = `http://127.0.0.1:${port}`;
 
-  console.log(`Signal Desk safe reset checklist
+  console.log(`HoloMart safe reset checklist
 
 No files, Git state, browser data, or remote resources were changed.
 
-1. At ${origin}, delete throwaway Saved Views with each × control.
+1. At ${origin}, delete throwaway Saved Searches with each × control.
 2. Choose Clear, then navigate to ${origin}/.
 3. For malformed state only, remove this one key in browser DevTools:
-   signal-desk.saved-views.v1
+   holomart.saved-searches.v1
 4. Close and reopen Roadmap Studio to reset its in-memory focus/filter state.
 5. Restart the known npm server with Ctrl+C then "npm start", if needed.
 6. Run "npm run demo:check".

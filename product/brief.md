@@ -1,64 +1,68 @@
-# Signal Desk product brief
+# HoloMart product brief
 
-> **Synthetic demo artifact.** Signal Desk, its customers, quotes, usage, and plans are fictional. Nothing here describes a real customer or production commitment.
+> **Synthetic demo artifact.** HoloMart, its shoppers, sellers, listings, prices, quotes, usage, and plans are fictional. Pokémon names are used only to illustrate the marketplace concept; this repository includes no card artwork and makes no production commitment.
 
 ## Product and users
 
-Signal Desk helps product teams turn scattered customer feedback into a reviewable queue and a traceable set of decisions.
+HoloMart is a marketplace for discovering and buying Pokémon TCG singles from independent sellers. It brings card identity, condition, seller trust, and market-price context into one decision surface.
 
-- **Product managers** synthesize themes, prioritize follow-up, and communicate decisions.
-- **Product operations leads** maintain intake quality and shared working practices.
-- **Designers and researchers** find relevant feedback and preserve context.
-- **Support and success partners** contribute signals and need visibility into outcomes.
+- **Collectors** hunt for exact cards, printings, rarities, and conditions without rebuilding the same filters.
+- **Players** compare playable copies and lower-cost conditions.
+- **Gift buyers** need plain-language guidance without deep set knowledge.
+- **Independent sellers** need trustworthy listings and qualified demand.
 
 ## Problem
 
-People repeatedly rebuild the same filters when they return to a feedback queue. A partially implemented **Saved Views** preview can store a filter configuration in one browser, but it cannot yet explain its state, recover reliably when fields change, or support team workflows. The team must decide whether to harden the private workflow before investing in sharing.
+High-intent collectors revisit the same narrow searches—such as a Pokémon, expansion, rarity, and condition—while inventory and prices change around them. The current **Saved Searches** preview stores a query in one browser, but it cannot sync to an account, explain stale criteria, or notify a shopper when a matching listing crosses a price threshold.
+
+The product decision is not simply “build alerts.” First, HoloMart must make the saved-search foundation reliable and legible, then separately validate account continuity and notification consent.
 
 ## Strategy
 
-1. Make repeat review work faster without obscuring how a result set was produced.
-2. Prefer reversible, observable workflow improvements over premature collaboration infrastructure.
-3. Treat saved configurations as user-controlled shortcuts, not as durable records or authorization boundaries.
-4. Expand from personal recall to team coordination only when evidence and permission semantics are strong enough.
+1. Help shoppers narrow a large catalog with confidence, not just speed.
+2. Keep price, condition, and seller context visible at the decision point.
+3. Treat Saved Searches as shopper-controlled shortcuts, not notification consent.
+4. Expand from browser-local recall to account sync and price alerts only through explicit evidence and safety gates.
 
-See the [synthetic evidence index](evidence/README.md), [incomplete Saved Views spec](saved-views-spec.md), and [preview decision record](decisions/0001-saved-views-local-preview.md).
+See the [synthetic evidence index](evidence/README.md), [incomplete Saved Searches spec](saved-searches-spec.md), and [preview decision record](decisions/0001-saved-searches-local-preview.md).
 
 ## Goals
 
-- Reduce repeated filter setup for people who revisit a queue.
-- Make the active view and its filters legible and keyboard accessible.
-- Learn which configurations are reused, edited, or abandoned.
-- Establish explicit gates for sync and sharing rather than implying they already exist.
+- Reduce repeat search setup for collectors who revisit a chase-card query.
+- Make saved criteria, active state, and local-only persistence easy to understand.
+- Recover safely when an expansion, rarity, or catalog field changes.
+- Learn whether later-session reuse reflects real cross-device and price-monitoring needs.
+- Preserve a separate, explicit opt-in for any future price alert.
 
 ## Non-goals
 
-- Cross-workspace sharing or real-time co-editing in the current preview.
-- Treating a saved view as a report, alert, permission grant, or canonical taxonomy.
-- Importing real customer data into this demo.
-- Claiming that directional synthetic signals prove demand or causality.
+- Account sync or outbound alerts in the current preview.
+- Authenticating, grading, pricing, or shipping real cards in this demo.
+- Treating a synthetic market price as a valuation guarantee.
+- Bundling real customer, seller, payment, or inventory data.
+- Claiming that directional synthetic signals establish demand or causality.
 
 ## Constraints
 
-- Current preview state is browser-local and can be cleared with site data.
-- Saved filters may reference fields that are later renamed, removed, or restricted.
-- A view must never reveal feedback the viewer cannot otherwise access.
-- Mobile layouts must preserve review and recovery, but not every dense desktop control.
-- Instrumentation in the demo is illustrative and must avoid free-text or customer content.
-- Scope is sized for evidence-backed planning, not a production launch promise.
+- Current Saved Searches state is browser-local and can disappear with site data.
+- Catalog taxonomies change; stored expansion and rarity values can become stale.
+- Search state must never include payment data, addresses, seller credentials, or card images.
+- Price alerts require separate consent, threshold, frequency, quiet-hour, and unsubscribe semantics.
+- Narrow screens must preserve browsing and recovery even if complex search creation is reduced.
+- All inventory, prices, ratings, and availability shown in the working app are synthetic.
 
 ## Success metrics and guardrails
 
-These are **proposed measures**, not baselines or targets backed by real telemetry.
+These are proposed decision aids, not real baselines or launch targets.
 
 | Measure | Proposed interpretation |
 | --- | --- |
-| Median time from opening Feedback to a useful result set | Directionally lower for repeat tasks |
-| Reuse rate | Portion of created views opened on a later synthetic session |
-| Successful recovery rate | View still opens after a referenced field changes, or gives an actionable explanation |
-| Edit-after-open rate | Diagnostic signal; can indicate useful templates or stale views |
-| Delete/abandon rate | Guardrail against clutter and accidental creation |
-| Accessibility task completion | Core create, apply, rename, and delete flows complete with keyboard and screen reader |
-| Permission incident count | Must remain zero before any sharing release |
+| Time to restore a repeat card search | Directionally lower for returning collectors |
+| Later-session reuse rate | Portion of created searches reopened in a later synthetic session |
+| Search-to-listing engagement | Diagnostic signal that restored criteria still produce useful inventory |
+| Successful stale-filter recovery | Search opens safely or explains unavailable criteria |
+| Save-to-alert opt-in | Must remain a separate future funnel, never an implicit subscription |
+| Accessible task completion | Create, apply, rename, delete, and recover work with keyboard and screen reader |
+| Unintended notification count | Must remain zero before any alert experiment |
 
-Metric definitions and limitations are in [usage/analytics evidence](evidence/usage-analytics.json). The authoritative planning artifact is [roadmap.json](roadmap.json).
+Metric definitions and limitations are in [usage and analytics evidence](evidence/usage-analytics.json). The authoritative planning artifact is [roadmap.json](roadmap.json).

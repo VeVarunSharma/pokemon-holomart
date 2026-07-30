@@ -1,13 +1,13 @@
 ---
 name: repository-feature-assessment
-description: Assess a Signal Desk feature from repository implementation evidence before making product claims.
+description: Assess a HoloMart feature from repository implementation evidence before making product claims.
 argument-hint: "[feature or product question]"
 agent: product-strategist
 ---
 
 Assess `${input:focus:Feature or product question}` using repository evidence.
 
-Start with [the product brief](../../product/brief.md), [Saved Views spec](../../product/saved-views-spec.md), and relevant `app/**`, `src/**`, and `test/**` files. Treat [implementation notes](../../src/features/saved-views/implementation-notes.js) and [dependency map](../../src/features/saved-views/dependency-map.js) as leads, then verify them in code.
+Start with [the product brief](../../product/brief.md), [Saved Searches spec](../../product/saved-searches-spec.md), and relevant `app/**`, `src/**`, and `test/**` files. Treat [implementation notes](../../src/features/saved-searches/implementation-notes.js) and [dependency map](../../src/features/saved-searches/dependency-map.js) as leads, then verify them in code.
 
 ## Human checkpoint
 

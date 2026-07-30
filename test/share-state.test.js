@@ -5,10 +5,10 @@ import { DEFAULT_FILTERS } from "../src/features/filters/filter-state.js";
 
 test("URL serialization is stable and drops unrelated parameters", () => {
   const url = filtersToUrl(
-    { query: "churn risk", sentiment: "Negative", channel: "Interview" },
-    "https://example.test/app?old=value#feedback"
+    { query: "pikachu ex", rarity: "Special Illustration Rare", expansion: "Surging Sparks" },
+    "https://example.test/app?old=value#catalog"
   );
-  assert.equal(url, "https://example.test/app?q=churn+risk&sentiment=Negative&channel=Interview#feedback");
+  assert.equal(url, "https://example.test/app?q=pikachu+ex&rarity=Special+Illustration+Rare&expansion=Surging+Sparks#catalog");
 });
 
 test("default filters serialize without a query string", () => {
@@ -17,10 +17,10 @@ test("default filters serialize without a query string", () => {
 
 test("malformed and invalid URL state falls back safely", () => {
   assert.deepEqual(filtersFromUrl("http://[invalid"), DEFAULT_FILTERS);
-  assert.deepEqual(filtersFromUrl("https://example.test/?sentiment=Furious&channel=Pager"), DEFAULT_FILTERS);
+  assert.deepEqual(filtersFromUrl("https://example.test/?rarity=Legendary&expansion=Unknown"), DEFAULT_FILTERS);
 });
 
 test("serialized filters round trip", () => {
-  const expected = { query: "billing", sentiment: "Neutral", channel: "Support" };
+  const expected = { query: "charizard", rarity: "Special Illustration Rare", expansion: "Paldean Fates" };
   assert.deepEqual(filtersFromUrl(filtersToUrl(expected, "https://example.test")), expected);
 });

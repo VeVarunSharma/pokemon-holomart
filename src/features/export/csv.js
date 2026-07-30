@@ -3,17 +3,18 @@ export function escapeCsv(value) {
   return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 }
 
-export function feedbackToCsv(items) {
+export function cardsToCsv(items) {
   const columns = [
     ["ID", "id"],
-    ["Company", "company"],
-    ["Channel", "channel"],
-    ["Theme", "theme"],
-    ["Sentiment", "sentiment"],
-    ["Plan", "plan"],
-    ["Date", "date"],
-    ["Feedback", "excerpt"],
-    ["Votes", "votes"]
+    ["Card", "name"],
+    ["Expansion", "set"],
+    ["Number", "number"],
+    ["Rarity", "rarity"],
+    ["Condition", "condition"],
+    ["Price", "price"],
+    ["Market price", "marketPrice"],
+    ["Seller", "seller"],
+    ["Stock", "stock"]
   ];
   return [
     columns.map(([heading]) => escapeCsv(heading)).join(","),
@@ -22,11 +23,11 @@ export function feedbackToCsv(items) {
 }
 
 export function downloadCsv(items, documentRef = document) {
-  const blob = new Blob([feedbackToCsv(items)], { type: "text/csv;charset=utf-8" });
+  const blob = new Blob([cardsToCsv(items)], { type: "text/csv;charset=utf-8" });
   const href = URL.createObjectURL(blob);
   const link = documentRef.createElement("a");
   link.href = href;
-  link.download = `signal-desk-feedback-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.download = `holomart-card-catalog-${new Date().toISOString().slice(0, 10)}.csv`;
   link.click();
   URL.revokeObjectURL(href);
 }

@@ -3,133 +3,225 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Signal Desk synthetic customer-feedback dashboard demo">
-    <title>Signal Desk — Feedback overview</title>
+    <meta name="description" content="HoloMart synthetic Pokémon TCG marketplace demo">
+    <title>HoloMart — Pokémon TCG marketplace</title>
     <link rel="stylesheet" href="/app/styles.css">
   </head>
   <body>
-    <a class="skip-link" href="#feedback">Skip to feedback</a>
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Signal Desk home">
-        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-        <span>Signal Desk</span>
-      </a>
-      <div class="topbar-context">
-        <span class="demo-label">Synthetic demo data</span>
-        <span class="avatar" aria-label="Signed in as Taylor">TR</span>
+    <a class="skip-link" href="#catalog">Skip to card catalog</a>
+
+    <div class="announcement">
+      <span>Free tracked shipping on orders over $50</span>
+      <span aria-hidden="true">•</span>
+      <span>30-day buyer protection</span>
+    </div>
+
+    <header class="site-header">
+      <div class="nav-shell">
+        <a class="brand" href="/" aria-label="HoloMart home">
+          <span class="brand-mark" aria-hidden="true"><i></i></span>
+          <span>HoloMart</span>
+        </a>
+        <nav class="main-nav" aria-label="Primary navigation">
+          <a href="#catalog" aria-current="page">Marketplace</a>
+          <a href="#new-arrivals">New arrivals</a>
+          <a href="#price-guide">Price guide</a>
+          <a href="#sell">Sell cards</a>
+        </nav>
+        <div class="nav-actions">
+          <span class="demo-label">Demo inventory</span>
+          <button class="cart-button" id="cart-button" type="button" aria-label="Open cart, 0 items">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 4h2l2 11h10l2-8H6M9 20h.01M17 20h.01"/></svg>
+            <span>Cart</span>
+            <b id="cart-count">0</b>
+          </button>
+          <span class="avatar" aria-label="Signed in as Alex">AT</span>
+        </div>
       </div>
     </header>
 
     <main>
-      <section class="page-heading" aria-labelledby="page-title">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy">
+          <span class="eyebrow">Pokémon TCG marketplace</span>
+          <h1 id="hero-title">Find the card your binder is missing.</h1>
+          <p>Compare condition-graded singles from trusted sellers, track market prices, and save every search worth coming back to.</p>
+          <div class="hero-actions">
+            <a class="button primary" href="#catalog">Shop singles</a>
+            <a class="button hero-secondary" href="#saved-searches">View saved searches</a>
+          </div>
+          <dl class="hero-stats">
+            <div><dt>2,400+</dt><dd>demo listings</dd></div>
+            <div><dt>98.7%</dt><dd>on-time delivery</dd></div>
+            <div><dt>30 days</dt><dd>buyer protection</dd></div>
+          </dl>
+        </div>
+        <div class="hero-showcase" aria-hidden="true">
+          <div class="showcase-glow"></div>
+          <div class="showcase-card showcase-card-back">
+            <span>151</span>
+            <strong>B</strong>
+            <small>Illustration rare</small>
+          </div>
+          <div class="showcase-card showcase-card-middle">
+            <span>PAL</span>
+            <strong>M</strong>
+            <small>Collector pick</small>
+          </div>
+          <div class="showcase-card showcase-card-front">
+            <span>SV08</span>
+            <strong>P</strong>
+            <small>Special illustration rare</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="trust-row" aria-label="Marketplace benefits">
         <div>
-          <p class="date-context">Feedback intelligence · July 2026</p>
-          <h1 id="page-title">Customer feedback</h1>
-          <p>Find the signals that should shape the next product decision.</p>
+          <span class="trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 2.8 7.8 7 10 4.2-2.2 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></svg>
+          </span>
+          <span><strong>Condition guaranteed</strong><small>Every listing uses a clear grading standard.</small></span>
         </div>
-        <div class="heading-actions">
-          <button class="button secondary" id="share-button" type="button">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 12h8M13 7l5 5-5 5M5 5v14"/></svg>
-            Share
-          </button>
-          <button class="button primary" id="save-view-button" type="button">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16l-6-3-6 3z"/></svg>
-            Save view
-          </button>
+        <div>
+          <span class="trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M4 7h11v10H4zM15 10h3l2 3v4h-5M8 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4ZM17 20a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/></svg>
+          </span>
+          <span><strong>Tracked delivery</strong><small>See every shipment from seller to doorstep.</small></span>
+        </div>
+        <div>
+          <span class="trust-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 3v18M17 7.5c0-1.4-1.7-2.5-4-2.5s-4 1.1-4 2.5 1.7 2.5 4 2.5 4 1.1 4 2.5-1.7 2.5-4 2.5-4-1.1-4-2.5"/></svg>
+          </span>
+          <span><strong>Market-aware prices</strong><small>Compare each listing with synthetic market data.</small></span>
         </div>
       </section>
 
-      <section class="summary-strip" aria-label="Feedback summary">
-        <div class="summary-primary">
-          <span class="summary-value" id="result-count">0</span>
-          <span><strong>signals in view</strong><small>Across four research channels</small></span>
-        </div>
-        <div class="sentiment-summary">
-          <span><i class="dot negative"></i><b id="negative-count">0</b> negative</span>
-          <span><i class="dot neutral"></i><b id="neutral-count">0</b> neutral</span>
-          <span><i class="dot positive"></i><b id="positive-count">0</b> positive</span>
-        </div>
-        <p class="summary-insight"><strong>Collaboration is rising.</strong> Team sharing appears in 3 of the 5 most-supported signals.</p>
-      </section>
-
-      <section class="workspace">
-        <aside class="views-panel" aria-labelledby="views-title">
-          <div class="views-heading">
-            <div>
-              <h2 id="views-title">Saved views</h2>
-              <span class="preview-badge">Personal preview</span>
-            </div>
-            <button class="icon-button" id="quick-save-button" type="button" aria-label="Save current view">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
-            </button>
-          </div>
-          <p class="local-note">
-            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-6 6v3l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19h4"/></svg>
-            Saved in this browser only
-          </p>
-          <div id="saved-views-list"></div>
-          <div class="views-future">
-            <span class="future-icon" aria-hidden="true">⌁</span>
-            <div><strong>Team views are next</strong><p>Shared ownership and permissions aren’t connected yet.</p></div>
-          </div>
-        </aside>
-
-        <div class="feedback-pane" id="feedback">
-          <form class="filterbar" id="filter-form" role="search">
-            <label class="search-field">
-              <span class="sr-only">Search feedback</span>
-              <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
-              <input id="query" name="query" type="search" placeholder="Search customers, themes, or feedback…" autocomplete="off">
-              <kbd>⌘ K</kbd>
-            </label>
-            <label>
-              <span class="sr-only">Sentiment</span>
-              <select id="sentiment" name="sentiment">
-                <option>All</option><option>Positive</option><option>Neutral</option><option>Negative</option>
-              </select>
-            </label>
-            <label>
-              <span class="sr-only">Channel</span>
-              <select id="channel" name="channel">
-                <option>All</option><option>Interview</option><option>Support</option><option>Survey</option><option>Community</option>
-              </select>
-            </label>
-            <button class="button text-button" id="clear-button" type="button">Clear <span id="filter-count"></span></button>
-          </form>
-
-          <div class="list-toolbar">
+      <section class="catalog-section" id="catalog" aria-labelledby="catalog-title">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow dark">Curated singles</span>
+            <h2 id="catalog-title">Shop the latest chase cards</h2>
             <p id="results-label" aria-live="polite"></p>
-            <button class="button quiet" id="export-button" type="button">
-              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 19h14"/></svg>
-              Export CSV
-            </button>
           </div>
+          <button class="button secondary desktop-save" id="save-search-button" type="button">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M6 4h12v16l-6-3-6 3z"/></svg>
+            Save this search
+          </button>
+        </div>
 
-          <div class="feedback-list" id="feedback-list"></div>
-          <div class="empty-state" id="empty-state" hidden>
-            <span aria-hidden="true">⌕</span>
-            <h2>No signals match this view</h2>
-            <p>Try a different keyword or clear one of the filters.</p>
-            <button class="button secondary" id="empty-clear-button" type="button">Clear filters</button>
+        <div class="marketplace">
+          <aside class="searches-panel" id="saved-searches" aria-labelledby="searches-title">
+            <div class="searches-heading">
+              <div>
+                <h2 id="searches-title">Saved searches</h2>
+                <span class="preview-badge">Personal preview</span>
+              </div>
+              <button class="icon-button" id="quick-save-button" type="button" aria-label="Save current search">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+            <p class="local-note">
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M8 11V8a4 4 0 0 1 8 0v3M6 11h12v10H6z"/></svg>
+              Stored on this device only
+            </p>
+            <div id="saved-searches-list"></div>
+            <div class="future-card">
+              <span class="future-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3a6 6 0 0 0-6 6v3l-2 3h16l-2-3V9a6 6 0 0 0-6-6zM10 19h4"/></svg>
+              </span>
+              <div>
+                <strong>Price alerts are next</strong>
+                <p>Account sync and alert preferences are not connected yet.</p>
+              </div>
+            </div>
+          </aside>
+
+          <div class="catalog-pane">
+            <form class="filterbar" id="filter-form" role="search">
+              <label class="search-field">
+                <span class="sr-only">Search cards</span>
+                <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg>
+                <input id="query" name="query" type="search" placeholder="Search Pokémon, expansion, or card number…" autocomplete="off">
+                <kbd>Ctrl K</kbd>
+              </label>
+              <label>
+                <span class="sr-only">Rarity</span>
+                <select id="rarity" name="rarity">
+                  <option value="All">All rarities</option>
+                  <option>Illustration Rare</option>
+                  <option>Special Illustration Rare</option>
+                  <option>Hyper Rare</option>
+                  <option>Secret Rare</option>
+                </select>
+              </label>
+              <label>
+                <span class="sr-only">Expansion</span>
+                <select id="expansion" name="expansion">
+                  <option value="All">All expansions</option>
+                  <option>Scarlet &amp; Violet</option>
+                  <option>Scarlet &amp; Violet—151</option>
+                  <option>Paldean Fates</option>
+                  <option>Paldea Evolved</option>
+                  <option>Twilight Masquerade</option>
+                  <option>Surging Sparks</option>
+                  <option>Crown Zenith</option>
+                  <option>Evolving Skies</option>
+                </select>
+              </label>
+              <button class="button quiet" id="clear-button" type="button">Clear <span id="filter-count"></span></button>
+            </form>
+
+            <div class="catalog-summary">
+              <div><strong id="result-count">0</strong><span>cards</span></div>
+              <div><strong id="under-market-count">0</strong><span>at or below market</span></div>
+              <div><strong id="near-mint-count">0</strong><span>near mint</span></div>
+              <button class="button quiet export-button" id="export-button" type="button">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-4-4 4 4 4-4M5 19h14"/></svg>
+                Export catalog
+              </button>
+            </div>
+
+            <div class="card-grid" id="card-grid"></div>
+            <div class="empty-state" id="empty-state" hidden>
+              <span aria-hidden="true">?</span>
+              <h2>No cards match this search</h2>
+              <p>Try another Pokémon, rarity, or expansion.</p>
+              <button class="button secondary" id="empty-clear-button" type="button">Clear filters</button>
+            </div>
           </div>
         </div>
+      </section>
+
+      <section class="buyer-promise" id="price-guide" aria-labelledby="promise-title">
+        <span class="eyebrow dark">Buy with context</span>
+        <h2 id="promise-title">More confidence in every card.</h2>
+        <p>HoloMart puts condition, seller reputation, and a market comparison next to the price—so collectors can decide without opening five more tabs.</p>
       </section>
     </main>
 
-    <dialog id="save-dialog" aria-labelledby="save-dialog-title">
-      <form method="dialog" id="save-dialog-form">
-        <button class="dialog-close icon-button" value="cancel" aria-label="Close save view dialog">×</button>
+    <footer>
+      <a class="brand footer-brand" href="/" aria-label="HoloMart home">
+        <span class="brand-mark" aria-hidden="true"><i></i></span>
+        <span>HoloMart</span>
+      </a>
+      <p>Fictional product demo. Inventory, sellers, ratings, availability, and prices are synthetic. Pokémon names are used only to illustrate the marketplace concept; no card artwork is included.</p>
+    </footer>
+
+    <dialog id="save-search-dialog" aria-labelledby="save-dialog-title">
+      <form method="dialog" id="save-search-form">
+        <button class="dialog-close icon-button" value="cancel" aria-label="Close save search dialog">×</button>
         <span class="dialog-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4h12v16l-6-3-6 3z"/></svg></span>
-        <h2 id="save-dialog-title">Save this view</h2>
-        <p>Keep these filters handy on this browser.</p>
-        <label class="dialog-field">View name
-          <input id="view-name" name="viewName" maxlength="60" required placeholder="e.g. Enterprise churn signals">
+        <h2 id="save-dialog-title">Save this search</h2>
+        <p>Jump back to these filters without rebuilding them.</p>
+        <label class="dialog-field">Search name
+          <input id="search-name" name="searchName" maxlength="60" required placeholder="e.g. 151 illustration rares">
         </label>
         <div class="filter-preview" id="filter-preview"></div>
-        <p class="dialog-disclaimer"><strong>Personal preview:</strong> this view won’t sync to teammates or other devices.</p>
+        <p class="dialog-disclaimer"><strong>Personal preview:</strong> this search stays in this browser. Account sync and price alerts are not available yet.</p>
         <div class="dialog-actions">
           <button class="button secondary" value="cancel">Cancel</button>
-          <button class="button primary" id="confirm-save-button" value="default">Save view</button>
+          <button class="button primary" value="default">Save search</button>
         </div>
       </form>
     </dialog>

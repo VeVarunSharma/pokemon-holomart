@@ -21,16 +21,16 @@ function run(...args) {
 }
 
 test("gh previews omit label dependencies and retain suggested labels as metadata", () => {
-  const output = run("--initiative", "init-saved-views-preview", "--format", "json", "--gh-commands");
+  const output = run("--initiative", "init-saved-searches-preview", "--format", "json", "--gh-commands");
   const plan = JSON.parse(output);
-  assert.deepEqual(plan.epic.suggestedLabels, ["synthetic-demo", "product", "saved-views", "preview", "epic"]);
+  assert.deepEqual(plan.epic.suggestedLabels, ["synthetic-demo", "product", "saved-searches", "preview", "epic"]);
   assert.ok(plan.children.every((child) => child.suggestedLabels.includes("child-work")));
   assert.doesNotMatch(plan.ghCommandPreview, /(?:^|\s)--label(?:\s|=)/m);
   assert.match(plan.ghCommandPreview, /Suggested epic labels \(not applied\):/);
 });
 
 test("every child body carries the evidence-backed issue contract", () => {
-  const plan = JSON.parse(run("--initiative", "init-saved-views-preview", "--format", "json"));
+  const plan = JSON.parse(run("--initiative", "init-saved-searches-preview", "--format", "json"));
   const requiredHeadings = [
     "## Rationale and outcome",
     "## Acceptance criteria",
@@ -56,10 +56,10 @@ test("dependency ordering is stable when authoritative input order changes", () 
   const reordered = buildPlan(roadmap, initiative).children.map(({ id }) => id);
   assert.deepEqual(reordered, expected);
   assert.deepEqual(expected, [
-    "work-view-storage-validation",
-    "work-view-core-flows",
-    "work-view-recovery",
-    "work-view-accessibility"
+    "work-search-storage-validation",
+    "work-search-core-flows",
+    "work-search-recovery",
+    "work-search-accessibility"
   ]);
 });
 
@@ -80,13 +80,13 @@ test("PowerShell commands quote apostrophes and reject unsafe here-string delimi
 });
 
 test("markdown, JSON, and command modes are deterministic and body-consistent", () => {
-  const args = ["--initiative", "init-saved-views-preview", "--gh-commands"];
+  const args = ["--initiative", "init-saved-searches-preview", "--gh-commands"];
   assert.equal(run(...args), run(...args));
   assert.equal(run("--format", "json"), run("--format", "json"));
 
-  const markdown = run("--initiative", "init-saved-views-preview");
-  const json = JSON.parse(run("--initiative", "init-saved-views-preview", "--format", "json"));
-  assert.match(markdown, /work-view-storage-validation/);
+  const markdown = run("--initiative", "init-saved-searches-preview");
+  const json = JSON.parse(run("--initiative", "init-saved-searches-preview", "--format", "json"));
+  assert.match(markdown, /work-search-storage-validation/);
   assert.ok(markdown.includes(json.children[0].body));
 
   const invalid = spawnSync(process.execPath, [script, "--format", "yaml"], {

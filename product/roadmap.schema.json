@@ -1,8 +1,8 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://signal-desk.invalid/schemas/roadmap.schema.json",
-  "title": "Signal Desk roadmap",
-  "description": "Schema for the synthetic, authoritative Signal Desk roadmap artifact.",
+  "$id": "https://holomart.invalid/schemas/roadmap.schema.json",
+  "title": "HoloMart roadmap",
+  "description": "Schema for the synthetic, authoritative HoloMart marketplace roadmap artifact.",
   "type": "object",
   "additionalProperties": false,
   "required": ["$schema", "schemaVersion", "metadata", "horizons", "initiatives"],
