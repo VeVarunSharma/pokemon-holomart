@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "title": "GitHub Copilot for Product Roadmap",
+  "subtitle": "A shared view of product outcomes, experiments, and delivery milestones.",
+  "updatedAt": "2026-07-30T14:21:31.655Z",
+  "quarters": [
+    {
+      "id": "2026-q3",
+      "label": "Q3 2026",
+      "objective": "Discover and align"
+    },
+    {
+      "id": "2026-q4",
+      "label": "Q4 2026",
+      "objective": "Pilot and learn"
+    },
+    {
+      "id": "2027-q1",
+      "label": "Q1 2027",
+      "objective": "Launch and measure"
+    },
+    {
+      "id": "2027-q2",
+      "label": "Q2 2027",
+      "objective": "Scale and optimize"
+    }
+  ],
+  "items": [
+    {
+      "id": "product-discovery-workflow",
+      "title": "Define the product discovery workflow",
+      "description": "Standardize how customer signals become validated roadmap opportunities.",
+      "quarter": "2026-q3",
+      "status": "in-progress",
+      "category": "Product",
+      "owner": "Product team",
+      "progress": 65,
+      "targetDate": "2026-09-15"
+    },
+    {
+      "id": "roadmap-canvas-pilot",
+      "title": "Pilot the roadmap canvas",
+      "description": "Use the shared canvas in planning reviews and gather feedback from the core team.",
+      "quarter": "2026-q3",
+      "status": "planned",
+      "category": "Experience",
+      "owner": "Design and engineering",
+      "progress": 20,
+      "targetDate": "2026-09-30"
+    },
+    {
+      "id": "feedback-synthesis",
+      "title": "Launch customer feedback synthesis",
+      "description": "Connect research evidence to roadmap decisions and measurable outcomes.",
+      "quarter": "2026-q4",
+      "status": "planned",
+      "category": "Insights",
+      "owner": "Research",
+      "progress": 10,
+      "targetDate": "2026-11-20"
+    },
+    {
+      "id": "release-readiness",
+      "title": "Automate release readiness checks",
+      "description": "Create a repeatable launch checklist with clear ownership and risk signals.",
+      "quarter": "2027-q1",
+      "status": "planned",
+      "category": "Operations",
+      "owner": "Engineering",
+      "progress": 0,
+      "targetDate": "2027-02-12"
+    },
+    {
+      "id": "portfolio-reporting",
+      "title": "Scale portfolio reporting",
+      "description": "Roll up roadmap progress, dependencies, and outcomes across product areas.",
+      "quarter": "2027-q2",
+      "status": "planned",
+      "category": "Strategy",
+      "owner": "Product operations",
+      "progress": 0,
+      "targetDate": "2027-05-28"
+    }
+  ]
+}
