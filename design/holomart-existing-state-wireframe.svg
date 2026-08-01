@@ -1,0 +1,840 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3340" height="2860" viewBox="0 0 3340 2860">
+  <title>HoloMart existing state responsive wireframe</title>
+  <desc>Figma-importable wireframe showing desktop, tablet, mobile, and save-search dialog states.</desc>
+  <style>
+    text {
+      font-family: Inter, "Segoe UI", Arial, sans-serif;
+      fill: #171a2b;
+    }
+
+    .canvas-title { font-size: 30px; font-weight: 750; }
+    .canvas-note { font-size: 14px; fill: #686d7e; }
+    .frame-label { font-size: 18px; font-weight: 700; }
+    .frame-meta { font-size: 12px; fill: #686d7e; }
+    .brand { font-size: 17px; font-weight: 800; }
+    .nav { font-size: 12px; font-weight: 650; fill: #686d7e; }
+    .announcement-copy { font-size: 11px; font-weight: 650; fill: #dce2ff; }
+    .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; fill: #5850ec; }
+    .eyebrow-inverse { font-size: 11px; font-weight: 800; letter-spacing: 1.6px; fill: #d6d8ff; }
+    .hero-title { font-size: 54px; font-weight: 820; letter-spacing: -2px; fill: #ffffff; }
+    .hero-title-tablet { font-size: 44px; font-weight: 820; letter-spacing: -1.7px; fill: #ffffff; }
+    .hero-title-mobile { font-size: 36px; font-weight: 820; letter-spacing: -1.4px; fill: #ffffff; }
+    .hero-copy { font-size: 15px; fill: #cbd0e9; }
+    .section-title { font-size: 34px; font-weight: 780; letter-spacing: -1.1px; }
+    .section-title-small { font-size: 27px; font-weight: 780; letter-spacing: -0.9px; }
+    .body { font-size: 13px; }
+    .small { font-size: 11px; fill: #686d7e; }
+    .micro { font-size: 9px; fill: #686d7e; }
+    .strong { font-weight: 750; }
+    .inverse { fill: #ffffff; }
+    .button-copy { font-size: 12px; font-weight: 720; }
+    .card-title { font-size: 14px; font-weight: 760; }
+    .card-price { font-size: 17px; font-weight: 780; }
+    .card-initial { font-size: 44px; font-weight: 820; fill: #ffffff; }
+    .card-initial-small { font-size: 30px; font-weight: 820; fill: #ffffff; }
+    .card-visual-label { font-size: 9px; font-weight: 760; letter-spacing: 1px; fill: #ffffff; }
+    .white { fill: #ffffff; }
+    .muted { fill: #686d7e; }
+    .primary { fill: #5850ec; }
+    .green { fill: #147d64; }
+    .line { stroke: #e2e5ee; stroke-width: 1; }
+    .wire-line { stroke: #cbd2dc; stroke-width: 1.2; fill: none; }
+    .soft-line { stroke: #e2e5ee; stroke-width: 1; fill: none; }
+  </style>
+
+  <rect width="3340" height="2860" fill="#eceef4"/>
+  <text x="60" y="46" class="canvas-title">HoloMart - Existing state wireframe</text>
+  <text x="60" y="72" class="canvas-note">Responsive marketplace shell, saved searches, catalog, product cards, and save-search interaction.</text>
+
+  <text x="60" y="104" class="frame-label">Desktop marketplace</text>
+  <text x="250" y="104" class="frame-meta">1440 x 2300</text>
+  <text x="1560" y="104" class="frame-label">Tablet marketplace</text>
+  <text x="1740" y="104" class="frame-meta">768 x 2360</text>
+  <text x="2410" y="104" class="frame-label">Mobile marketplace</text>
+  <text x="2590" y="104" class="frame-meta">390 x 2660</text>
+  <text x="2880" y="104" class="frame-label">Save search state</text>
+  <text x="3040" y="104" class="frame-meta">390 x 844</text>
+
+  <g id="Desktop-1440" transform="translate(60 120)">
+    <rect width="1440" height="2300" rx="8" fill="#f6f7fb" stroke="#cbd2dc"/>
+
+    <g id="Desktop-Announcement">
+      <rect width="1440" height="34" fill="#111936"/>
+      <text x="720" y="22" text-anchor="middle" class="announcement-copy">Free tracked shipping on orders over $50  -  30-day buyer protection</text>
+    </g>
+
+    <g id="Desktop-Header">
+      <rect y="34" width="1440" height="74" fill="#ffffff"/>
+      <line x1="0" y1="108" x2="1440" y2="108" class="line"/>
+      <g transform="translate(64 55)">
+        <circle cx="16" cy="16" r="16" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+        <path d="M1 16h30" stroke="#111936" stroke-width="3"/>
+        <path d="M2 15a14 14 0 0 1 28 0z" fill="#de4d5f"/>
+        <circle cx="16" cy="16" r="5" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+        <text x="43" y="22" class="brand">HoloMart</text>
+      </g>
+      <g transform="translate(286 79)">
+        <text x="0" y="0" class="nav" fill="#171a2b">Marketplace</text>
+        <line x1="0" y1="28" x2="68" y2="28" stroke="#5850ec" stroke-width="2"/>
+        <text x="106" y="0" class="nav">New arrivals</text>
+        <text x="206" y="0" class="nav">Price guide</text>
+        <text x="294" y="0" class="nav">Sell cards</text>
+      </g>
+      <text x="1114" y="80" class="small">Demo inventory</text>
+      <g transform="translate(1220 51)">
+        <rect width="96" height="40" rx="20" fill="#ffffff" stroke="#e2e5ee"/>
+        <path d="M15 13h4l3 13h17l3-10H21" class="wire-line"/>
+        <text x="48" y="25" class="button-copy">Cart</text>
+        <circle cx="82" cy="20" r="10" fill="#5850ec"/>
+        <text x="82" y="24" text-anchor="middle" class="micro white">0</text>
+      </g>
+      <circle cx="1352" cy="71" r="18" fill="#5850ec"/>
+      <text x="1352" y="75" text-anchor="middle" class="micro white strong">AT</text>
+    </g>
+
+    <g id="Desktop-Hero">
+      <rect x="64" y="132" width="1312" height="500" rx="28" fill="#111936"/>
+      <path d="M64 132h1312v500H64z" fill="#1d2854" opacity="0.45"/>
+      <circle cx="1110" cy="300" r="165" fill="#5850ec" opacity="0.18"/>
+      <g transform="translate(128 224)">
+        <line x1="0" y1="6" x2="28" y2="6" stroke="#f7ce55" stroke-width="3"/>
+        <text x="40" y="10" class="eyebrow-inverse">POKEMON TCG MARKETPLACE</text>
+        <text x="0" y="76" class="hero-title">Find the card your</text>
+        <text x="0" y="130" class="hero-title">binder is missing.</text>
+        <text x="0" y="175" class="hero-copy">Compare condition-graded singles from trusted sellers, track market</text>
+        <text x="0" y="199" class="hero-copy">prices, and save every search worth coming back to.</text>
+        <rect x="0" y="230" width="126" height="44" rx="9" fill="#f7ce55"/>
+        <text x="63" y="257" text-anchor="middle" class="button-copy">Shop singles</text>
+        <rect x="138" y="230" width="166" height="44" rx="9" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.3"/>
+        <text x="221" y="257" text-anchor="middle" class="button-copy inverse">View saved searches</text>
+        <g transform="translate(0 316)">
+          <line x1="0" y1="0" x2="0" y2="45" stroke="#f7ce55" stroke-width="2"/>
+          <text x="14" y="17" class="body inverse strong">2,400+</text>
+          <text x="14" y="36" class="micro" fill="#aeb5d2">demo listings</text>
+          <line x1="132" y1="0" x2="132" y2="45" stroke="#f7ce55" stroke-width="2"/>
+          <text x="146" y="17" class="body inverse strong">98.7%</text>
+          <text x="146" y="36" class="micro" fill="#aeb5d2">on-time delivery</text>
+          <line x1="282" y1="0" x2="282" y2="45" stroke="#f7ce55" stroke-width="2"/>
+          <text x="296" y="17" class="body inverse strong">30 days</text>
+          <text x="296" y="36" class="micro" fill="#aeb5d2">buyer protection</text>
+        </g>
+      </g>
+      <g id="Desktop-Hero-Card-Stack">
+        <g transform="translate(974 254) rotate(-12)">
+          <rect width="205" height="286" rx="16" fill="#3d946f" stroke="#ffffff" stroke-opacity="0.35"/>
+          <text x="174" y="27" text-anchor="end" class="card-visual-label">151</text>
+          <text x="102" y="160" text-anchor="middle" class="card-initial">B</text>
+          <text x="18" y="262" class="card-visual-label">ILLUSTRATION RARE</text>
+        </g>
+        <g transform="translate(1124 240) rotate(8)">
+          <rect width="205" height="286" rx="16" fill="#de4d5f" stroke="#ffffff" stroke-opacity="0.35"/>
+          <text x="174" y="27" text-anchor="end" class="card-visual-label">PAL</text>
+          <text x="102" y="160" text-anchor="middle" class="card-initial">M</text>
+          <text x="18" y="262" class="card-visual-label">COLLECTOR PICK</text>
+        </g>
+        <g transform="translate(1046 216) rotate(-2)">
+          <rect width="205" height="286" rx="16" fill="#b98b2f" stroke="#ffffff" stroke-opacity="0.45"/>
+          <text x="174" y="27" text-anchor="end" class="card-visual-label">SV08</text>
+          <text x="102" y="160" text-anchor="middle" class="card-initial">P</text>
+          <text x="18" y="262" class="card-visual-label">SPECIAL ILLUSTRATION RARE</text>
+        </g>
+      </g>
+    </g>
+
+    <g id="Desktop-Trust-Row">
+      <rect x="64" y="648" width="1312" height="82" rx="18" fill="#ffffff" stroke="#e2e5ee"/>
+      <line x1="501" y1="648" x2="501" y2="730" class="line"/>
+      <line x1="938" y1="648" x2="938" y2="730" class="line"/>
+      <g transform="translate(92 669)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <path d="M12 19l6 6 11-13" stroke="#5850ec" stroke-width="2.2" fill="none"/>
+        <text x="56" y="15" class="body strong">Condition guaranteed</text>
+        <text x="56" y="34" class="small">Every listing uses a clear grading standard.</text>
+      </g>
+      <g transform="translate(529 669)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <rect x="9" y="13" width="20" height="13" rx="2" class="wire-line"/>
+        <circle cx="14" cy="29" r="3" class="wire-line"/>
+        <circle cx="28" cy="29" r="3" class="wire-line"/>
+        <text x="56" y="15" class="body strong">Tracked delivery</text>
+        <text x="56" y="34" class="small">See every shipment from seller to doorstep.</text>
+      </g>
+      <g transform="translate(966 669)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <text x="20" y="26" text-anchor="middle" class="body primary strong">$</text>
+        <text x="56" y="15" class="body strong">Market-aware prices</text>
+        <text x="56" y="34" class="small">Compare each listing with synthetic market data.</text>
+      </g>
+    </g>
+
+    <g id="Desktop-Catalog-Heading">
+      <line x1="64" y1="816" x2="92" y2="816" stroke="#f7ce55" stroke-width="3"/>
+      <text x="104" y="820" class="eyebrow">CURATED SINGLES</text>
+      <text x="64" y="869" class="section-title">Shop the latest chase cards</text>
+      <text x="64" y="897" class="small">12 of 12 synthetic listings</text>
+      <rect x="1198" y="838" width="178" height="44" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+      <path d="M1218 850h14v22l-7-4-7 4z" class="wire-line"/>
+      <text x="1300" y="865" text-anchor="middle" class="button-copy">Save this search</text>
+    </g>
+
+    <g id="Desktop-Marketplace">
+      <rect x="64" y="930" width="1312" height="1030" rx="18" fill="#ffffff" stroke="#e2e5ee"/>
+      <rect x="64" y="930" width="248" height="1030" rx="18" fill="#fafbfe"/>
+      <rect x="294" y="930" width="18" height="1030" fill="#fafbfe"/>
+      <line x1="312" y1="930" x2="312" y2="1960" class="line"/>
+
+      <g id="Desktop-Saved-Searches" transform="translate(84 958)">
+        <text x="0" y="18" class="body strong">Saved searches</text>
+        <rect x="0" y="30" width="96" height="23" rx="12" fill="#eeedff" stroke="#cecbff"/>
+        <text x="48" y="45" text-anchor="middle" class="micro primary strong">Personal preview</text>
+        <rect x="172" y="0" width="36" height="36" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+        <path d="M184 18h12M190 12v12" stroke="#5850ec" stroke-width="1.8"/>
+        <text x="0" y="84" class="micro">Stored on this device only</text>
+        <circle cx="18" cy="126" r="18" fill="#eeedff"/>
+        <path d="M12 117h12v18l-6-3-6 3z" class="wire-line"/>
+        <text x="0" y="166" class="small strong">Save your first search</text>
+        <text x="0" y="188" class="micro">Keep a shortcut to the cards and</text>
+        <text x="0" y="204" class="micro">expansions you collect.</text>
+        <rect x="0" y="238" width="208" height="92" rx="13" fill="#fffdf1" stroke="#e2ddbc"/>
+        <circle cx="23" cy="266" r="14" fill="#fff3b7"/>
+        <path d="M18 270h10M20 263a5 5 0 0 1 6 0" class="wire-line"/>
+        <text x="47" y="263" class="small strong">Price alerts are next</text>
+        <text x="47" y="282" class="micro">Account sync and alert preferences</text>
+        <text x="47" y="298" class="micro">are not connected yet.</text>
+      </g>
+
+      <g id="Desktop-Filterbar">
+        <rect x="312" y="930" width="1064" height="70" fill="#ffffff"/>
+        <line x1="312" y1="1000" x2="1376" y2="1000" class="line"/>
+        <rect x="332" y="943" width="438" height="44" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+        <circle cx="351" cy="965" r="7" class="wire-line"/>
+        <line x1="356" y1="970" x2="362" y2="976" class="wire-line"/>
+        <text x="373" y="971" class="small">Search Pokemon, expansion, or card number...</text>
+        <rect x="719" y="952" width="39" height="25" rx="5" fill="#f1f3f9" stroke="#e2e5ee"/>
+        <text x="738" y="968" text-anchor="middle" class="micro">Ctrl K</text>
+        <rect x="782" y="943" width="178" height="44" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="798" y="970" class="small">All rarities</text>
+        <path d="M940 960l5 6 5-6" class="wire-line"/>
+        <rect x="972" y="943" width="195" height="44" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="988" y="970" class="small">All expansions</text>
+        <path d="M1147 960l5 6 5-6" class="wire-line"/>
+        <text x="1200" y="970" class="small">Clear</text>
+      </g>
+
+      <g id="Desktop-Catalog-Summary">
+        <rect x="312" y="1000" width="1064" height="64" fill="#ffffff"/>
+        <line x1="312" y1="1064" x2="1376" y2="1064" class="line"/>
+        <text x="332" y="1039" class="card-price">12</text>
+        <text x="357" y="1039" class="small">cards</text>
+        <text x="426" y="1039" class="card-price">11</text>
+        <text x="453" y="1039" class="small">at or below market</text>
+        <text x="592" y="1039" class="card-price">10</text>
+        <text x="618" y="1039" class="small">near mint</text>
+        <rect x="1214" y="1012" width="142" height="40" rx="9" fill="#ffffff"/>
+        <path d="M1231 1022v16m-5-5 5 5 5-5m-11 10h12" class="wire-line"/>
+        <text x="1291" y="1037" text-anchor="middle" class="small strong">Export catalog</text>
+      </g>
+
+      <g id="Desktop-Card-Pikachu" transform="translate(312 1064)">
+        <rect width="354" height="448" fill="#ffffff"/>
+        <line x1="354" y1="0" x2="354" y2="448" class="line"/>
+        <line x1="0" y1="448" x2="354" y2="448" class="line"/>
+        <rect x="16" y="16" width="322" height="174" rx="13" fill="#b98b2f"/>
+        <circle cx="177" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
+        <rect x="28" y="28" width="76" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
+        <text x="66" y="43" text-anchor="middle" class="micro strong">Below market</text>
+        <text x="321" y="43" text-anchor="end" class="micro white strong">SV08-238</text>
+        <text x="177" y="120" text-anchor="middle" class="card-initial">P</text>
+        <text x="30" y="174" class="card-visual-label">PIKACHU EX</text>
+        <text x="18" y="220" class="micro">Surging Sparks  -  238/191</text>
+        <text x="18" y="246" class="card-title">Pikachu ex</text>
+        <rect x="18" y="258" width="126" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="81" y="273" text-anchor="middle" class="micro">Special Illustration Rare</text>
+        <rect x="151" y="258" width="68" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="185" y="273" text-anchor="middle" class="micro">Near Mint</text>
+        <line x1="18" y1="296" x2="336" y2="296" class="line"/>
+        <text x="18" y="327" class="card-price">$329.00</text>
+        <text x="18" y="345" class="micro green strong">$12.28 below market</text>
+        <circle cx="314" cy="325" r="19" fill="#111936"/>
+        <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
+        <circle cx="32" cy="392" r="14" fill="#eeedff"/>
+        <text x="32" y="396" text-anchor="middle" class="micro primary strong">M</text>
+        <text x="55" y="388" class="micro strong">Mossdeep Cards</text>
+        <text x="55" y="404" class="micro">4.9  -  812 sales</text>
+        <text x="324" y="398" text-anchor="end" class="micro">1 left</text>
+      </g>
+
+      <g id="Desktop-Card-Charizard" transform="translate(666 1064)">
+        <rect width="354" height="448" fill="#ffffff"/>
+        <line x1="354" y1="0" x2="354" y2="448" class="line"/>
+        <line x1="0" y1="448" x2="354" y2="448" class="line"/>
+        <rect x="16" y="16" width="322" height="174" rx="13" fill="#de4d5f"/>
+        <circle cx="177" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
+        <rect x="28" y="28" width="55" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
+        <text x="55" y="43" text-anchor="middle" class="micro strong">Popular</text>
+        <text x="321" y="43" text-anchor="end" class="micro white strong">PAF-234</text>
+        <text x="177" y="120" text-anchor="middle" class="card-initial">C</text>
+        <text x="30" y="174" class="card-visual-label">CHARIZARD EX</text>
+        <text x="18" y="220" class="micro">Paldean Fates  -  234/091</text>
+        <text x="18" y="246" class="card-title">Charizard ex</text>
+        <rect x="18" y="258" width="126" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="81" y="273" text-anchor="middle" class="micro">Special Illustration Rare</text>
+        <rect x="151" y="258" width="68" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="185" y="273" text-anchor="middle" class="micro">Near Mint</text>
+        <line x1="18" y1="296" x2="336" y2="296" class="line"/>
+        <text x="18" y="327" class="card-price">$164.50</text>
+        <text x="18" y="345" class="micro green strong">$6.58 below market</text>
+        <circle cx="314" cy="325" r="19" fill="#111936"/>
+        <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
+        <circle cx="32" cy="392" r="14" fill="#eeedff"/>
+        <text x="32" y="396" text-anchor="middle" class="micro primary strong">C</text>
+        <text x="55" y="388" class="micro strong">Cinnabar Collectibles</text>
+        <text x="55" y="404" class="micro">5.0  -  429 sales</text>
+        <text x="324" y="398" text-anchor="end" class="micro">2 left</text>
+      </g>
+
+      <g id="Desktop-Card-Mew" transform="translate(1020 1064)">
+        <rect width="356" height="448" fill="#ffffff"/>
+        <line x1="0" y1="448" x2="356" y2="448" class="line"/>
+        <rect x="16" y="16" width="324" height="174" rx="13" fill="#9f5dcc"/>
+        <circle cx="178" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
+        <rect x="28" y="28" width="63" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
+        <text x="59" y="43" text-anchor="middle" class="micro strong">Low stock</text>
+        <text x="323" y="43" text-anchor="end" class="micro white strong">MEW-205</text>
+        <text x="178" y="120" text-anchor="middle" class="card-initial">M</text>
+        <text x="30" y="174" class="card-visual-label">MEW EX</text>
+        <text x="18" y="220" class="micro">Scarlet and Violet - 151  -  205/165</text>
+        <text x="18" y="246" class="card-title">Mew ex</text>
+        <rect x="18" y="258" width="72" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="54" y="273" text-anchor="middle" class="micro">Hyper Rare</text>
+        <rect x="97" y="258" width="68" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="131" y="273" text-anchor="middle" class="micro">Near Mint</text>
+        <line x1="18" y1="296" x2="338" y2="296" class="line"/>
+        <text x="18" y="327" class="card-price">$78.00</text>
+        <text x="18" y="345" class="micro green strong">$2.44 below market</text>
+        <circle cx="316" cy="325" r="19" fill="#111936"/>
+        <path d="M308 325h16M316 317v16" stroke="#ffffff" stroke-width="1.8"/>
+        <circle cx="32" cy="392" r="14" fill="#eeedff"/>
+        <text x="32" y="396" text-anchor="middle" class="micro primary strong">C</text>
+        <text x="55" y="388" class="micro strong">Celadon Card Co.</text>
+        <text x="55" y="404" class="micro">4.8  -  1260 sales</text>
+        <text x="326" y="398" text-anchor="end" class="micro">3 left</text>
+      </g>
+
+      <g id="Desktop-Card-Bulbasaur" transform="translate(312 1512)">
+        <rect width="354" height="448" fill="#ffffff"/>
+        <line x1="354" y1="0" x2="354" y2="448" class="line"/>
+        <rect x="16" y="16" width="322" height="174" rx="13" fill="#3d946f"/>
+        <circle cx="177" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
+        <rect x="28" y="28" width="72" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
+        <text x="64" y="43" text-anchor="middle" class="micro strong">Great value</text>
+        <text x="321" y="43" text-anchor="end" class="micro white strong">MEW-166</text>
+        <text x="177" y="120" text-anchor="middle" class="card-initial">B</text>
+        <text x="30" y="174" class="card-visual-label">BULBASAUR</text>
+        <text x="18" y="220" class="micro">Scarlet and Violet - 151  -  166/165</text>
+        <text x="18" y="246" class="card-title">Bulbasaur</text>
+        <rect x="18" y="258" width="92" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="64" y="273" text-anchor="middle" class="micro">Illustration Rare</text>
+        <rect x="117" y="258" width="68" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="151" y="273" text-anchor="middle" class="micro">Near Mint</text>
+        <line x1="18" y1="296" x2="336" y2="296" class="line"/>
+        <text x="18" y="327" class="card-price">$32.75</text>
+        <text x="18" y="345" class="micro green strong">$2.37 below market</text>
+        <circle cx="314" cy="325" r="19" fill="#111936"/>
+        <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
+        <circle cx="32" cy="392" r="14" fill="#eeedff"/>
+        <text x="32" y="396" text-anchor="middle" class="micro primary strong">V</text>
+        <text x="55" y="388" class="micro strong">Viridian Vault</text>
+        <text x="55" y="404" class="micro">4.9  -  654 sales</text>
+        <text x="324" y="398" text-anchor="end" class="micro">5 left</text>
+      </g>
+
+      <g id="Desktop-Card-Squirtle" transform="translate(666 1512)">
+        <rect width="354" height="448" fill="#ffffff"/>
+        <line x1="354" y1="0" x2="354" y2="448" class="line"/>
+        <rect x="16" y="16" width="322" height="174" rx="13" fill="#347cc8"/>
+        <circle cx="177" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
+        <rect x="28" y="28" width="86" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
+        <text x="71" y="43" text-anchor="middle" class="micro strong">Collector pick</text>
+        <text x="321" y="43" text-anchor="end" class="micro white strong">MEW-170</text>
+        <text x="177" y="120" text-anchor="middle" class="card-initial">S</text>
+        <text x="30" y="174" class="card-visual-label">SQUIRTLE</text>
+        <text x="18" y="220" class="micro">Scarlet and Violet - 151  -  170/165</text>
+        <text x="18" y="246" class="card-title">Squirtle</text>
+        <rect x="18" y="258" width="92" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="64" y="273" text-anchor="middle" class="micro">Illustration Rare</text>
+        <rect x="117" y="258" width="68" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="151" y="273" text-anchor="middle" class="micro">Near Mint</text>
+        <line x1="18" y1="296" x2="336" y2="296" class="line"/>
+        <text x="18" y="327" class="card-price">$41.25</text>
+        <text x="18" y="345" class="micro" fill="#de4d5f">$1.39 above market</text>
+        <circle cx="314" cy="325" r="19" fill="#111936"/>
+        <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
+        <circle cx="32" cy="392" r="14" fill="#eeedff"/>
+        <text x="32" y="396" text-anchor="middle" class="micro primary strong">C</text>
+        <text x="55" y="388" class="micro strong">Cerulean Singles</text>
+        <text x="55" y="404" class="micro">4.7  -  308 sales</text>
+        <text x="324" y="398" text-anchor="end" class="micro">4 left</text>
+      </g>
+
+      <g id="Desktop-Card-Gardevoir" transform="translate(1020 1512)">
+        <rect width="356" height="448" fill="#ffffff"/>
+        <rect x="16" y="16" width="324" height="174" rx="13" fill="#d27abe"/>
+        <circle cx="178" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
+        <rect x="28" y="28" width="102" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
+        <text x="79" y="43" text-anchor="middle" class="micro strong">16% below market</text>
+        <text x="323" y="43" text-anchor="end" class="micro white strong">SV01-245</text>
+        <text x="178" y="120" text-anchor="middle" class="card-initial">G</text>
+        <text x="30" y="174" class="card-visual-label">GARDEVOIR EX</text>
+        <text x="18" y="220" class="micro">Scarlet and Violet  -  245/198</text>
+        <text x="18" y="246" class="card-title">Gardevoir ex</text>
+        <rect x="18" y="258" width="126" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="81" y="273" text-anchor="middle" class="micro">Special Illustration Rare</text>
+        <rect x="151" y="258" width="82" height="22" rx="5" fill="#f1f3f9"/>
+        <text x="192" y="273" text-anchor="middle" class="micro">Lightly Played</text>
+        <line x1="18" y1="296" x2="338" y2="296" class="line"/>
+        <text x="18" y="327" class="card-price">$25.50</text>
+        <text x="18" y="345" class="micro green strong">$5.72 below market</text>
+        <circle cx="316" cy="325" r="19" fill="#111936"/>
+        <path d="M308 325h16M316 317v16" stroke="#ffffff" stroke-width="1.8"/>
+        <circle cx="32" cy="392" r="14" fill="#eeedff"/>
+        <text x="32" y="396" text-anchor="middle" class="micro primary strong">L</text>
+        <text x="55" y="388" class="micro strong">Lilycove League</text>
+        <text x="55" y="404" class="micro">4.9  -  992 sales</text>
+        <text x="326" y="398" text-anchor="end" class="micro">2 left</text>
+      </g>
+    </g>
+
+    <g id="Desktop-Buyer-Promise">
+      <line x1="570" y1="2045" x2="598" y2="2045" stroke="#f7ce55" stroke-width="3"/>
+      <text x="610" y="2049" class="eyebrow">BUY WITH CONTEXT</text>
+      <text x="720" y="2102" text-anchor="middle" class="section-title">More confidence in every card.</text>
+      <text x="720" y="2132" text-anchor="middle" class="body muted">Condition, seller reputation, and market comparison stay next to the price.</text>
+    </g>
+
+    <g id="Desktop-Footer">
+      <line x1="64" y1="2200" x2="1376" y2="2200" class="line"/>
+      <g transform="translate(64 2220)">
+        <circle cx="16" cy="16" r="16" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+        <path d="M1 16h30" stroke="#111936" stroke-width="3"/>
+        <circle cx="16" cy="16" r="5" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+        <text x="43" y="22" class="brand">HoloMart</text>
+      </g>
+      <text x="1376" y="2234" text-anchor="end" class="micro">Fictional product demo. Inventory, sellers, ratings, availability, and prices are synthetic.</text>
+      <text x="1376" y="2252" text-anchor="end" class="micro">Pokemon names illustrate the marketplace concept; no card artwork is included.</text>
+    </g>
+  </g>
+
+  <g id="Tablet-768" transform="translate(1560 120)">
+    <rect width="768" height="2360" rx="8" fill="#f6f7fb" stroke="#cbd2dc"/>
+    <rect width="768" height="34" fill="#111936"/>
+    <text x="384" y="22" text-anchor="middle" class="announcement-copy">Free tracked shipping on orders over $50  -  30-day buyer protection</text>
+    <rect y="34" width="768" height="64" fill="#ffffff"/>
+    <line x1="0" y1="98" x2="768" y2="98" class="line"/>
+    <g transform="translate(24 50)">
+      <circle cx="16" cy="16" r="16" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+      <path d="M1 16h30" stroke="#111936" stroke-width="3"/>
+      <circle cx="16" cy="16" r="5" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+      <text x="43" y="22" class="brand">HoloMart</text>
+    </g>
+    <g transform="translate(624 46)">
+      <rect width="74" height="40" rx="20" fill="#ffffff" stroke="#e2e5ee"/>
+      <path d="M13 13h4l3 13h15l3-10H19" class="wire-line"/>
+      <text x="50" y="25" class="micro strong">0</text>
+    </g>
+    <circle cx="724" cy="66" r="18" fill="#5850ec"/>
+    <text x="724" y="70" text-anchor="middle" class="micro white strong">AT</text>
+
+    <g id="Tablet-Hero">
+      <rect x="24" y="122" width="720" height="590" rx="22" fill="#111936"/>
+      <circle cx="525" cy="500" r="130" fill="#5850ec" opacity="0.18"/>
+      <line x1="64" y1="183" x2="92" y2="183" stroke="#f7ce55" stroke-width="3"/>
+      <text x="104" y="187" class="eyebrow-inverse">POKEMON TCG MARKETPLACE</text>
+      <text x="64" y="250" class="hero-title-tablet">Find the card your binder</text>
+      <text x="64" y="294" class="hero-title-tablet">is missing.</text>
+      <text x="64" y="332" class="hero-copy">Compare condition-graded singles from trusted sellers, track market prices,</text>
+      <text x="64" y="355" class="hero-copy">and save every search worth coming back to.</text>
+      <rect x="64" y="382" width="122" height="44" rx="9" fill="#f7ce55"/>
+      <text x="125" y="409" text-anchor="middle" class="button-copy">Shop singles</text>
+      <rect x="198" y="382" width="164" height="44" rx="9" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.3"/>
+      <text x="280" y="409" text-anchor="middle" class="button-copy inverse">View saved searches</text>
+      <g transform="translate(64 452)">
+        <text x="0" y="0" class="body inverse strong">2,400+</text>
+        <text x="0" y="18" class="micro" fill="#aeb5d2">demo listings</text>
+        <text x="112" y="0" class="body inverse strong">98.7%</text>
+        <text x="112" y="18" class="micro" fill="#aeb5d2">on-time delivery</text>
+        <text x="222" y="0" class="body inverse strong">30 days</text>
+        <text x="222" y="18" class="micro" fill="#aeb5d2">buyer protection</text>
+      </g>
+      <g id="Tablet-Hero-Card-Stack">
+        <g transform="translate(418 505) rotate(-11)">
+          <rect width="130" height="172" rx="12" fill="#3d946f" stroke="#ffffff" stroke-opacity="0.35"/>
+          <text x="65" y="100" text-anchor="middle" class="card-initial-small">B</text>
+        </g>
+        <g transform="translate(550 500) rotate(9)">
+          <rect width="130" height="172" rx="12" fill="#de4d5f" stroke="#ffffff" stroke-opacity="0.35"/>
+          <text x="65" y="100" text-anchor="middle" class="card-initial-small">M</text>
+        </g>
+        <g transform="translate(493 482) rotate(-1)">
+          <rect width="130" height="172" rx="12" fill="#b98b2f" stroke="#ffffff" stroke-opacity="0.4"/>
+          <text x="65" y="100" text-anchor="middle" class="card-initial-small">P</text>
+        </g>
+      </g>
+    </g>
+
+    <g id="Tablet-Trust-Row">
+      <rect x="24" y="728" width="720" height="210" rx="17" fill="#ffffff" stroke="#e2e5ee"/>
+      <line x1="24" y1="798" x2="744" y2="798" class="line"/>
+      <line x1="24" y1="868" x2="744" y2="868" class="line"/>
+      <g transform="translate(48 743)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <path d="M12 19l6 6 11-13" stroke="#5850ec" stroke-width="2.2" fill="none"/>
+        <text x="56" y="15" class="body strong">Condition guaranteed</text>
+        <text x="56" y="34" class="small">Every listing uses a clear grading standard.</text>
+      </g>
+      <g transform="translate(48 813)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <rect x="9" y="13" width="20" height="13" rx="2" class="wire-line"/>
+        <text x="56" y="15" class="body strong">Tracked delivery</text>
+        <text x="56" y="34" class="small">See every shipment from seller to doorstep.</text>
+      </g>
+      <g transform="translate(48 883)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <text x="20" y="26" text-anchor="middle" class="body primary strong">$</text>
+        <text x="56" y="15" class="body strong">Market-aware prices</text>
+        <text x="56" y="34" class="small">Compare each listing with synthetic market data.</text>
+      </g>
+    </g>
+
+    <g id="Tablet-Catalog-Heading">
+      <line x1="24" y1="1002" x2="52" y2="1002" stroke="#f7ce55" stroke-width="3"/>
+      <text x="64" y="1006" class="eyebrow">CURATED SINGLES</text>
+      <text x="24" y="1050" class="section-title-small">Shop the latest chase cards</text>
+      <text x="24" y="1076" class="small">12 of 12 synthetic listings</text>
+      <rect x="572" y="1020" width="172" height="44" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+      <text x="658" y="1047" text-anchor="middle" class="button-copy">Save this search</text>
+    </g>
+
+    <g id="Tablet-Marketplace">
+      <rect x="24" y="1110" width="720" height="850" rx="17" fill="#ffffff" stroke="#e2e5ee"/>
+      <rect x="24" y="1110" width="720" height="150" rx="17" fill="#fafbfe"/>
+      <rect x="24" y="1240" width="720" height="20" fill="#fafbfe"/>
+      <line x1="24" y1="1260" x2="744" y2="1260" class="line"/>
+      <text x="48" y="1148" class="body strong">Saved searches</text>
+      <rect x="48" y="1160" width="96" height="23" rx="12" fill="#eeedff" stroke="#cecbff"/>
+      <text x="96" y="1175" text-anchor="middle" class="micro primary strong">Personal preview</text>
+      <text x="48" y="1210" class="micro">Stored on this device only</text>
+      <rect x="492" y="1132" width="214" height="96" rx="12" fill="#ffffff" stroke="#e2e5ee"/>
+      <circle cx="522" cy="1163" r="16" fill="#eeedff"/>
+      <text x="548" y="1157" class="small strong">Save your first search</text>
+      <text x="548" y="1177" class="micro">Keep a shortcut to the cards and</text>
+      <text x="548" y="1193" class="micro">expansions you collect.</text>
+
+      <g id="Tablet-Filterbar">
+        <rect x="24" y="1260" width="720" height="100" fill="#ffffff"/>
+        <line x1="24" y1="1360" x2="744" y2="1360" class="line"/>
+        <rect x="44" y="1273" width="680" height="38" rx="8" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="62" y="1297" class="small">Search Pokemon, expansion, or card number...</text>
+        <rect x="44" y="1319" width="250" height="32" rx="8" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="58" y="1340" class="micro">All rarities</text>
+        <rect x="304" y="1319" width="260" height="32" rx="8" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="318" y="1340" class="micro">All expansions</text>
+        <text x="594" y="1340" class="micro strong">Clear</text>
+      </g>
+
+      <g id="Tablet-Summary">
+        <rect x="24" y="1360" width="720" height="60" fill="#ffffff"/>
+        <line x1="24" y1="1420" x2="744" y2="1420" class="line"/>
+        <text x="44" y="1397" class="card-price">12</text>
+        <text x="70" y="1397" class="small">cards</text>
+        <text x="138" y="1397" class="card-price">11</text>
+        <text x="165" y="1397" class="small">at or below market</text>
+        <text x="624" y="1397" class="small strong">Export</text>
+      </g>
+
+      <g id="Tablet-Card-Pikachu" transform="translate(24 1420)">
+        <rect width="360" height="270" fill="#ffffff"/>
+        <line x1="360" y1="0" x2="360" y2="270" class="line"/>
+        <line x1="0" y1="270" x2="360" y2="270" class="line"/>
+        <rect x="14" y="14" width="332" height="108" rx="11" fill="#b98b2f"/>
+        <text x="180" y="82" text-anchor="middle" class="card-initial-small">P</text>
+        <text x="20" y="146" class="micro">Surging Sparks  -  238/191</text>
+        <text x="20" y="169" class="card-title">Pikachu ex</text>
+        <text x="20" y="197" class="card-price">$329.00</text>
+        <text x="20" y="214" class="micro green strong">$12.28 below market</text>
+        <circle cx="322" cy="198" r="18" fill="#111936"/>
+        <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
+        <text x="20" y="246" class="micro strong">Mossdeep Cards  -  4.9  -  1 left</text>
+      </g>
+      <g id="Tablet-Card-Charizard" transform="translate(384 1420)">
+        <rect width="360" height="270" fill="#ffffff"/>
+        <line x1="0" y1="270" x2="360" y2="270" class="line"/>
+        <rect x="14" y="14" width="332" height="108" rx="11" fill="#de4d5f"/>
+        <text x="180" y="82" text-anchor="middle" class="card-initial-small">C</text>
+        <text x="20" y="146" class="micro">Paldean Fates  -  234/091</text>
+        <text x="20" y="169" class="card-title">Charizard ex</text>
+        <text x="20" y="197" class="card-price">$164.50</text>
+        <text x="20" y="214" class="micro green strong">$6.58 below market</text>
+        <circle cx="322" cy="198" r="18" fill="#111936"/>
+        <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
+        <text x="20" y="246" class="micro strong">Cinnabar Collectibles  -  5.0  -  2 left</text>
+      </g>
+      <g id="Tablet-Card-Mew" transform="translate(24 1690)">
+        <rect width="360" height="270" fill="#ffffff"/>
+        <line x1="360" y1="0" x2="360" y2="270" class="line"/>
+        <rect x="14" y="14" width="332" height="108" rx="11" fill="#9f5dcc"/>
+        <text x="180" y="82" text-anchor="middle" class="card-initial-small">M</text>
+        <text x="20" y="146" class="micro">Scarlet and Violet - 151  -  205/165</text>
+        <text x="20" y="169" class="card-title">Mew ex</text>
+        <text x="20" y="197" class="card-price">$78.00</text>
+        <text x="20" y="214" class="micro green strong">$2.44 below market</text>
+        <circle cx="322" cy="198" r="18" fill="#111936"/>
+        <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
+        <text x="20" y="246" class="micro strong">Celadon Card Co.  -  4.8  -  3 left</text>
+      </g>
+      <g id="Tablet-Card-Bulbasaur" transform="translate(384 1690)">
+        <rect width="360" height="270" fill="#ffffff"/>
+        <rect x="14" y="14" width="332" height="108" rx="11" fill="#3d946f"/>
+        <text x="180" y="82" text-anchor="middle" class="card-initial-small">B</text>
+        <text x="20" y="146" class="micro">Scarlet and Violet - 151  -  166/165</text>
+        <text x="20" y="169" class="card-title">Bulbasaur</text>
+        <text x="20" y="197" class="card-price">$32.75</text>
+        <text x="20" y="214" class="micro green strong">$2.37 below market</text>
+        <circle cx="322" cy="198" r="18" fill="#111936"/>
+        <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
+        <text x="20" y="246" class="micro strong">Viridian Vault  -  4.9  -  5 left</text>
+      </g>
+    </g>
+
+    <g id="Tablet-Buyer-Promise">
+      <text x="384" y="2046" text-anchor="middle" class="eyebrow">BUY WITH CONTEXT</text>
+      <text x="384" y="2090" text-anchor="middle" class="section-title-small">More confidence in every card.</text>
+      <text x="384" y="2118" text-anchor="middle" class="small">Price, condition, seller trust, and market comparison stay together.</text>
+    </g>
+    <line x1="24" y1="2212" x2="744" y2="2212" class="line"/>
+    <text x="24" y="2252" class="brand">HoloMart</text>
+    <text x="24" y="2285" class="micro">Fictional product demo. Inventory, sellers, ratings, availability, and prices are synthetic.</text>
+    <text x="24" y="2302" class="micro">No card artwork is included.</text>
+  </g>
+
+  <g id="Mobile-390" transform="translate(2410 120)">
+    <rect width="390" height="2660" rx="8" fill="#f6f7fb" stroke="#cbd2dc"/>
+    <rect width="390" height="34" fill="#111936"/>
+    <text x="195" y="22" text-anchor="middle" class="announcement-copy">Free tracked shipping on orders over $50</text>
+    <rect y="34" width="390" height="64" fill="#ffffff"/>
+    <line x1="0" y1="98" x2="390" y2="98" class="line"/>
+    <g transform="translate(12 50)">
+      <circle cx="16" cy="16" r="16" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+      <path d="M1 16h30" stroke="#111936" stroke-width="3"/>
+      <circle cx="16" cy="16" r="5" fill="#ffffff" stroke="#111936" stroke-width="2"/>
+      <text x="43" y="22" class="brand">HoloMart</text>
+    </g>
+    <g transform="translate(320 46)">
+      <rect width="56" height="40" rx="20" fill="#ffffff" stroke="#e2e5ee"/>
+      <path d="M12 13h4l3 13h15l3-10H18" class="wire-line"/>
+      <circle cx="43" cy="12" r="8" fill="#5850ec"/>
+      <text x="43" y="15" text-anchor="middle" class="micro white">0</text>
+    </g>
+
+    <g id="Mobile-Hero">
+      <rect x="12" y="110" width="366" height="620" rx="20" fill="#111936"/>
+      <circle cx="230" cy="560" r="115" fill="#5850ec" opacity="0.18"/>
+      <line x1="32" y1="157" x2="56" y2="157" stroke="#f7ce55" stroke-width="3"/>
+      <text x="66" y="161" class="eyebrow-inverse">POKEMON TCG MARKETPLACE</text>
+      <text x="32" y="213" class="hero-title-mobile">Find the card your</text>
+      <text x="32" y="252" class="hero-title-mobile">binder is missing.</text>
+      <text x="32" y="292" class="small" fill="#cbd0e9">Compare condition-graded singles from trusted</text>
+      <text x="32" y="311" class="small" fill="#cbd0e9">sellers, track market prices, and save searches.</text>
+      <rect x="32" y="338" width="326" height="44" rx="9" fill="#f7ce55"/>
+      <text x="195" y="365" text-anchor="middle" class="button-copy">Shop singles</text>
+      <rect x="32" y="394" width="326" height="44" rx="9" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.3"/>
+      <text x="195" y="421" text-anchor="middle" class="button-copy inverse">View saved searches</text>
+      <g transform="translate(32 470)">
+        <text x="0" y="0" class="small inverse strong">2,400+</text>
+        <text x="0" y="16" class="micro" fill="#aeb5d2">demo listings</text>
+        <text x="115" y="0" class="small inverse strong">98.7%</text>
+        <text x="115" y="16" class="micro" fill="#aeb5d2">on-time delivery</text>
+        <text x="228" y="0" class="small inverse strong">30 days</text>
+        <text x="228" y="16" class="micro" fill="#aeb5d2">buyer protection</text>
+      </g>
+      <g id="Mobile-Hero-Card-Stack">
+        <g transform="translate(82 550) rotate(-10)">
+          <rect width="92" height="128" rx="10" fill="#3d946f" stroke="#ffffff" stroke-opacity="0.35"/>
+          <text x="46" y="77" text-anchor="middle" class="card-initial-small">B</text>
+        </g>
+        <g transform="translate(216 546) rotate(9)">
+          <rect width="92" height="128" rx="10" fill="#de4d5f" stroke="#ffffff" stroke-opacity="0.35"/>
+          <text x="46" y="77" text-anchor="middle" class="card-initial-small">M</text>
+        </g>
+        <g transform="translate(149 533) rotate(-1)">
+          <rect width="92" height="128" rx="10" fill="#b98b2f" stroke="#ffffff" stroke-opacity="0.4"/>
+          <text x="46" y="77" text-anchor="middle" class="card-initial-small">P</text>
+        </g>
+      </g>
+    </g>
+
+    <g id="Mobile-Trust-Row">
+      <rect x="12" y="746" width="366" height="210" rx="16" fill="#ffffff" stroke="#e2e5ee"/>
+      <line x1="12" y1="816" x2="378" y2="816" class="line"/>
+      <line x1="12" y1="886" x2="378" y2="886" class="line"/>
+      <g transform="translate(28 760)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <path d="M12 19l6 6 11-13" stroke="#5850ec" stroke-width="2.2" fill="none"/>
+        <text x="52" y="15" class="small strong">Condition guaranteed</text>
+        <text x="52" y="34" class="micro">Every listing uses a clear grading standard.</text>
+      </g>
+      <g transform="translate(28 830)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <rect x="9" y="13" width="20" height="13" rx="2" class="wire-line"/>
+        <text x="52" y="15" class="small strong">Tracked delivery</text>
+        <text x="52" y="34" class="micro">See every shipment from seller to doorstep.</text>
+      </g>
+      <g transform="translate(28 900)">
+        <circle cx="20" cy="20" r="20" fill="#eeedff"/>
+        <text x="20" y="26" text-anchor="middle" class="body primary strong">$</text>
+        <text x="52" y="15" class="small strong">Market-aware prices</text>
+        <text x="52" y="34" class="micro">Compare each listing with synthetic market data.</text>
+      </g>
+    </g>
+
+    <g id="Mobile-Catalog-Heading">
+      <line x1="12" y1="1010" x2="38" y2="1010" stroke="#f7ce55" stroke-width="3"/>
+      <text x="50" y="1014" class="eyebrow">CURATED SINGLES</text>
+      <text x="12" y="1058" class="section-title-small">Shop the latest chase</text>
+      <text x="12" y="1088" class="section-title-small">cards</text>
+      <text x="12" y="1113" class="small">12 of 12 synthetic listings</text>
+    </g>
+
+    <g id="Mobile-Marketplace">
+      <rect x="12" y="1130" width="366" height="1254" rx="16" fill="#ffffff" stroke="#e2e5ee"/>
+      <rect x="12" y="1130" width="366" height="190" rx="16" fill="#fafbfe"/>
+      <rect x="12" y="1302" width="366" height="18" fill="#fafbfe"/>
+      <line x1="12" y1="1320" x2="378" y2="1320" class="line"/>
+      <text x="28" y="1163" class="body strong">Saved searches</text>
+      <rect x="28" y="1174" width="96" height="23" rx="12" fill="#eeedff" stroke="#cecbff"/>
+      <text x="76" y="1189" text-anchor="middle" class="micro primary strong">Personal preview</text>
+      <rect x="326" y="1144" width="36" height="36" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+      <path d="M338 1162h12M344 1156v12" stroke="#5850ec" stroke-width="1.8"/>
+      <text x="28" y="1222" class="micro">Stored on this device only</text>
+      <circle cx="46" cy="1262" r="17" fill="#eeedff"/>
+      <text x="73" y="1258" class="small strong">Save your first search</text>
+      <text x="73" y="1277" class="micro">Keep a shortcut to the cards and expansions you collect.</text>
+
+      <g id="Mobile-Filterbar">
+        <rect x="12" y="1320" width="366" height="220" fill="#ffffff"/>
+        <line x1="12" y1="1540" x2="378" y2="1540" class="line"/>
+        <rect x="28" y="1336" width="334" height="44" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="43" y="1363" class="micro">Search cards</text>
+        <rect x="28" y="1392" width="334" height="42" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="43" y="1418" class="small">All rarities</text>
+        <path d="M339 1408l5 6 5-6" class="wire-line"/>
+        <rect x="28" y="1446" width="334" height="42" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+        <text x="43" y="1472" class="small">All expansions</text>
+        <path d="M339 1462l5 6 5-6" class="wire-line"/>
+        <text x="28" y="1518" class="small strong">Clear</text>
+      </g>
+
+      <g id="Mobile-Summary">
+        <rect x="12" y="1540" width="366" height="64" fill="#ffffff"/>
+        <line x1="12" y1="1604" x2="378" y2="1604" class="line"/>
+        <text x="28" y="1579" class="card-price">12</text>
+        <text x="53" y="1579" class="small">cards</text>
+        <text x="110" y="1579" class="card-price">11</text>
+        <text x="136" y="1579" class="small">at or below market</text>
+        <rect x="326" y="1552" width="36" height="36" rx="9" fill="#ffffff"/>
+        <path d="M344 1558v16m-5-5 5 5 5-5m-11 10h12" class="wire-line"/>
+      </g>
+
+      <g id="Mobile-Card-Pikachu" transform="translate(12 1604)">
+        <rect width="366" height="260" fill="#ffffff"/>
+        <line x1="0" y1="260" x2="366" y2="260" class="line"/>
+        <rect x="16" y="14" width="334" height="112" rx="11" fill="#b98b2f"/>
+        <text x="183" y="83" text-anchor="middle" class="card-initial-small">P</text>
+        <text x="20" y="149" class="micro">Surging Sparks  -  238/191</text>
+        <text x="20" y="172" class="card-title">Pikachu ex</text>
+        <text x="20" y="201" class="card-price">$329.00</text>
+        <text x="20" y="218" class="micro green strong">$12.28 below market</text>
+        <circle cx="326" cy="202" r="18" fill="#111936"/>
+        <path d="M318 202h16M326 194v16" stroke="#ffffff" stroke-width="1.8"/>
+        <text x="20" y="244" class="micro strong">Mossdeep Cards  -  4.9  -  1 left</text>
+      </g>
+      <g id="Mobile-Card-Charizard" transform="translate(12 1864)">
+        <rect width="366" height="260" fill="#ffffff"/>
+        <line x1="0" y1="260" x2="366" y2="260" class="line"/>
+        <rect x="16" y="14" width="334" height="112" rx="11" fill="#de4d5f"/>
+        <text x="183" y="83" text-anchor="middle" class="card-initial-small">C</text>
+        <text x="20" y="149" class="micro">Paldean Fates  -  234/091</text>
+        <text x="20" y="172" class="card-title">Charizard ex</text>
+        <text x="20" y="201" class="card-price">$164.50</text>
+        <text x="20" y="218" class="micro green strong">$6.58 below market</text>
+        <circle cx="326" cy="202" r="18" fill="#111936"/>
+        <path d="M318 202h16M326 194v16" stroke="#ffffff" stroke-width="1.8"/>
+        <text x="20" y="244" class="micro strong">Cinnabar Collectibles  -  5.0  -  2 left</text>
+      </g>
+      <g id="Mobile-Card-Mew" transform="translate(12 2124)">
+        <rect width="366" height="260" fill="#ffffff"/>
+        <rect x="16" y="14" width="334" height="112" rx="11" fill="#9f5dcc"/>
+        <text x="183" y="83" text-anchor="middle" class="card-initial-small">M</text>
+        <text x="20" y="149" class="micro">Scarlet and Violet - 151  -  205/165</text>
+        <text x="20" y="172" class="card-title">Mew ex</text>
+        <text x="20" y="201" class="card-price">$78.00</text>
+        <text x="20" y="218" class="micro green strong">$2.44 below market</text>
+        <circle cx="326" cy="202" r="18" fill="#111936"/>
+        <path d="M318 202h16M326 194v16" stroke="#ffffff" stroke-width="1.8"/>
+        <text x="20" y="244" class="micro strong">Celadon Card Co.  -  4.8  -  3 left</text>
+      </g>
+    </g>
+
+    <g id="Mobile-Buyer-Promise">
+      <text x="195" y="2433" text-anchor="middle" class="eyebrow">BUY WITH CONTEXT</text>
+      <text x="195" y="2473" text-anchor="middle" class="section-title-small">More confidence in</text>
+      <text x="195" y="2503" text-anchor="middle" class="section-title-small">every card.</text>
+      <text x="195" y="2530" text-anchor="middle" class="micro">Price, condition, seller trust, and market comparison stay together.</text>
+    </g>
+    <line x1="12" y1="2570" x2="378" y2="2570" class="line"/>
+    <text x="12" y="2605" class="brand">HoloMart</text>
+    <text x="12" y="2630" class="micro">Fictional product demo. Inventory and prices are synthetic.</text>
+    <text x="12" y="2647" class="micro">No card artwork is included.</text>
+  </g>
+
+  <g id="Mobile-Save-Search-Dialog" transform="translate(2880 120)">
+    <rect width="390" height="844" rx="8" fill="#f6f7fb" stroke="#cbd2dc"/>
+    <rect width="390" height="34" fill="#111936"/>
+    <text x="195" y="22" text-anchor="middle" class="announcement-copy">Free tracked shipping on orders over $50</text>
+    <rect y="34" width="390" height="64" fill="#ffffff"/>
+    <text x="22" y="73" class="brand">HoloMart</text>
+    <rect x="12" y="110" width="366" height="360" rx="20" fill="#111936"/>
+    <text x="32" y="170" class="eyebrow-inverse">POKEMON TCG MARKETPLACE</text>
+    <rect x="12" y="486" width="366" height="250" rx="16" fill="#ffffff" stroke="#e2e5ee"/>
+    <rect width="390" height="844" rx="8" fill="#0a0e22" opacity="0.68"/>
+
+    <g id="Save-Search-Dialog" transform="translate(16 190)">
+      <rect width="358" height="420" rx="20" fill="#ffffff"/>
+      <rect x="24" y="24" width="42" height="42" rx="11" fill="#eeedff"/>
+      <path d="M36 34h18v23l-9-5-9 5z" class="wire-line"/>
+      <text x="327" y="48" text-anchor="middle" font-size="22" class="muted">x</text>
+      <text x="24" y="94" font-size="21" font-weight="760">Save this search</text>
+      <text x="24" y="119" class="small">Jump back to these filters without rebuilding them.</text>
+      <text x="24" y="153" class="small strong">Search name</text>
+      <rect x="24" y="164" width="310" height="44" rx="8" fill="#ffffff" stroke="#e2e5ee"/>
+      <text x="38" y="191" class="small">All card listings</text>
+      <rect x="24" y="222" width="88" height="24" rx="12" fill="#f1f3f9"/>
+      <text x="68" y="238" text-anchor="middle" class="micro">All card listings</text>
+      <rect x="24" y="262" width="310" height="68" rx="9" fill="#fffbea" stroke="#e8dfb2"/>
+      <text x="36" y="282" class="micro strong" fill="#5e5430">Personal preview:</text>
+      <text x="36" y="300" class="micro" fill="#5e5430">This search stays in this browser. Account sync and price</text>
+      <text x="36" y="316" class="micro" fill="#5e5430">alerts are not available yet.</text>
+      <rect x="154" y="352" width="76" height="44" rx="9" fill="#ffffff" stroke="#e2e5ee"/>
+      <text x="192" y="379" text-anchor="middle" class="button-copy">Cancel</text>
+      <rect x="240" y="352" width="94" height="44" rx="9" fill="#5850ec"/>
+      <text x="287" y="379" text-anchor="middle" class="button-copy inverse">Save search</text>
+    </g>
+  </g>
+
+  <g id="Artifact-Notes">
+    <rect x="60" y="2790" width="3210" height="42" rx="10" fill="#ffffff" stroke="#cbd2dc"/>
+    <text x="80" y="2816" class="small strong">Figma import:</text>
+    <text x="168" y="2816" class="small">Drag this SVG into a Figma file. Each responsive viewport and major region is named as a grouped layer.</text>
+    <text x="3260" y="2816" text-anchor="end" class="micro">Source: live HoloMart UI and committed local design context</text>
+  </g>
+</svg>
