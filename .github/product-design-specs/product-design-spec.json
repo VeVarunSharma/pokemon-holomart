@@ -1,0 +1,75 @@
+{
+  "schemaVersion": 1,
+  "documentId": "product-design-spec",
+  "meta": {
+    "title": "Product design specification",
+    "status": "Draft",
+    "owner": "",
+    "reviewers": "",
+    "template": "product",
+    "createdAt": "2026-07-30T14:19:55.763Z",
+    "updatedAt": "2026-07-30T14:20:39.261Z"
+  },
+  "brief": {
+    "oneLiner": "",
+    "problem": "",
+    "audience": "",
+    "value": "",
+    "goals": [],
+    "nonGoals": [],
+    "assumptions": []
+  },
+  "requirements": [],
+  "experience": {
+    "jobStory": "",
+    "principles": [],
+    "flow": [],
+    "states": []
+  },
+  "ui": {
+    "visualDirection": "",
+    "responsiveBehavior": "",
+    "contentGuidance": "",
+    "screens": [],
+    "components": []
+  },
+  "delivery": {
+    "metrics": [],
+    "analytics": [],
+    "accessibility": [
+      {
+        "id": "a11y-keyboard",
+        "label": "Keyboard navigation and visible focus",
+        "status": "Not reviewed",
+        "notes": ""
+      },
+      {
+        "id": "a11y-contrast",
+        "label": "Contrast, non-color cues, and readable text",
+        "status": "Not reviewed",
+        "notes": ""
+      },
+      {
+        "id": "a11y-semantics",
+        "label": "Labels, roles, structure, and announcements",
+        "status": "Not reviewed",
+        "notes": ""
+      },
+      {
+        "id": "a11y-reflow",
+        "label": "Zoom, reflow, touch targets, and responsive use",
+        "status": "Not reviewed",
+        "notes": ""
+      },
+      {
+        "id": "a11y-motion",
+        "label": "Reduced motion and equivalent alternatives",
+        "status": "Not reviewed",
+        "notes": ""
+      }
+    ],
+    "dependencies": [],
+    "risks": [],
+    "openQuestions": []
+  }
+}
