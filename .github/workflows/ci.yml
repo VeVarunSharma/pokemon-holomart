@@ -1,4 +1,4 @@
-name: Validate presenter kit
+name: Repository validation
 
 on:
   push:
@@ -8,11 +8,12 @@ permissions:
   contents: read
 
 concurrency:
-  group: presenter-kit-${{ github.workflow }}-${{ github.ref }}
+  group: validation-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
   validate:
+    name: Repository validation
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
@@ -23,6 +24,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
+          cache: npm
 
-      - name: Validate artifacts, tests, and issue preview
-        run: npm run demo:check
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate repository artifacts
+        run: npm run validate
+
+      - name: Preview roadmap issues deterministically
+        run: npm run issues:preview:json

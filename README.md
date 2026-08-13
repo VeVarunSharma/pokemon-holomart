@@ -14,25 +14,64 @@ The product story deliberately stops at an honest boundary: **Saved Searches wor
 
 ## Quick start
 
-Requirements: Git, Node.js 20+, npm, and the GitHub Copilot app/CLI.
+Requirements: Git, npm, the GitHub Copilot app/CLI, and Node.js 20.19.0–20.x, 22.13.0–22.x, or 24.0.0 and newer (`^20.19.0 || ^22.13.0 || >=24.0.0`).
+
+From a clean checkout, install the locked dependencies and the Chromium browser used by Playwright:
 
 ```powershell
 node --version
+npm ci
+npx playwright install chromium
 npm run demo:check
 npm start
 ```
 
+On Linux and in CI, use `npx playwright install --with-deps chromium` so required system packages are installed with the browser.
+
 Open <http://127.0.0.1:4173>.
 
-Useful commands:
+Useful demo commands:
 
 ```powershell
-npm test
 npm run validate
 npm run issues:preview
 npm run issues:preview:json
 npm run demo:reset
 ```
+
+## Test contract
+
+The test layers are deliberately separate:
+
+| Layer | Implementation boundary |
+| --- | --- |
+| Unit | `test/unit/**/*.test.js`, selected by `vitest.unit.config.js`, runs module-level filter, URL state, CSV, and browser-local Saved Searches behavior in Vitest's Node environment. |
+| Integration | `test/integration/**/*.test.js`, selected by `vitest.integration.config.js`, assembles repository components: storefront markup and JavaScript in jsdom, the local HTTP server, reset and issue-preview scripts, and Roadmap Studio. |
+| End to end | `test/e2e/**/*.spec.js`, selected by `playwright.config.js`, starts `node scripts/serve.mjs` at `127.0.0.1:4173` and exercises the rendered demo in Chromium. |
+
+Run the layers locally:
+
+| Command | What it runs |
+| --- | --- |
+| `npm test` | Unit, then integration tests; it does not run end-to-end tests. |
+| `npm run test:unit` | Unit tests only. |
+| `npm run test:unit:coverage` | Unit tests with reports in `coverage/unit`. |
+| `npm run test:integration` | Integration tests only. |
+| `npm run test:integration:coverage` | Integration tests with reports in `coverage/integration`. |
+| `npm run test:e2e` | Playwright end-to-end tests; the configured local server starts automatically. |
+| `npm run test:all` | Unit, integration, then end-to-end tests. |
+| `npm run demo:check` | Repository artifact validation, unit and integration tests, then a deterministic JSON issue-plan preview; it does not run end-to-end tests or coverage. |
+
+Playwright writes its HTML report to `playwright-report` and run artifacts such as retained failure screenshots, traces, and videos to `test-results`. Coverage reports are baseline artifacts only: no percentage threshold is enforced yet, and adopting one is a future human decision.
+
+Pushes and pull requests run four independent workflows/checks as committed:
+
+- **Repository validation** — validates repository artifacts and generates the deterministic issue-plan preview.
+- **Unit tests** — runs unit coverage and uploads `coverage/unit`.
+- **Integration tests** — runs integration coverage and uploads `coverage/integration`.
+- **E2E tests** — installs Chromium with Linux dependencies, runs Playwright, and uploads `playwright-report` and `test-results` on failure.
+
+Every layer stays inside the **SYNTHETIC / DEMO-ONLY** boundary: tests use repository-owned fixtures and local processes, with no external services or real shopper, seller, payment, inventory, or pricing data. Passing tests supports deterministic demo behavior; it is not proof of real shopper outcomes or production readiness.
 
 ## Demo narrative
 
