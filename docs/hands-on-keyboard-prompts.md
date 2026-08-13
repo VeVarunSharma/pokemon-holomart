@@ -159,7 +159,7 @@ Focus init-price-drop-alerts.
 
 ## QA workflows
 
-The reusable QA prompts route work to the repository-scoped `qa-engineer` custom agent.
+The reusable QA prompts route work to the repository-scoped `qa-engineer` custom agent. See the [QA architecture](qa-architecture.md) for how these prompts, both QA agents, the change-risk canvas, conventional CI, and the pull-request agentic workflow fit together.
 
 ### Plan without editing
 

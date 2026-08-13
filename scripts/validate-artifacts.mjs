@@ -51,7 +51,8 @@ const requiredFiles = [
   "scripts/roadmap-to-issues.mjs",
   "scripts/validate-artifacts.mjs",
   "docs/github-projects-setup.md",
-  "docs/hands-on-keyboard-prompts.md"
+  "docs/hands-on-keyboard-prompts.md",
+  "docs/qa-architecture.md"
 ];
 
 function record(condition, message) {
