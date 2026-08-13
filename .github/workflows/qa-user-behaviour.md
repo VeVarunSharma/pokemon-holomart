@@ -405,6 +405,7 @@ pre-agent-steps:
           await page.waitForFunction(() => document.activeElement?.id === "search-name");
           ensure(await page.locator("#search-name").evaluate((input) => document.activeElement === input), "Save Search did not focus Search name.");
           await page.getByRole("button", { name: "Close save search dialog" }).click();
+          ensure(!(await page.locator("#save-search-dialog").evaluate((dialog) => dialog.open)), "Close save search dialog did not dismiss the required-name form.");
 
           await page.setViewportSize({ width: 320, height: 800 });
           ensure(await page.getByRole("button", { name: "Save current search" }).isVisible(), "Mobile Save current search control is not visible at 320px.");

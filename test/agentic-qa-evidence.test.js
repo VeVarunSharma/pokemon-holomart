@@ -6,6 +6,7 @@ import {
   ensureExternalArtifactDirectory,
   npmInvocation,
   normalizeSeed,
+  repositoryStatusViolations,
   selectExplorationCharters,
   validateQaBaseUrl,
   validateBrowserPayload,
@@ -125,6 +126,24 @@ test("artifact output must stay outside the repository checkout", () => {
   assert.equal(
     ensureExternalArtifactDirectory(root, path.resolve("qa-artifacts")),
     path.resolve("qa-artifacts")
+  );
+});
+
+test("repository status accepts only gh-aw Playwright skill files as the runtime baseline", () => {
+  const runtimeStatus = [
+    "?? .claude/skills/playwright-cli/SKILL.md",
+    "?? .claude/skills/playwright-cli/references/session-management.md",
+    ""
+  ].join("\n");
+
+  assert.equal(repositoryStatusViolations(runtimeStatus), "");
+  assert.equal(
+    repositoryStatusViolations(`${runtimeStatus}?? unexpected.txt\n`),
+    "?? unexpected.txt"
+  );
+  assert.equal(
+    repositoryStatusViolations(" M .claude/skills/playwright-cli/SKILL.md\n"),
+    " M .claude/skills/playwright-cli/SKILL.md"
   );
 });
 

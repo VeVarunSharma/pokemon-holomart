@@ -186,6 +186,15 @@ function git(args, options = {}) {
   return result.stdout;
 }
 
+export function repositoryStatusViolations(status) {
+  assert(typeof status === "string", "repository status must be text");
+  return status
+    .split(/\r?\n/)
+    .filter(Boolean)
+    .filter((line) => !line.startsWith("?? .claude/skills/playwright-cli/"))
+    .join("\n");
+}
+
 async function writeJson(filePath, value) {
   await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
@@ -295,7 +304,11 @@ async function prepareEvidence() {
 
   const repositoryBefore = git(["status", "--porcelain=v1", "--untracked-files=all"]);
   await writeFile(path.join(context.artifactDir, "repository-before.txt"), repositoryBefore, "utf8");
-  assert(repositoryBefore.trim() === "", "repository checkout is dirty before QA execution");
+  const repositoryBeforeViolations = repositoryStatusViolations(repositoryBefore);
+  assert(
+    repositoryBeforeViolations === "",
+    `repository checkout is dirty before QA execution: ${repositoryBeforeViolations}`
+  );
 
   const changedFiles = git(["diff", "--name-status", `${context.baseSha}...${context.headSha}`]);
   const rawDiff = git(["diff", "--no-ext-diff", "--unified=20", `${context.baseSha}...${context.headSha}`], {
@@ -754,10 +767,20 @@ async function finalizeEvidence() {
   let repositoryAfter = "";
   try {
     repositoryAfter = git(["status", "--porcelain=v1", "--untracked-files=all"]);
+    const repositoryBefore = await readFile(path.join(context.artifactDir, "repository-before.txt"), "utf8");
+    const repositoryBeforeViolations = repositoryStatusViolations(repositoryBefore);
+    const repositoryUnchanged = repositoryBeforeViolations === ""
+      && repositoryAfter === repositoryBefore;
     addCheck(
       "repository-clean",
-      repositoryAfter.trim() === "",
-      repositoryAfter.trim() === "" ? "no tracked or untracked checkout changes" : repositoryAfter.trim()
+      repositoryUnchanged,
+      repositoryUnchanged
+        ? repositoryBefore.trim() === ""
+          ? "no tracked or untracked checkout changes"
+          : "runtime-owned Playwright skill files remain the only untracked checkout entries"
+        : repositoryBeforeViolations
+          || repositoryAfter.trim()
+          || "checkout status no longer matches the pre-run runtime baseline"
     );
   } catch (error) {
     addCheck("repository-clean", false, cleanMessage(error));
