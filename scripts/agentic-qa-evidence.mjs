@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { spawn, spawnSync } from "node:child_process";
 import { createHash } from "node:crypto";
 import {
@@ -438,25 +436,12 @@ async function runDeterministicGates() {
     {
       id: "unit-contracts",
       category: "unit",
-      command: process.execPath,
-      args: [
-        "--test",
-        "test/csv.test.js",
-        "test/filter-state.test.js",
-        "test/saved-searches.test.js",
-        "test/share-state.test.js"
-      ]
+      ...npmInvocation(["run", "test:unit"])
     },
     {
       id: "integration-contracts",
       category: "integration",
-      command: process.execPath,
-      args: [
-        "--test",
-        "test/reset-demo.test.js",
-        "test/roadmap-to-issues.test.js",
-        "test/roadmap-studio.test.js"
-      ]
+      ...npmInvocation(["run", "test:integration"])
     },
     {
       id: "full-node-suite",

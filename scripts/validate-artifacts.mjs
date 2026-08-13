@@ -56,7 +56,7 @@ const requiredFiles = [
   "scripts/agentic-qa-browser.cjs",
   "scripts/roadmap-to-issues.mjs",
   "scripts/validate-artifacts.mjs",
-  "test/agentic-qa-evidence.test.js",
+  "test/unit/agentic-qa-evidence.test.js",
   "docs/agentic-qa-demo.md",
   "docs/demo-operations.md",
   "docs/github-projects-setup.md",
