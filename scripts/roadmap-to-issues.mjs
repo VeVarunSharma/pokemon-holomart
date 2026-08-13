@@ -193,6 +193,7 @@ const CHILD_CONTEXT = Object.freeze({
       "MK-03"
     ],
     "references": [
+      "../design/price-monitoring-job-study.md#research-decision-matrix",
       "../design/saved-searches-ux-brief.md#research-questions",
       "./decisions/0001-saved-searches-local-preview.md#why-not-account-sync-or-alerts-now"
     ],
