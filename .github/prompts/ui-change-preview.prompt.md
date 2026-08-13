@@ -4,7 +4,7 @@ description: Preview one small HoloMart UI change and its validation before any 
 argument-hint: "[small UI change to preview]"
 ---
 
-Preview `${input:change:Small UI change to preview}` against [the current UI](../../app/app.js), [styles](../../app/styles.css), [Saved Searches tests](../../test/saved-searches.test.js), [UX brief](../../design/saved-searches-ux-brief.md), [local design context](../../design/local-design-context.json), and [tokens](../../design/tokens.json).
+Preview `${input:change:Small UI change to preview}` against [the current UI](../../app/app.js), [styles](../../app/styles.css), [Saved Searches tests](../../test/unit/saved-searches.test.js), [UX brief](../../design/saved-searches-ux-brief.md), [local design context](../../design/local-design-context.json), and [tokens](../../design/tokens.json).
 
 ## Evidence rules
 

@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import assert from "node:assert/strict";
 import { execFileSync, spawnSync } from "node:child_process";
 import { readFile } from "node:fs/promises";
@@ -8,10 +8,10 @@ import {
   hereString,
   powerShellLiteral,
   renderGhCommands
-} from "../scripts/roadmap-to-issues.mjs";
+} from "../../scripts/roadmap-to-issues.mjs";
 
-const script = fileURLToPath(new URL("../scripts/roadmap-to-issues.mjs", import.meta.url));
-const roadmap = JSON.parse(await readFile(new URL("../product/roadmap.json", import.meta.url), "utf8"));
+const script = fileURLToPath(new URL("../../scripts/roadmap-to-issues.mjs", import.meta.url));
+const roadmap = JSON.parse(await readFile(new URL("../../product/roadmap.json", import.meta.url), "utf8"));
 
 function run(...args) {
   return execFileSync(process.execPath, [script, ...args], {

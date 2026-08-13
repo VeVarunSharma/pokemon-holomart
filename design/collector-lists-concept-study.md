@@ -68,7 +68,7 @@ Expected results:
 | Check | Expected |
 | --- | --- |
 | `npm run validate` | Passes with no missing artifacts, and fails with the exact path if `design/collector-lists-concept-study.md` is deleted or renamed. |
-| `npm test` | Passes, including `collector-list previews retain research and ownership boundaries` in `test/roadmap-to-issues.test.js`. |
+| `npm test` | Passes, including `collector-list previews retain research and ownership boundaries` in `test/integration/roadmap-to-issues.test.js`. |
 | Issue preview JSON | `work-lists-problem-study` references `../design/collector-lists-concept-study.md#research-decision-matrix`; `work-lists-model` references `../design/collector-lists-concept-study.md#guardrails` and depends only on `work-lists-problem-study`. |
 | `product/roadmap.json` | `init-collector-lists` still reads horizon **later**, status **candidate**, low confidence, with the primary-job decision unresolved. A change to those values is a defect in this change. |
 | Storefront (`npm start`, <http://127.0.0.1:4173>) | Unchanged. No wishlist, owned-collection, or gift-list control appears, and saving, cart, or purchase produces no ownership state. |
