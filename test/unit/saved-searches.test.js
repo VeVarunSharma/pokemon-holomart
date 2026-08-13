@@ -1,8 +1,7 @@
-import test from "node:test";
-import assert from "node:assert/strict";
+import { expect, test } from "vitest";
 import {
   createSavedSearch, readSavedSearches, removeSearch, saveSearch, SAVED_SEARCHES_KEY, writeSavedSearches
-} from "../src/features/saved-searches/storage.js";
+} from "../../src/features/saved-searches/storage.js";
 
 function memoryStorage(initial = {}) {
   const values = new Map(Object.entries(initial));
@@ -19,7 +18,7 @@ test("creates a normalized, deterministic personal search", () => {
     () => new Date("2026-07-29T12:00:00Z"),
     () => "search-1"
   );
-  assert.deepEqual(search, {
+  expect(search).toEqual({
     id: "search-1",
     name: "Pikachu chase cards",
     filters: { query: "pikachu", rarity: "Special Illustration Rare", expansion: "All" },
@@ -28,12 +27,12 @@ test("creates a normalized, deterministic personal search", () => {
 });
 
 test("rejects blank names", () => {
-  assert.throws(() => createSavedSearch({ name: " ", filters: {} }), /name is required/);
+  expect(() => createSavedSearch({ name: " ", filters: {} })).toThrow(/name is required/);
 });
 
 test("malformed saved data is ignored without breaking the catalog", () => {
-  assert.deepEqual(readSavedSearches(memoryStorage({ [SAVED_SEARCHES_KEY]: "{bad json" })), []);
-  assert.deepEqual(readSavedSearches(memoryStorage({ [SAVED_SEARCHES_KEY]: JSON.stringify({ nope: true }) })), []);
+  expect(readSavedSearches(memoryStorage({ [SAVED_SEARCHES_KEY]: "{bad json" }))).toEqual([]);
+  expect(readSavedSearches(memoryStorage({ [SAVED_SEARCHES_KEY]: JSON.stringify({ nope: true }) }))).toEqual([]);
 });
 
 test("invalid records are removed and valid filters are repaired", () => {
@@ -43,7 +42,7 @@ test("invalid records are removed and valid filters are repaired", () => {
       { id: 2, name: "", createdAt: "yesterday" }
     ])
   });
-  assert.deepEqual(readSavedSearches(storage), [{
+  expect(readSavedSearches(storage)).toEqual([{
     id: "ok",
     name: "Useful",
     createdAt: "2026-07-29T12:00:00Z",
@@ -55,16 +54,16 @@ test("saving deduplicates IDs and removing is persistent", () => {
   const storage = memoryStorage();
   const first = { id: "same", name: "First", createdAt: "2026-07-29T12:00:00Z", filters: {} };
   const updated = { ...first, name: "Updated" };
-  assert.equal(saveSearch(storage, first).ok, true);
-  assert.equal(saveSearch(storage, updated).ok, true);
-  assert.deepEqual(readSavedSearches(storage).map((search) => search.name), ["Updated"]);
-  assert.equal(removeSearch(storage, "same").ok, true);
-  assert.deepEqual(readSavedSearches(storage), []);
+  expect(saveSearch(storage, first).ok).toBe(true);
+  expect(saveSearch(storage, updated).ok).toBe(true);
+  expect(readSavedSearches(storage).map((search) => search.name)).toEqual(["Updated"]);
+  expect(removeSearch(storage, "same").ok).toBe(true);
+  expect(readSavedSearches(storage)).toEqual([]);
 });
 
 test("storage quota failures are returned to the UI", () => {
   const storage = { getItem: () => null, setItem: () => { throw new Error("Quota exceeded"); } };
-  assert.deepEqual(writeSavedSearches(storage, []), { ok: false, error: "Quota exceeded" });
+  expect(writeSavedSearches(storage, [])).toEqual({ ok: false, error: "Quota exceeded" });
 });
 
 test.todo("persists searches to an account and syncs them across devices");
