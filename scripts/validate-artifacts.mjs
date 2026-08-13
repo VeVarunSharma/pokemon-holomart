@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 import { access, readFile, readdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import path from "node:path";
 import process from "node:process";
 import { fileURLToPath } from "node:url";
@@ -48,8 +49,16 @@ const requiredFiles = [
   ".github/ISSUE_TEMPLATE/design-review.yml",
   ".github/ISSUE_TEMPLATE/config.yml",
   ".github/PULL_REQUEST_TEMPLATE.md",
+  ".github/workflows/holomart-agentic-qa.md",
+  ".github/workflows/holomart-agentic-qa.lock.yml",
+  ".gitattributes",
+  "scripts/agentic-qa-evidence.mjs",
+  "scripts/agentic-qa-browser.cjs",
   "scripts/roadmap-to-issues.mjs",
   "scripts/validate-artifacts.mjs",
+  "test/agentic-qa-evidence.test.js",
+  "docs/agentic-qa-demo.md",
+  "docs/demo-operations.md",
   "docs/github-projects-setup.md",
   "docs/hands-on-keyboard-prompts.md",
   "docs/qa-architecture.md"
@@ -76,6 +85,19 @@ async function readJson(relativePath) {
     errors.push(`${relativePath}: invalid or unreadable JSON (${error.message})`);
     return null;
   }
+}
+
+async function readText(relativePath) {
+  try {
+    return await readFile(path.join(ROOT, relativePath), "utf8");
+  } catch (error) {
+    errors.push(`${relativePath}: unreadable text (${error.message})`);
+    return "";
+  }
+}
+
+function sha256(value) {
+  return createHash("sha256").update(value).digest("hex");
 }
 
 function headingAnchorExists(markdown, fragment) {
@@ -258,6 +280,167 @@ const forbiddenConfigPaths = [
 ];
 for (const forbiddenPath of forbiddenConfigPaths) {
   record(!(await exists(forbiddenPath)), `forbidden real integration or secret config present: ${forbiddenPath}`);
+}
+
+const forbiddenGeneratedFiles = [
+  ".github/aw/actions-lock.json",
+  ".poutine.yml"
+];
+for (const generatedFile of forbiddenGeneratedFiles) {
+  record(!(await exists(generatedFile)), `generated tool file must not remain in the checkout: ${generatedFile}`);
+}
+
+const workflowSource = await readText(".github/workflows/holomart-agentic-qa.md");
+const workflowLock = await readText(".github/workflows/holomart-agentic-qa.lock.yml");
+const evidenceHarness = await readText("scripts/agentic-qa-evidence.mjs");
+const browserHarness = await readText("scripts/agentic-qa-browser.cjs");
+const qaRunbook = await readText("docs/agentic-qa-demo.md");
+
+if (workflowSource) {
+  const sourceChecks = [
+    [/^  stale-check: full$/m, "workflow source: full stale-lock checks must remain enabled"],
+    [/ref: \$\{\{ github\.event\.pull_request\.head\.sha \|\| inputs\.revision \}\}/, "workflow source: checkout must use the immutable PR head or manual revision"],
+    [/QA_HEAD_SHA: \$\{\{ github\.event\.pull_request\.head\.sha \|\| inputs\.revision \}\}/, "workflow source: QA_HEAD_SHA must use the immutable tested revision"],
+    [/QA_BASE_SHA: \$\{\{ github\.event\.pull_request\.base\.sha \|\| inputs\.base_revision \}\}/, "workflow source: QA_BASE_SHA must use the reviewed base revision"],
+    [/^  github: false$/m, "workflow source: GitHub tools must remain disabled"],
+    [/^  edit: false$/m, "workflow source: edit tools must remain disabled"],
+    [/--deny-tool=write/, "workflow source: Copilot write tool denial is missing"],
+    [/^  allowed-github-references: \[\]$/m, "workflow source: GitHub reference expansion must remain disabled"],
+    [/^  threat-detection: false$/m, "workflow source: issue-writing detection reporting must remain disabled"],
+    [/^  report-failure-as-issue: false$/m, "workflow source: failure issue reporting must remain disabled"],
+    [/^  report-failed-jobs: false$/m, "workflow source: failed-job issue reporting must remain disabled"],
+    [/^max-daily-ai-credits: -1$/m, "workflow source: issue-writing daily credit guardrail must remain disabled"],
+    [/record-qa-verdict:/, "workflow source: non-networked structured verdict output is missing"],
+    [/report:\r?\n\s+description: "Complete Markdown QA report/, "workflow source: independent Markdown report output is missing"],
+    [/playwright@1\.51\.1/, "workflow source: deterministic Playwright runtime must stay pinned"],
+    [/name: holomart-agentic-qa-evidence[\s\S]*?retention-days: 7/, "workflow source: bounded seven-day evidence upload is missing"],
+    [/steps\.upload-qa-evidence\.outcome == 'success'/, "workflow source: bounded bundle cleanup guard is missing"],
+    [/agentic-qa-evidence\.mjs cleanup/, "workflow source: staged QA bundle cleanup is missing"],
+    [/node scripts\/agentic-qa-evidence\.mjs enforce/, "workflow source: final deterministic enforcement is missing"],
+    [/SYNTHETIC \/ DEMO-ONLY/, "workflow source: synthetic provenance boundary is missing"],
+    [/AI observation override/, "workflow source: deterministic authority boundary is missing"],
+    [/Do not reward test volume or coverage alone\./, "workflow source: independent assertion-strength review is missing"]
+  ];
+  for (const [pattern, message] of sourceChecks) record(pattern.test(workflowSource), message);
+
+  const bashTools = workflowSource.match(/^  bash:\r?\n([\s\S]*?)(?=^  [a-z-]+:|^safe-outputs:)/m)?.[1] ?? "";
+  record(bashTools.length > 0, "workflow source: bounded shell tool allowlist is missing");
+  record(
+    !/^\s+-\s+"(?:git|gh|curl|wget|node|npm|npx|bash|sh|pwsh|powershell)\b/im.test(bashTools),
+    "workflow source: agent shell allowlist exposes a repository, network, runtime, or shell command"
+  );
+  record(!/\b(?:run-code|upload|pdf|video|tracing)\b/i.test(bashTools), "workflow source: prohibited Playwright capability is exposed");
+}
+
+if (workflowLock) {
+  const metadataMatch = /^# gh-aw-metadata: (\{.+\})$/m.exec(workflowLock);
+  let metadata = null;
+  try {
+    metadata = metadataMatch ? JSON.parse(metadataMatch[1]) : null;
+  } catch {
+    // The explicit metadata check below reports the failure.
+  }
+  record(metadata?.schema_version === "v4", "workflow lock: gh-aw v4 metadata is missing");
+  record(metadata?.compiler_version === "v0.85.4", "workflow lock: expected gh-aw compiler v0.85.4");
+  record(metadata?.strict === true, "workflow lock: strict compilation metadata is missing");
+
+  const sourceMatch = /^---\r?\n[\s\S]*?\r?\n---\r?\n?([\s\S]*)$/.exec(workflowSource);
+  const normalizedBody = sourceMatch?.[1].trim().replace(/\r\n/g, "\n") ?? "";
+  record(
+    normalizedBody.length > 0 && metadata?.body_hash === sha256(normalizedBody),
+    "workflow lock: prompt body hash is stale"
+  );
+
+  const writePermissions = [...workflowLock.matchAll(/^\s+([a-z-]+): write$/gm)].map((match) => match[1]);
+  record(
+    writePermissions.length === 1 && writePermissions[0] === "copilot-requests",
+    `workflow lock: only copilot-requests may be write-scoped (found: ${writePermissions.join(", ") || "none"})`
+  );
+  record(/^permissions: \{\}$/m.test(workflowLock), "workflow lock: top-level permissions must default to none");
+  record(/persist-credentials: false/.test(workflowLock), "workflow lock: checkout credentials must not persist");
+  record(
+    /ref: \$\{\{ github\.event\.pull_request\.head\.sha \|\| inputs\.revision \}\}/.test(workflowLock),
+    "workflow lock: checkout does not target the immutable tested revision"
+  );
+
+  const prohibitedLockPatterns = [
+    [/safe_outputs_auto_create_issue|["']create_issue["']|create_issue:/, "issue creation"],
+    [/["']add_comment["']|add_comment:/, "comment creation"],
+    [/["']create_pull_request["']|create_pull_request:/, "pull-request creation"],
+    [/push_to_pull_request_branch|push-to-pull-request-branch/, "code push"],
+    [/dispatch_repository|repository-dispatch/, "repository dispatch"],
+    [/handle_detection_runs|report_failed_jobs/, "framework issue reporting"],
+    [/target-repo|allowed-repos/, "cross-repository output"]
+  ];
+  for (const [pattern, operation] of prohibitedLockPatterns) {
+    record(!pattern.test(workflowLock), `workflow lock: prohibited ${operation} path is compiled`);
+  }
+
+  const actionRefs = [...workflowLock.matchAll(/^\s+uses:\s+([^\s#]+)(?:\s+#.*)?$/gm)]
+    .map((match) => match[1]);
+  record(actionRefs.length > 0, "workflow lock: no action references found");
+  for (const actionRef of actionRefs) {
+    record(
+      /@[0-9a-f]{40}$/.test(actionRef),
+      `workflow lock: action reference is not pinned to a full commit SHA (${actionRef})`
+    );
+  }
+  const containerRefs = [...workflowLock.matchAll(/^\s+container:\s+([^\s#]+)$/gm)]
+    .map((match) => match[1]);
+  for (const containerRef of containerRefs) {
+    record(
+      /@sha256:[0-9a-f]{64}$/.test(containerRef),
+      `workflow lock: container is not pinned to a sha256 digest (${containerRef})`
+    );
+  }
+}
+
+if (evidenceHarness) {
+  const evidenceChecks = [
+    [/const MAX_DIFF_BYTES = 2 \* 1024 \* 1024;/, "evidence harness: 2 MB diff bound is missing"],
+    [/const MAX_LOG_BYTES = 8 \* 1024 \* 1024;/, "evidence harness: 8 MB log bound is missing"],
+    [/const MAX_ARTIFACT_BYTES = 50 \* 1024 \* 1024;/, "evidence harness: 50 MB bundle bound is missing"],
+    [/const MAX_FILE_BYTES = 10 \* 1024 \* 1024;/, "evidence harness: 10 MB file bound is missing"],
+    [/QA artifact directory must be outside the repository checkout/, "evidence harness: external artifact path guard is missing"],
+    [/export function validateQaBaseUrl/, "evidence harness: testable loopback URL guard is missing"],
+    [/repository checkout is dirty before QA execution/, "evidence harness: pre-run repository cleanliness check is missing"],
+    [/"repository-clean"/, "evidence harness: post-run repository cleanliness check is missing"],
+    [/checked out \$\{actualSha\}, expected immutable revision/, "evidence harness: immutable revision check is missing"],
+    [/mulberry32-fisher-yates-v1/, "evidence harness: replay algorithm identifier is missing"],
+    [/deterministicGatesAreBlocking: true/, "evidence harness: deterministic blocking policy is missing"],
+    [/exploratoryReviewIsAdvisory: true/, "evidence harness: exploratory advisory policy is missing"],
+    [/artifactRetentionDays: 7/, "evidence harness: seven-day evidence policy is missing"],
+    [/validateIndependentReviewPayload/, "evidence harness: independent report schema validation is missing"],
+    [/independent-review-evidence/, "evidence harness: independent review finalization check is missing"],
+    [/89504e470d0a1a0a/, "evidence harness: exploratory PNG validation is missing"],
+    [/async function cleanupEvidence/, "evidence harness: bounded bundle cleanup is missing"]
+  ];
+  for (const [pattern, message] of evidenceChecks) record(pattern.test(evidenceHarness), message);
+}
+
+if (browserHarness) {
+  for (const caseId of ["QA-01", "QA-02", "QA-03", "QA-04", "QA-05", "QA-06", "QA-07"]) {
+    record(browserHarness.includes(`id: "${caseId}"`), `browser harness: ${caseId} is missing`);
+  }
+  record(browserHarness.includes('const PROVENANCE = "SYNTHETIC / DEMO-ONLY";'), "browser harness: synthetic provenance is missing");
+  record(/127\.0\.0\.1/.test(browserHarness), "browser harness: loopback default is missing");
+  record(/run\(\)\.catch\(\(error\)/.test(browserHarness), "browser harness: structured infrastructure failure handler is missing");
+}
+
+if (qaRunbook) {
+  const documentationChecks = [
+    [/gh aw validate holomart-agentic-qa --strict --no-check-update/, "QA runbook: strict validation command is missing"],
+    [/gh aw compile holomart-agentic-qa --action-mode release --action-tag 53843da968225dc56e1590978a7ed6407a8438ac --no-check-update/, "QA runbook: immutable gh-aw compile command is missing"],
+    [/node scripts\\agentic-qa-evidence\.mjs prepare/, "QA runbook: local evidence preparation command is missing"],
+    [/gh workflow run holomart-agentic-qa\.lock\.yml/, "QA runbook: approval-gated dispatch preview is missing"],
+    [/gh run download/, "QA runbook: artifact download command is missing"],
+    [/independent-review\.md/, "QA runbook: independent review artifact is not documented"],
+    [/seven days/i, "QA runbook: evidence retention is not documented"],
+    [/shadow repository/i, "QA runbook: optional shadow-repository decision is not documented"],
+    [/separate approval/i, "QA runbook: shadow-repository approval boundary is missing"],
+    [/SYNTHETIC \/ DEMO-ONLY/, "QA runbook: synthetic provenance boundary is missing"]
+  ];
+  for (const [pattern, message] of documentationChecks) record(pattern.test(qaRunbook), message);
 }
 
 const scanFiles = [

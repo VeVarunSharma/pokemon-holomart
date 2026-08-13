@@ -194,6 +194,7 @@ Now/Next/Later are planning horizons, not promises. Every initiative preserves e
 ## Operations
 
 - Presenter preflight and reset: [demo operations](docs/demo-operations.md)
+- Agentic testing and evidence replay: [Agentic QA demo](docs/agentic-qa-demo.md)
 - Exact 45-minute script: [facilitator guide](docs/facilitator-guide.md)
 - Copy/paste conversation ladder: [hands-on-keyboard prompts](docs/hands-on-keyboard-prompts.md)
 - QA components and delivery pipeline: [QA architecture](docs/qa-architecture.md)
