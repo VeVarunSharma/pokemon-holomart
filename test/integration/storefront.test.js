@@ -104,9 +104,10 @@ test("syncs filters to the URL and recovers from an empty result", () => {
   expect(document.querySelector("#empty-state").hidden).toBe(true);
 });
 
-test("recovers malformed storage and supports Saved Search save, apply, and delete", () => {
+test("recovers malformed storage and supports Saved Search save, apply, rename, edit, and delete", () => {
   setupStorefront({ storageValue: "{not valid json" });
   expect(document.querySelector("#saved-searches-list").textContent).toContain("Save your first search");
+  expect(document.querySelector("#saved-searches-list").textContent).toContain("Some saved search data couldn’t be loaded");
 
   updateQuery("Mew");
   document.querySelector("#save-search-button").click();
@@ -134,10 +135,53 @@ test("recovers malformed storage and supports Saved Search save, apply, and dele
   expect(document.querySelector("#query").value).toBe("Mew");
   expect(document.querySelector("#result-count").textContent).toBe("1");
   expect(window.location.search).toBe("?q=Mew");
+  expect(document.querySelector("[data-search-state]").textContent).toBe("Active");
+  expect(document.querySelector("[data-search-id]").getAttribute("aria-current")).toBe("true");
+  expect(document.activeElement).toBe(document.querySelector("[data-search-id]"));
 
+  updateQuery("Mew ex");
+  expect(document.querySelector("[data-search-state]").textContent).toBe("Edited");
+  document.querySelector("[data-update-id]").click();
+  expect(document.querySelector("[data-search-state]").textContent).toBe("Active");
+  expect(document.activeElement).toBe(document.querySelector("[data-search-id]"));
+
+  document.querySelector("[data-rename-id]").click();
+  expect(document.querySelector("#save-dialog-title").textContent).toBe("Rename saved search");
+  expect(document.querySelector("#search-name").value).toBe("Mew shortlist");
+  document.querySelector("#search-name").value = "Mew favorites";
+  form.dispatchEvent(new window.SubmitEvent("submit", {
+    bubbles: true,
+    cancelable: true,
+    submitter
+  }));
+  expect(document.querySelector("#saved-searches-list").textContent).toContain("Mew favorites");
+  expect(JSON.parse(window.localStorage.getItem(SAVED_SEARCHES_KEY))[0].id).toBe(storedSearches[0].id);
+
+  vi.spyOn(window, "confirm").mockReturnValue(true);
   document.querySelector("[data-delete-id]").click();
   expect(document.querySelector("#saved-searches-list").textContent).toContain("Save your first search");
   expect(JSON.parse(window.localStorage.getItem(SAVED_SEARCHES_KEY))).toEqual([]);
+});
+
+test("explains and safely omits unavailable saved criteria", () => {
+  setupStorefront({
+    storageValue: JSON.stringify([{
+      id: "stale",
+      name: "Old taxonomy",
+      schemaVersion: 1,
+      createdAt: "2026-07-29T12:00:00Z",
+      filters: { query: "Pikachu", rarity: "Legendary", expansion: "Base Set" }
+    }])
+  });
+
+  expect(document.querySelector("#saved-searches-list").textContent)
+    .toContain("Unavailable rarity “Legendary” and expansion “Base Set” will be omitted.");
+  document.querySelector("[data-search-id]").click();
+  expect(document.querySelector("#query").value).toBe("Pikachu");
+  expect(document.querySelector("#rarity").value).toBe("All");
+  expect(document.querySelector("#expansion").value).toBe("All");
+  expect(document.querySelector("#toast").textContent)
+    .toContain("Unavailable rarity “Legendary” and expansion “Base Set” were omitted.");
 });
 
 test("reports demo cart status and updates its count", () => {
