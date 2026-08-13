@@ -1,6 +1,13 @@
 import { expect, test } from "vitest";
 import {
-  createSavedSearch, readSavedSearches, removeSearch, saveSearch, SAVED_SEARCHES_KEY, writeSavedSearches
+  createSavedSearch,
+  readSavedSearches,
+  readSavedSearchesState,
+  removeSearch,
+  renameSearch,
+  saveSearch,
+  SAVED_SEARCHES_KEY,
+  writeSavedSearches
 } from "../../src/features/saved-searches/storage.js";
 
 function memoryStorage(initial = {}) {
@@ -21,8 +28,11 @@ test("creates a normalized, deterministic personal search", () => {
   expect(search).toEqual({
     id: "search-1",
     name: "Pikachu chase cards",
+    schemaVersion: 1,
     filters: { query: "pikachu", rarity: "Special Illustration Rare", expansion: "All" },
-    createdAt: "2026-07-29T12:00:00.000Z"
+    createdAt: "2026-07-29T12:00:00.000Z",
+    updatedAt: "2026-07-29T12:00:00.000Z",
+    unavailableCriteria: []
   });
 });
 
@@ -45,9 +55,41 @@ test("invalid records are removed and valid filters are repaired", () => {
   expect(readSavedSearches(storage)).toEqual([{
     id: "ok",
     name: "Useful",
+    schemaVersion: 1,
     createdAt: "2026-07-29T12:00:00Z",
-    filters: { query: "", rarity: "All", expansion: "All" }
+    updatedAt: "2026-07-29T12:00:00Z",
+    filters: { query: "", rarity: "All", expansion: "All" },
+    unavailableCriteria: [{ field: "rarity", value: "Legendary" }]
   }]);
+});
+
+test("reports corrupt, unsupported, and stale records without blocking valid searches", () => {
+  const state = readSavedSearchesState(memoryStorage({
+    [SAVED_SEARCHES_KEY]: JSON.stringify([
+      {
+        id: "stale",
+        name: "Old taxonomy",
+        schemaVersion: 1,
+        createdAt: "2026-07-29T12:00:00Z",
+        filters: { rarity: "Legendary", expansion: "Base Set" }
+      },
+      {
+        id: "future",
+        name: "Future record",
+        schemaVersion: 2,
+        createdAt: "2026-07-29T12:00:00Z",
+        filters: {}
+      }
+    ])
+  }));
+
+  expect(state.searches).toHaveLength(1);
+  expect(state.searches[0].filters).toEqual({ query: "", rarity: "All", expansion: "All" });
+  expect(state.searches[0].unavailableCriteria).toEqual([
+    { field: "rarity", value: "Legendary" },
+    { field: "expansion", value: "Base Set" }
+  ]);
+  expect(state.issues).toEqual([{ type: "unsupported-version", recordName: "Future record" }]);
 });
 
 test("saving deduplicates IDs and removing is persistent", () => {
@@ -61,6 +103,51 @@ test("saving deduplicates IDs and removing is persistent", () => {
   expect(readSavedSearches(storage)).toEqual([]);
 });
 
+test("renaming preserves identity and criteria while updating the record", () => {
+  const storage = memoryStorage();
+  const search = createSavedSearch(
+    { name: "Old name", filters: { query: "Mew" } },
+    () => new Date("2026-07-29T12:00:00Z"),
+    () => "search-1"
+  );
+  saveSearch(storage, search);
+
+  expect(renameSearch(
+    storage,
+    "search-1",
+    "  New name  ",
+    () => new Date("2026-08-13T15:00:00Z")
+  )).toEqual({ ok: true });
+  expect(readSavedSearches(storage)[0]).toMatchObject({
+    id: "search-1",
+    name: "New name",
+    filters: { query: "Mew", rarity: "All", expansion: "All" },
+    createdAt: "2026-07-29T12:00:00.000Z",
+    updatedAt: "2026-08-13T15:00:00.000Z"
+  });
+});
+
+test("writes only the versioned local search contract", () => {
+  const storage = memoryStorage();
+  expect(writeSavedSearches(storage, [{
+    id: "safe",
+    name: "Safe",
+    filters: { query: "Pikachu" },
+    createdAt: "2026-07-29T12:00:00Z",
+    listingSnapshot: { price: 1 },
+    alertConsent: true
+  }]).ok).toBe(true);
+
+  expect(JSON.parse(storage.value(SAVED_SEARCHES_KEY))[0]).toEqual({
+    id: "safe",
+    name: "Safe",
+    schemaVersion: 1,
+    filters: { query: "Pikachu", rarity: "All", expansion: "All" },
+    createdAt: "2026-07-29T12:00:00Z",
+    updatedAt: "2026-07-29T12:00:00Z"
+  });
+});
+
 test("storage quota failures are returned to the UI", () => {
   const storage = { getItem: () => null, setItem: () => { throw new Error("Quota exceeded"); } };
   expect(writeSavedSearches(storage, [])).toEqual({ ok: false, error: "Quota exceeded" });
@@ -68,6 +155,5 @@ test("storage quota failures are returned to the UI", () => {
 
 test.todo("persists searches to an account and syncs them across devices");
 test.todo("creates price alerts with explicit frequency and channel preferences");
-test.todo("handles removed expansions and renamed rarity values");
 test.todo("emits create, apply, alert, and delete telemetry events");
 test.todo("covers multi-tab conflicts and browser-level integration");

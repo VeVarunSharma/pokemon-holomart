@@ -699,11 +699,17 @@ main {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
+  border: 1px solid transparent;
   border-radius: var(--radius-sm);
 }
 
 .saved-search:hover {
   background: var(--surface-soft);
+}
+
+.saved-search.is-active {
+  border-color: var(--primary);
+  background: var(--primary-soft);
 }
 
 .saved-search-apply {
@@ -732,19 +738,45 @@ main {
   font-size: 0.6rem;
 }
 
-.delete-search {
-  width: 1.8rem;
-  min-height: 1.8rem;
-  opacity: 0;
-  color: var(--muted);
-  border: 0;
-  background: transparent;
-  border-radius: 0.35rem;
+.search-state {
+  margin-right: 0.55rem;
+  color: var(--primary);
+  font-size: 0.62rem;
+  font-weight: 750;
 }
 
-.saved-search:hover .delete-search,
-.delete-search:focus {
-  opacity: 1;
+.search-warning,
+.search-recovery {
+  grid-column: 1 / -1;
+  margin: 0 0.55rem 0.55rem;
+  color: #7c4b00;
+  font-size: 0.62rem;
+  line-height: 1.45;
+}
+
+.search-recovery {
+  margin: 0 0 0.75rem;
+  padding: 0.65rem;
+  background: #fff5d6;
+  border-radius: var(--radius-sm);
+}
+
+.saved-search-actions {
+  display: flex;
+  grid-column: 1 / -1;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  padding: 0 0.55rem 0.55rem;
+}
+
+.saved-search-actions button {
+  min-height: 1.8rem;
+  padding: 0.2rem 0.4rem;
+  color: var(--muted);
+  font-size: 0.6rem;
+  border: 1px solid var(--line);
+  background: transparent;
+  border-radius: 0.35rem;
 }
 
 .searches-empty {
