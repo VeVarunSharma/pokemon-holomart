@@ -88,10 +88,10 @@ export function initializeStorefront({
 
   function marketMessage(card) {
     const difference = Math.abs(card.marketPrice - card.price);
-    if (difference < 0.01) return "At market";
+    if (difference < 0.01) return "At demo reference · freshness unavailable";
     return card.price < card.marketPrice
-      ? `${currency.format(difference)} below market`
-      : `${currency.format(difference)} above market`;
+      ? `${currency.format(difference)} below demo reference · freshness unavailable`
+      : `${currency.format(difference)} above demo reference · freshness unavailable`;
   }
 
   function renderCatalog() {
@@ -119,7 +119,7 @@ export function initializeStorefront({
           <h3>${escapeHtml(card.name)}</h3>
           <div class="tag-row">
             <span>${escapeHtml(card.rarity)}</span>
-            <span>${escapeHtml(card.condition)}</span>
+            <span>Seller condition: ${escapeHtml(card.condition)}</span>
           </div>
           <div class="price-row">
             <div>
@@ -132,7 +132,7 @@ export function initializeStorefront({
           </div>
           <div class="seller-row">
             <span class="seller-avatar" aria-hidden="true">${escapeHtml(card.seller.slice(0, 1))}</span>
-            <span><strong>${escapeHtml(card.seller)}</strong><small>★ ${card.rating.toFixed(1)} · ${card.reviews} sales</small></span>
+            <span><strong>Demo seller: ${escapeHtml(card.seller)}</strong><small>Synthetic rating ★ ${card.rating.toFixed(1)} · ${card.reviews} demo sales</small></span>
             <em>${card.stock} left</em>
           </div>
         </div>

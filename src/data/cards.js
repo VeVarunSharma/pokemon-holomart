@@ -13,7 +13,7 @@ export const cards = Object.freeze([
     rating: 4.9,
     reviews: 812,
     stock: 1,
-    badge: "Below market",
+    badge: "Below demo reference",
     artClass: "electric",
     glyph: "P"
   },
@@ -64,7 +64,7 @@ export const cards = Object.freeze([
     rating: 4.9,
     reviews: 654,
     stock: 5,
-    badge: "Great value",
+    badge: "Below demo reference",
     artClass: "grass",
     glyph: "B"
   },
@@ -98,7 +98,7 @@ export const cards = Object.freeze([
     rating: 4.9,
     reviews: 992,
     stock: 2,
-    badge: "16% below market",
+    badge: "16% below demo reference",
     artClass: "fairy",
     glyph: "G"
   },
@@ -132,7 +132,7 @@ export const cards = Object.freeze([
     rating: 4.7,
     reviews: 308,
     stock: 1,
-    badge: "Below market",
+    badge: "Below demo reference",
     artClass: "water-dark",
     glyph: "G"
   },
@@ -149,7 +149,7 @@ export const cards = Object.freeze([
     rating: 5,
     reviews: 184,
     stock: 1,
-    badge: "Authenticated",
+    badge: "One available",
     artClass: "dark",
     glyph: "U"
   },
@@ -166,7 +166,7 @@ export const cards = Object.freeze([
     rating: 4.9,
     reviews: 573,
     stock: 2,
-    badge: "Great value",
+    badge: "Below demo reference",
     artClass: "dragon",
     glyph: "G"
   },
@@ -183,7 +183,7 @@ export const cards = Object.freeze([
     rating: 4.8,
     reviews: 457,
     stock: 3,
-    badge: "Below market",
+    badge: "Below demo reference",
     artClass: "trainer",
     glyph: "I"
   },

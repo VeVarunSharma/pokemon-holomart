@@ -101,8 +101,8 @@
         <text x="40" y="10" class="eyebrow-inverse">POKEMON TCG MARKETPLACE</text>
         <text x="0" y="76" class="hero-title">Find the card your</text>
         <text x="0" y="130" class="hero-title">binder is missing.</text>
-        <text x="0" y="175" class="hero-copy">Compare condition-graded singles from trusted sellers, track market</text>
-        <text x="0" y="199" class="hero-copy">prices, and save every search worth coming back to.</text>
+        <text x="0" y="175" class="hero-copy">Compare listing prices, seller-reported condition, synthetic seller history,</text>
+        <text x="0" y="199" class="hero-copy">and demo market context—then save searches worth revisiting.</text>
         <rect x="0" y="230" width="126" height="44" rx="9" fill="#f7ce55"/>
         <text x="63" y="257" text-anchor="middle" class="button-copy">Shop singles</text>
         <rect x="138" y="230" width="166" height="44" rx="9" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.3"/>
@@ -148,8 +148,8 @@
       <g transform="translate(92 669)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
         <path d="M12 19l6 6 11-13" stroke="#5850ec" stroke-width="2.2" fill="none"/>
-        <text x="56" y="15" class="body strong">Condition guaranteed</text>
-        <text x="56" y="34" class="small">Every listing uses a clear grading standard.</text>
+        <text x="56" y="15" class="body strong">Seller-reported condition</text>
+        <text x="56" y="34" class="small">Compare the condition supplied for each demo listing.</text>
       </g>
       <g transform="translate(529 669)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
@@ -162,8 +162,8 @@
       <g transform="translate(966 669)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
         <text x="20" y="26" text-anchor="middle" class="body primary strong">$</text>
-        <text x="56" y="15" class="body strong">Market-aware prices</text>
-        <text x="56" y="34" class="small">Compare each listing with synthetic market data.</text>
+        <text x="56" y="15" class="body strong">Demo market context</text>
+        <text x="56" y="34" class="small">Synthetic reference; freshness unavailable.</text>
       </g>
     </g>
 
@@ -227,7 +227,7 @@
         <text x="332" y="1039" class="card-price">12</text>
         <text x="357" y="1039" class="small">cards</text>
         <text x="426" y="1039" class="card-price">11</text>
-        <text x="453" y="1039" class="small">at or below market</text>
+        <text x="453" y="1039" class="small">at or below demo reference</text>
         <text x="592" y="1039" class="card-price">10</text>
         <text x="618" y="1039" class="small">near mint</text>
         <rect x="1214" y="1012" width="142" height="40" rx="9" fill="#ffffff"/>
@@ -242,7 +242,7 @@
         <rect x="16" y="16" width="322" height="174" rx="13" fill="#b98b2f"/>
         <circle cx="177" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
         <rect x="28" y="28" width="76" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
-        <text x="66" y="43" text-anchor="middle" class="micro strong">Below market</text>
+        <text x="66" y="43" text-anchor="middle" class="micro strong">Below demo reference</text>
         <text x="321" y="43" text-anchor="end" class="micro white strong">SV08-238</text>
         <text x="177" y="120" text-anchor="middle" class="card-initial">P</text>
         <text x="30" y="174" class="card-visual-label">PIKACHU EX</text>
@@ -254,7 +254,7 @@
         <text x="185" y="273" text-anchor="middle" class="micro">Near Mint</text>
         <line x1="18" y1="296" x2="336" y2="296" class="line"/>
         <text x="18" y="327" class="card-price">$329.00</text>
-        <text x="18" y="345" class="micro green strong">$12.28 below market</text>
+        <text x="18" y="345" class="micro green strong">$12.28 below demo reference</text>
         <circle cx="314" cy="325" r="19" fill="#111936"/>
         <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
         <circle cx="32" cy="392" r="14" fill="#eeedff"/>
@@ -283,7 +283,7 @@
         <text x="185" y="273" text-anchor="middle" class="micro">Near Mint</text>
         <line x1="18" y1="296" x2="336" y2="296" class="line"/>
         <text x="18" y="327" class="card-price">$164.50</text>
-        <text x="18" y="345" class="micro green strong">$6.58 below market</text>
+        <text x="18" y="345" class="micro green strong">$6.58 below demo reference</text>
         <circle cx="314" cy="325" r="19" fill="#111936"/>
         <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
         <circle cx="32" cy="392" r="14" fill="#eeedff"/>
@@ -311,7 +311,7 @@
         <text x="131" y="273" text-anchor="middle" class="micro">Near Mint</text>
         <line x1="18" y1="296" x2="338" y2="296" class="line"/>
         <text x="18" y="327" class="card-price">$78.00</text>
-        <text x="18" y="345" class="micro green strong">$2.44 below market</text>
+        <text x="18" y="345" class="micro green strong">$2.44 below demo reference</text>
         <circle cx="316" cy="325" r="19" fill="#111936"/>
         <path d="M308 325h16M316 317v16" stroke="#ffffff" stroke-width="1.8"/>
         <circle cx="32" cy="392" r="14" fill="#eeedff"/>
@@ -327,7 +327,7 @@
         <rect x="16" y="16" width="322" height="174" rx="13" fill="#3d946f"/>
         <circle cx="177" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
         <rect x="28" y="28" width="72" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
-        <text x="64" y="43" text-anchor="middle" class="micro strong">Great value</text>
+        <text x="64" y="43" text-anchor="middle" class="micro strong">Below demo reference</text>
         <text x="321" y="43" text-anchor="end" class="micro white strong">MEW-166</text>
         <text x="177" y="120" text-anchor="middle" class="card-initial">B</text>
         <text x="30" y="174" class="card-visual-label">BULBASAUR</text>
@@ -339,7 +339,7 @@
         <text x="151" y="273" text-anchor="middle" class="micro">Near Mint</text>
         <line x1="18" y1="296" x2="336" y2="296" class="line"/>
         <text x="18" y="327" class="card-price">$32.75</text>
-        <text x="18" y="345" class="micro green strong">$2.37 below market</text>
+        <text x="18" y="345" class="micro green strong">$2.37 below demo reference</text>
         <circle cx="314" cy="325" r="19" fill="#111936"/>
         <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
         <circle cx="32" cy="392" r="14" fill="#eeedff"/>
@@ -367,7 +367,7 @@
         <text x="151" y="273" text-anchor="middle" class="micro">Near Mint</text>
         <line x1="18" y1="296" x2="336" y2="296" class="line"/>
         <text x="18" y="327" class="card-price">$41.25</text>
-        <text x="18" y="345" class="micro" fill="#de4d5f">$1.39 above market</text>
+        <text x="18" y="345" class="micro" fill="#de4d5f">$1.39 above demo reference</text>
         <circle cx="314" cy="325" r="19" fill="#111936"/>
         <path d="M306 325h16M314 317v16" stroke="#ffffff" stroke-width="1.8"/>
         <circle cx="32" cy="392" r="14" fill="#eeedff"/>
@@ -382,7 +382,7 @@
         <rect x="16" y="16" width="324" height="174" rx="13" fill="#d27abe"/>
         <circle cx="178" cy="102" r="48" fill="none" stroke="#ffffff" stroke-opacity="0.26"/>
         <rect x="28" y="28" width="102" height="22" rx="11" fill="#ffffff" opacity="0.9"/>
-        <text x="79" y="43" text-anchor="middle" class="micro strong">16% below market</text>
+        <text x="79" y="43" text-anchor="middle" class="micro strong">16% below demo reference</text>
         <text x="323" y="43" text-anchor="end" class="micro white strong">SV01-245</text>
         <text x="178" y="120" text-anchor="middle" class="card-initial">G</text>
         <text x="30" y="174" class="card-visual-label">GARDEVOIR EX</text>
@@ -394,7 +394,7 @@
         <text x="192" y="273" text-anchor="middle" class="micro">Lightly Played</text>
         <line x1="18" y1="296" x2="338" y2="296" class="line"/>
         <text x="18" y="327" class="card-price">$25.50</text>
-        <text x="18" y="345" class="micro green strong">$5.72 below market</text>
+        <text x="18" y="345" class="micro green strong">$5.72 below demo reference</text>
         <circle cx="316" cy="325" r="19" fill="#111936"/>
         <path d="M308 325h16M316 317v16" stroke="#ffffff" stroke-width="1.8"/>
         <circle cx="32" cy="392" r="14" fill="#eeedff"/>
@@ -452,8 +452,8 @@
       <text x="104" y="187" class="eyebrow-inverse">POKEMON TCG MARKETPLACE</text>
       <text x="64" y="250" class="hero-title-tablet">Find the card your binder</text>
       <text x="64" y="294" class="hero-title-tablet">is missing.</text>
-      <text x="64" y="332" class="hero-copy">Compare condition-graded singles from trusted sellers, track market prices,</text>
-      <text x="64" y="355" class="hero-copy">and save every search worth coming back to.</text>
+      <text x="64" y="332" class="hero-copy">Compare listing prices, seller-reported condition, and synthetic seller history,</text>
+      <text x="64" y="355" class="hero-copy">then view demo market context and save searches worth revisiting.</text>
       <rect x="64" y="382" width="122" height="44" rx="9" fill="#f7ce55"/>
       <text x="125" y="409" text-anchor="middle" class="button-copy">Shop singles</text>
       <rect x="198" y="382" width="164" height="44" rx="9" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.3"/>
@@ -489,8 +489,8 @@
       <g transform="translate(48 743)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
         <path d="M12 19l6 6 11-13" stroke="#5850ec" stroke-width="2.2" fill="none"/>
-        <text x="56" y="15" class="body strong">Condition guaranteed</text>
-        <text x="56" y="34" class="small">Every listing uses a clear grading standard.</text>
+        <text x="56" y="15" class="body strong">Seller-reported condition</text>
+        <text x="56" y="34" class="small">Compare the condition supplied for each demo listing.</text>
       </g>
       <g transform="translate(48 813)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
@@ -501,8 +501,8 @@
       <g transform="translate(48 883)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
         <text x="20" y="26" text-anchor="middle" class="body primary strong">$</text>
-        <text x="56" y="15" class="body strong">Market-aware prices</text>
-        <text x="56" y="34" class="small">Compare each listing with synthetic market data.</text>
+        <text x="56" y="15" class="body strong">Demo market context</text>
+        <text x="56" y="34" class="small">Synthetic reference; freshness unavailable.</text>
       </g>
     </g>
 
@@ -548,7 +548,7 @@
         <text x="44" y="1397" class="card-price">12</text>
         <text x="70" y="1397" class="small">cards</text>
         <text x="138" y="1397" class="card-price">11</text>
-        <text x="165" y="1397" class="small">at or below market</text>
+        <text x="165" y="1397" class="small">at or below demo reference</text>
         <text x="624" y="1397" class="small strong">Export</text>
       </g>
 
@@ -561,7 +561,7 @@
         <text x="20" y="146" class="micro">Surging Sparks  -  238/191</text>
         <text x="20" y="169" class="card-title">Pikachu ex</text>
         <text x="20" y="197" class="card-price">$329.00</text>
-        <text x="20" y="214" class="micro green strong">$12.28 below market</text>
+        <text x="20" y="214" class="micro green strong">$12.28 below demo reference</text>
         <circle cx="322" cy="198" r="18" fill="#111936"/>
         <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
         <text x="20" y="246" class="micro strong">Mossdeep Cards  -  4.9  -  1 left</text>
@@ -574,7 +574,7 @@
         <text x="20" y="146" class="micro">Paldean Fates  -  234/091</text>
         <text x="20" y="169" class="card-title">Charizard ex</text>
         <text x="20" y="197" class="card-price">$164.50</text>
-        <text x="20" y="214" class="micro green strong">$6.58 below market</text>
+        <text x="20" y="214" class="micro green strong">$6.58 below demo reference</text>
         <circle cx="322" cy="198" r="18" fill="#111936"/>
         <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
         <text x="20" y="246" class="micro strong">Cinnabar Collectibles  -  5.0  -  2 left</text>
@@ -587,7 +587,7 @@
         <text x="20" y="146" class="micro">Scarlet and Violet - 151  -  205/165</text>
         <text x="20" y="169" class="card-title">Mew ex</text>
         <text x="20" y="197" class="card-price">$78.00</text>
-        <text x="20" y="214" class="micro green strong">$2.44 below market</text>
+        <text x="20" y="214" class="micro green strong">$2.44 below demo reference</text>
         <circle cx="322" cy="198" r="18" fill="#111936"/>
         <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
         <text x="20" y="246" class="micro strong">Celadon Card Co.  -  4.8  -  3 left</text>
@@ -599,7 +599,7 @@
         <text x="20" y="146" class="micro">Scarlet and Violet - 151  -  166/165</text>
         <text x="20" y="169" class="card-title">Bulbasaur</text>
         <text x="20" y="197" class="card-price">$32.75</text>
-        <text x="20" y="214" class="micro green strong">$2.37 below market</text>
+        <text x="20" y="214" class="micro green strong">$2.37 below demo reference</text>
         <circle cx="322" cy="198" r="18" fill="#111936"/>
         <path d="M314 198h16M322 190v16" stroke="#ffffff" stroke-width="1.8"/>
         <text x="20" y="246" class="micro strong">Viridian Vault  -  4.9  -  5 left</text>
@@ -643,8 +643,8 @@
       <text x="66" y="161" class="eyebrow-inverse">POKEMON TCG MARKETPLACE</text>
       <text x="32" y="213" class="hero-title-mobile">Find the card your</text>
       <text x="32" y="252" class="hero-title-mobile">binder is missing.</text>
-      <text x="32" y="292" class="small" fill="#cbd0e9">Compare condition-graded singles from trusted</text>
-      <text x="32" y="311" class="small" fill="#cbd0e9">sellers, track market prices, and save searches.</text>
+      <text x="32" y="292" class="small" fill="#cbd0e9">Compare listing price, seller-reported condition,</text>
+      <text x="32" y="311" class="small" fill="#cbd0e9">synthetic seller history, and demo market context.</text>
       <rect x="32" y="338" width="326" height="44" rx="9" fill="#f7ce55"/>
       <text x="195" y="365" text-anchor="middle" class="button-copy">Shop singles</text>
       <rect x="32" y="394" width="326" height="44" rx="9" fill="#ffffff" opacity="0.08" stroke="#ffffff" stroke-opacity="0.3"/>
@@ -680,8 +680,8 @@
       <g transform="translate(28 760)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
         <path d="M12 19l6 6 11-13" stroke="#5850ec" stroke-width="2.2" fill="none"/>
-        <text x="52" y="15" class="small strong">Condition guaranteed</text>
-        <text x="52" y="34" class="micro">Every listing uses a clear grading standard.</text>
+        <text x="52" y="15" class="small strong">Seller-reported condition</text>
+        <text x="52" y="34" class="micro">Condition supplied for each demo listing.</text>
       </g>
       <g transform="translate(28 830)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
@@ -692,8 +692,8 @@
       <g transform="translate(28 900)">
         <circle cx="20" cy="20" r="20" fill="#eeedff"/>
         <text x="20" y="26" text-anchor="middle" class="body primary strong">$</text>
-        <text x="52" y="15" class="small strong">Market-aware prices</text>
-        <text x="52" y="34" class="micro">Compare each listing with synthetic market data.</text>
+        <text x="52" y="15" class="small strong">Demo market context</text>
+        <text x="52" y="34" class="micro">Synthetic reference; freshness unavailable.</text>
       </g>
     </g>
 
@@ -740,7 +740,7 @@
         <text x="28" y="1579" class="card-price">12</text>
         <text x="53" y="1579" class="small">cards</text>
         <text x="110" y="1579" class="card-price">11</text>
-        <text x="136" y="1579" class="small">at or below market</text>
+        <text x="136" y="1579" class="small">at or below demo reference</text>
         <rect x="326" y="1552" width="36" height="36" rx="9" fill="#ffffff"/>
         <path d="M344 1558v16m-5-5 5 5 5-5m-11 10h12" class="wire-line"/>
       </g>
@@ -753,7 +753,7 @@
         <text x="20" y="149" class="micro">Surging Sparks  -  238/191</text>
         <text x="20" y="172" class="card-title">Pikachu ex</text>
         <text x="20" y="201" class="card-price">$329.00</text>
-        <text x="20" y="218" class="micro green strong">$12.28 below market</text>
+        <text x="20" y="218" class="micro green strong">$12.28 below demo reference</text>
         <circle cx="326" cy="202" r="18" fill="#111936"/>
         <path d="M318 202h16M326 194v16" stroke="#ffffff" stroke-width="1.8"/>
         <text x="20" y="244" class="micro strong">Mossdeep Cards  -  4.9  -  1 left</text>
@@ -766,7 +766,7 @@
         <text x="20" y="149" class="micro">Paldean Fates  -  234/091</text>
         <text x="20" y="172" class="card-title">Charizard ex</text>
         <text x="20" y="201" class="card-price">$164.50</text>
-        <text x="20" y="218" class="micro green strong">$6.58 below market</text>
+        <text x="20" y="218" class="micro green strong">$6.58 below demo reference</text>
         <circle cx="326" cy="202" r="18" fill="#111936"/>
         <path d="M318 202h16M326 194v16" stroke="#ffffff" stroke-width="1.8"/>
         <text x="20" y="244" class="micro strong">Cinnabar Collectibles  -  5.0  -  2 left</text>
@@ -778,7 +778,7 @@
         <text x="20" y="149" class="micro">Scarlet and Violet - 151  -  205/165</text>
         <text x="20" y="172" class="card-title">Mew ex</text>
         <text x="20" y="201" class="card-price">$78.00</text>
-        <text x="20" y="218" class="micro green strong">$2.44 below market</text>
+        <text x="20" y="218" class="micro green strong">$2.44 below demo reference</text>
         <circle cx="326" cy="202" r="18" fill="#111936"/>
         <path d="M318 202h16M326 194v16" stroke="#ffffff" stroke-width="1.8"/>
         <text x="20" y="244" class="micro strong">Celadon Card Co.  -  4.8  -  3 left</text>
