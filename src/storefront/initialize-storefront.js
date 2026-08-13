@@ -190,6 +190,12 @@ export function initializeStorefront({
     return `Unavailable ${joined} ${verb}.`;
   }
 
+  function focusSavedSearchControl(attribute, id) {
+    [...elements.searches.querySelectorAll(`[${attribute}]`)]
+      .find((control) => control.getAttribute(attribute) === id)
+      ?.focus();
+  }
+
   function renderSavedSearches() {
     const { searches, issues } = readSavedSearchesState(storage);
     if (activeSearchId && !searches.some((search) => search.id === activeSearchId)) {
@@ -320,6 +326,7 @@ export function initializeStorefront({
       if (search) {
         activeSearchId = search.id;
         updateFilters(search.filters);
+        focusSavedSearchControl("data-search-id", search.id);
         showToast(search.unavailableCriteria.length
           ? `Applied “${search.name}”. ${describeUnavailable(search.unavailableCriteria, search.unavailableCriteria.length === 1 ? "was omitted" : "were omitted")}`
           : `Applied “${search.name}”`);
@@ -354,6 +361,7 @@ export function initializeStorefront({
       });
       renderSavedSearches();
       showToast(result.ok ? `Updated “${search.name}” on this device` : "Couldn’t update this saved search");
+      if (result.ok) focusSavedSearchControl("data-search-id", search.id);
     }
 
     if (saveAsButton) openSaveDialog();

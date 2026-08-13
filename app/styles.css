@@ -1542,9 +1542,19 @@ dialog h2 + p {
     width: 100%;
     max-width: none;
   }
+
 }
 
 @media (max-width: 38rem) {
+  .search-list {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+
+  .saved-search {
+    min-width: 0;
+  }
+
   .announcement span:nth-child(n + 2) {
     display: none;
   }

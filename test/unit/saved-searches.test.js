@@ -92,6 +92,37 @@ test("reports corrupt, unsupported, and stale records without blocking valid sea
   expect(state.issues).toEqual([{ type: "unsupported-version", recordName: "Future record" }]);
 });
 
+test("invalid records cannot crowd valid searches out of the read limit", () => {
+  const invalid = Array.from({ length: 20 }, (_, index) => ({ id: index }));
+  const storage = memoryStorage({
+    [SAVED_SEARCHES_KEY]: JSON.stringify([
+      ...invalid,
+      { id: "valid", name: "Still visible", createdAt: "2026-07-29T12:00:00Z", filters: {} }
+    ])
+  });
+
+  expect(readSavedSearches(storage).map((search) => search.id)).toEqual(["valid"]);
+});
+
+test("mutations preserve unsupported records for a newer app version", () => {
+  const future = {
+    id: "future",
+    name: "Future record",
+    schemaVersion: 2,
+    createdAt: "2026-07-29T12:00:00Z",
+    filters: { futureCriterion: true }
+  };
+  const storage = memoryStorage({ [SAVED_SEARCHES_KEY]: JSON.stringify([future]) });
+
+  expect(saveSearch(storage, {
+    id: "current",
+    name: "Current record",
+    createdAt: "2026-07-29T12:00:00Z",
+    filters: {}
+  }).ok).toBe(true);
+  expect(JSON.parse(storage.value(SAVED_SEARCHES_KEY))).toContainEqual(future);
+});
+
 test("saving deduplicates IDs and removing is persistent", () => {
   const storage = memoryStorage();
   const first = { id: "same", name: "First", createdAt: "2026-07-29T12:00:00Z", filters: {} };

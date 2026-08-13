@@ -137,9 +137,13 @@ test("recovers malformed storage and supports Saved Search save, apply, rename, 
   expect(window.location.search).toBe("?q=Mew");
   expect(document.querySelector("[data-search-state]").textContent).toBe("Active");
   expect(document.querySelector("[data-search-id]").getAttribute("aria-current")).toBe("true");
+  expect(document.activeElement).toBe(document.querySelector("[data-search-id]"));
 
   updateQuery("Mew ex");
   expect(document.querySelector("[data-search-state]").textContent).toBe("Edited");
+  document.querySelector("[data-update-id]").click();
+  expect(document.querySelector("[data-search-state]").textContent).toBe("Active");
+  expect(document.activeElement).toBe(document.querySelector("[data-search-id]"));
 
   document.querySelector("[data-rename-id]").click();
   expect(document.querySelector("#save-dialog-title").textContent).toBe("Rename saved search");

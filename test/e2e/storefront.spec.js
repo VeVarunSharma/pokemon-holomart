@@ -139,6 +139,7 @@ test("persists a Saved Search across reload, then applies and deletes it", async
   await savedSearch.click();
 
   await expect(page.getByRole("status")).toHaveText(`Applied “${savedSearchName}”`);
+  await expect(savedSearch).toBeFocused();
   await expect(page.getByText("Active", { exact: true })).toBeVisible();
   await expect(rarity).toHaveValue("Illustration Rare");
   await expect(expansion).toHaveValue("Scarlet & Violet—151");
