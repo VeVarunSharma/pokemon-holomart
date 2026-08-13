@@ -157,6 +157,50 @@ Focus init-price-drop-alerts.
 /stakeholder-program-update Draft a concise update for product, design, and engineering leaders. Separate shipped demo behavior, validated repository facts, synthetic evidence, proposed roadmap options, open decisions, and risks.
 ```
 
+## QA workflows
+
+The reusable QA prompts route work to the repository-scoped `qa-engineer` custom agent.
+
+### Plan without editing
+
+```text
+/qa-test-plan Evaluate Saved Searches create, apply, delete, malformed storage, quota failure, stale criteria, and multi-tab risks.
+```
+
+Expected: a requirement trace, risk matrix, prioritized test cases, exact commands, and explicit unknowns. No files are edited.
+
+### Verify a change
+
+```text
+/qa-change-verification Verify the current Saved Searches changes against their acceptance criteria. Run targeted tests and do not edit production code.
+```
+
+Expected: a pass, fail, partial, or blocked verdict with commands, repository evidence, findings, and residual risk.
+
+### Reproduce a reported defect
+
+```text
+/qa-bug-reproduction Reproduce the report that malformed browser storage prevents the catalog from loading.
+```
+
+Expected: reproduced, not reproduced, intermittent, or blocked, followed by exact steps and evidence.
+
+### Author a regression test
+
+Select `qa-engineer` directly and use an explicit edit authorization:
+
+```text
+Add deterministic regression tests for the confirmed malformed-storage defect under test/**. Run the smallest targeted test command. Do not edit production code.
+```
+
+### Hand off from another agent
+
+Use a bounded handoff that repeats the authority limit:
+
+```text
+Use the qa-engineer custom agent to verify this change against the supplied acceptance criteria. It may run established local checks but must not edit files. Return the verification verdict, evidence, findings, and residual risk.
+```
+
 ## Role-based shortcuts
 
 ### Product manager

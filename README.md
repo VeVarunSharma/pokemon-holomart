@@ -86,6 +86,22 @@ The complete run-of-show is in [the facilitator guide](docs/facilitator-guide.md
 /figma-ux-review Review Saved Searches, listing trust context, empty states, and recovery using the committed local design fallback.
 ```
 
+QA workflows route to the repository-scoped `qa-engineer` agent:
+
+```text
+/qa-test-plan Evaluate Saved Searches create, apply, delete, malformed storage, quota failure, stale criteria, and multi-tab risks.
+```
+
+```text
+/qa-change-verification Verify the current Saved Searches changes against their acceptance criteria. Run targeted tests and do not edit production code.
+```
+
+```text
+/qa-bug-reproduction Reproduce the report that malformed browser storage prevents the catalog from loading.
+```
+
+To authorize a regression-test edit, select `qa-engineer` directly and say: `Add deterministic regression tests for this defect under test/**. Do not edit production code.`
+
 ```text
 /epic-subissue-draft init-saved-searches-preview
 ```

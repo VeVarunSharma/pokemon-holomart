@@ -32,11 +32,15 @@ const requiredFiles = [
   ".github/prompts/roadmap-review.prompt.md",
   ".github/prompts/product-decision-brief.prompt.md",
   ".github/prompts/ui-change-preview.prompt.md",
+  ".github/prompts/qa-test-plan.prompt.md",
+  ".github/prompts/qa-change-verification.prompt.md",
+  ".github/prompts/qa-bug-reproduction.prompt.md",
   ".github/prompts/roadmap-scenario-review.prompt.md",
   ".github/prompts/stakeholder-program-update.prompt.md",
   ".github/agents/product-strategist.agent.md",
   ".github/agents/ux-reviewer.agent.md",
   ".github/agents/delivery-planner.agent.md",
+  ".github/agents/qa-engineer.agent.md",
   ".github/skills/roadmap-planning/SKILL.md",
   ".github/ISSUE_TEMPLATE/product-discovery.yml",
   ".github/ISSUE_TEMPLATE/epic.yml",
@@ -260,6 +264,11 @@ const scanFiles = [
   ...await walk("product"),
   ...await walk("design")
 ].filter((file) => !/\.(png|jpg|jpeg|gif|ico)$/i.test(file));
+const qaPromptFiles = new Set([
+  ".github/prompts/qa-test-plan.prompt.md",
+  ".github/prompts/qa-change-verification.prompt.md",
+  ".github/prompts/qa-bug-reproduction.prompt.md"
+]);
 const secretPatterns = [
   { name: "private key", pattern: /-----BEGIN (?:RSA |EC |OPENSSH )?PRIVATE KEY-----/ },
   { name: "GitHub token", pattern: /\bgh[psu]_[A-Za-z0-9]{30,}\b/ },
@@ -273,8 +282,12 @@ for (const relativeFile of scanFiles) {
   } catch {
     continue;
   }
+  const portableFile = relativeFile.split(path.sep).join("/");
   for (const { name, pattern } of secretPatterns) {
     record(!pattern.test(content), `${relativeFile}: possible ${name}`);
+  }
+  if (qaPromptFiles.has(portableFile)) {
+    record(/^agent:\s*qa-engineer\s*$/m.test(content), `${relativeFile}: must route to qa-engineer`);
   }
   if (relativeFile.endsWith(".agent.md")) {
     const frontmatter = content.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -282,6 +295,17 @@ for (const relativeFile of scanFiles) {
     if (frontmatter) {
       record(!/\bfigma\b/i.test(frontmatter[1]), `${relativeFile}: Figma must not be enabled in agent frontmatter`);
       record(!/\bmcp\b/i.test(frontmatter[1]), `${relativeFile}: MCP tools/config must not be enabled in agent frontmatter`);
+      if (portableFile === ".github/agents/qa-engineer.agent.md") {
+        const toolsBlock = frontmatter[1].match(/^tools:\s*\r?\n((?:\s+-\s+[^\r\n]+\r?\n?)*)/m)?.[1] ?? "";
+        const tools = toolsBlock
+          .split(/\r?\n/)
+          .map((line) => line.replace(/^\s*-\s*/, "").trim())
+          .filter(Boolean);
+        record(tools.join(",") === "read,search,execute,edit", `${relativeFile}: tools must be exactly read, search, execute, edit`);
+        record(content.includes("Create or edit files under `test/**` only"), `${relativeFile}: test-only edit boundary missing`);
+        record(content.includes("Never edit `app/**`, `src/**`, `scripts/**`, `product/**`, `design/**`"), `${relativeFile}: production edit boundary missing`);
+        record(content.includes("Never commit, push, call `gh`"), `${relativeFile}: remote-write boundary missing`);
+      }
     }
   }
 }
