@@ -41,6 +41,7 @@ const requiredFiles = [
   ".github/agents/ux-reviewer.agent.md",
   ".github/agents/delivery-planner.agent.md",
   ".github/agents/qa-engineer.agent.md",
+  ".github/agents/issue-qa.agent.md",
   ".github/skills/roadmap-planning/SKILL.md",
   ".github/ISSUE_TEMPLATE/product-discovery.yml",
   ".github/ISSUE_TEMPLATE/epic.yml",
