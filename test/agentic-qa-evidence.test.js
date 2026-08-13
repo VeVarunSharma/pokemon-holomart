@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import path from "node:path";
 import {
+  deterministicGateDefinitions,
   ensureExternalArtifactDirectory,
   npmInvocation,
   normalizeSeed,
@@ -153,6 +154,25 @@ test("npm gate invocation uses fixed tokens and a Windows command shell", () => 
     () => npmInvocation(["run", "validate&&whoami"], "win32", "cmd.exe"),
     /fixed command tokens/
   );
+});
+
+test("deterministic gates use the current Vitest and native Node suites", () => {
+  const gates = deterministicGateDefinitions("linux");
+  const byId = Object.fromEntries(gates.map((gate) => [gate.id, gate]));
+
+  assert.deepEqual(
+    { command: byId["unit-contracts"].command, args: byId["unit-contracts"].args },
+    { command: "npm", args: ["run", "test:unit"] }
+  );
+  assert.deepEqual(
+    { command: byId["integration-contracts"].command, args: byId["integration-contracts"].args },
+    { command: "npm", args: ["run", "test:integration"] }
+  );
+  assert.deepEqual(byId["full-node-suite"].args, [
+    "--test",
+    "test/qa-change-risk.test.js",
+    "test/agentic-qa-evidence.test.js"
+  ]);
 });
 
 test("deterministic evidence rejects stale revisions, missing gates, and inconsistent summaries", () => {

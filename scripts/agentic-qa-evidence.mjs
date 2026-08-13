@@ -425,48 +425,40 @@ function markdownCell(value) {
   return String(value).replaceAll("|", "\\|").replace(/\r?\n/g, " ");
 }
 
-async function runDeterministicGates() {
-  const context = contextFromEnvironment();
-  const manifest = await readJson(path.join(context.artifactDir, "manifest.json"));
-  assert(manifest.testedRevision === context.headSha, "manifest revision does not match requested revision");
-  const gates = [
+export function deterministicGateDefinitions(
+  platform = process.platform,
+  commandShell = process.env.ComSpec
+) {
+  return [
     {
       id: "artifact-validation",
       category: "integration",
-      ...npmInvocation(["run", "validate"])
+      ...npmInvocation(["run", "validate"], platform, commandShell)
     },
     {
       id: "unit-contracts",
       category: "unit",
-      command: process.execPath,
-      args: [
-        "--test",
-        "test/csv.test.js",
-        "test/filter-state.test.js",
-        "test/saved-searches.test.js",
-        "test/share-state.test.js"
-      ]
+      ...npmInvocation(["run", "test:unit"], platform, commandShell)
     },
     {
       id: "integration-contracts",
       category: "integration",
-      command: process.execPath,
-      args: [
-        "--test",
-        "test/reset-demo.test.js",
-        "test/roadmap-to-issues.test.js",
-        "test/roadmap-studio.test.js"
-      ]
+      ...npmInvocation(["run", "test:integration"], platform, commandShell)
     },
     {
       id: "full-node-suite",
       category: "regression",
-      ...npmInvocation(["test"])
+      command: process.execPath,
+      args: [
+        "--test",
+        "test/qa-change-risk.test.js",
+        "test/agentic-qa-evidence.test.js"
+      ]
     },
     {
       id: "issue-preview",
       category: "integration",
-      ...npmInvocation(["run", "issues:preview:json"])
+      ...npmInvocation(["run", "issues:preview:json"], platform, commandShell)
     },
     {
       id: "browser-e2e",
@@ -475,6 +467,13 @@ async function runDeterministicGates() {
       args: [path.join(ROOT, "scripts", "agentic-qa-browser.cjs")]
     }
   ];
+}
+
+async function runDeterministicGates() {
+  const context = contextFromEnvironment();
+  const manifest = await readJson(path.join(context.artifactDir, "manifest.json"));
+  assert(manifest.testedRevision === context.headSha, "manifest revision does not match requested revision");
+  const gates = deterministicGateDefinitions();
 
   const results = [];
   for (const gate of gates) results.push(await runGate(context.artifactDir, gate));

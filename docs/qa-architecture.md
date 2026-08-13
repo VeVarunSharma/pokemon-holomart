@@ -2,7 +2,7 @@
 
 > **SYNTHETIC / DEMO-ONLY.** This page describes committed repository mechanics and local fixture-based QA. It is not evidence of real shopper outcomes, production readiness, or a defect-free product. No product-evidence source IDs are used here; every implementation claim is tied to repository `path:line` evidence.
 
-HoloMart uses several QA surfaces for different moments in delivery. Prompts and agents help people plan, reproduce, and interpret. The QA Change-Risk canvas assesses a local diff before review. Conventional tests and CI provide repeatable checks. The pull-request agentic workflow adds a fixed browser acceptance check plus an advisory agent comment. None of these removes the final human decision.
+HoloMart uses several QA surfaces for different moments in delivery. Prompts and agents help people plan, reproduce, and interpret. The QA Change-Risk canvas assesses a local diff before review. Conventional tests and CI provide repeatable checks. Two pull-request agentic workflows add fixed browser acceptance, deterministic evidence, independent review, and advisory reporting. None of these removes the final human decision.
 
 ## Architecture
 
@@ -27,13 +27,17 @@ flowchart LR
     TESTS["Artifact validation<br/>unit, integration, and E2E tests"]
     FIXED["Fixed QA-01 through QA-07<br/>Playwright acceptance suite"]
     ART["qa-user-behaviour-evidence artifact"]
+    DET["Six deterministic gates<br/>including QA-01 through QA-07"]
+    BUNDLE["Bounded Agentic QA<br/>evidence bundle"]
   end
 
   subgraph PullRequest["Pull-request outputs"]
     CI["Four conventional CI checks"]
-    AW["QA User Behaviour agent"]
+    AW["QA User Behaviour<br/>explanation agent"]
     COMMENT["One advisory PR comment"]
     CHECK["QA User Behaviour check"]
+    REVIEW["HoloMart independent<br/>QA reviewer"]
+    VERDICT["Structured advisory verdict"]
   end
 
   H{"Human review and merge decision"}
@@ -51,12 +55,16 @@ flowchart LR
   ART --> AW --> COMMENT
   ART --> CHECK
   AW -. "job completion dependency" .-> CHECK
+  PR --> DET --> BUNDLE
+  BUNDLE --> REVIEW --> VERDICT
+  DET --> H
+  REVIEW -. "advisory" .-> H
   TESTS --> H
   COMMENT -. "advisory" .-> H
   CHECK --> H
 ```
 
-Solid arrows represent execution or evidence flow. Dotted arrows represent context or advice. In particular, the agent comment cannot change the fixed acceptance result: the workflow says the conventional Playwright suite is the only source of the merge-gating conclusion (`.github/workflows/qa-user-behaviour.md:557-574`), and the check job derives success only when all seven validated cases pass (`.github/workflows/qa-user-behaviour.md:475-553`).
+Solid arrows represent execution or evidence flow. Dotted arrows represent context or advice. In `QA User Behaviour`, the explanation agent cannot change the fixed acceptance result: the conventional Playwright suite is the only source of its check conclusion (`.github/workflows/qa-user-behaviour.md:572-589`), and success requires all seven validated cases (`.github/workflows/qa-user-behaviour.md:490-568`). In `HoloMart Agentic QA`, deterministic gates remain authoritative while the independent test-strength and exploratory review is advisory (`.github/workflows/holomart-agentic-qa.md:246-309`).
 
 ## QA component map
 
@@ -66,19 +74,20 @@ Solid arrows represent execution or evidence flow. Dotted arrows represent conte
 | `qa-engineer` | Performs risk-based planning, reproduction, change verification, regression-test work, and release checks. | May edit only `test/**` after explicit human authorization; it never edits production/configuration files or writes remotely. | Interactive local QA and bounded handoffs from another agent. | `.github/agents/qa-engineer.agent.md:13-39`, `.github/agents/qa-engineer.agent.md:41-65` |
 | `issue-qa` | Treats an assigned issue as a test charter, traces acceptance criteria, reproduces defects, and reports a verdict. | Defaults to verification-only. Tests or a production fix require explicit issue authorization; unrelated remote resources remain out of scope. | Issue implementation and issue-scoped verification, usually before or while preparing a PR. | `.github/agents/issue-qa.agent.md:1-10`, `.github/agents/issue-qa.agent.md:21-31`, `.github/agents/issue-qa.agent.md:93-120` |
 | QA Change-Risk canvas | Reads local Git evidence, maps changed paths to capabilities, infers risks, proposes automated/manual checks, records results, and exports a local summary. | Runs only existing allowlisted commands after an exact-command preview and confirmation; state stays in session artifacts and release remains a human decision. | Local pre-PR and review preparation. | `.github/extensions/qa-change-risk/extension.mjs:94-123`, `.github/extensions/qa-change-risk/model.mjs:755-839`, `.github/extensions/qa-change-risk/model.mjs:891-965`, `.github/extensions/qa-change-risk/extension.mjs:307-331`, `.github/extensions/qa-change-risk/model.mjs:1215-1223` |
-| QA User Behaviour agentic workflow | Runs seven fixed browser journeys, preserves their result artifact, lets an agent clarify failures or add advisory observations, and publishes one safe PR comment. | Repository edits are disabled; the agent cannot reinterpret fixed statuses. The generated check fails closed when evidence is missing, malformed, incomplete, or non-passing. | Automatic pull-request QA. | `.github/workflows/qa-user-behaviour.md:1-57`, `.github/workflows/qa-user-behaviour.md:79-185`, `.github/workflows/qa-user-behaviour.md:557-598` |
+| QA User Behaviour agentic workflow | Runs seven fixed browser journeys, preserves their result artifact, lets an agent clarify failures or add advisory observations, and publishes one safe PR comment. | Repository edits are disabled; the agent cannot reinterpret fixed statuses. The generated check fails closed when evidence is missing, malformed, incomplete, or non-passing. | Automatic pull-request QA. | `.github/workflows/qa-user-behaviour.md:1-57`, `.github/workflows/qa-user-behaviour.md:94-200`, `.github/workflows/qa-user-behaviour.md:572-613` |
+| HoloMart Agentic QA workflow | Captures an immutable PR revision, runs six deterministic gates and seven browser cases, independently reviews changed-test strength, and performs three seed-selected exploratory charters. | Checkout, GitHub, and edit access are read-only. Deterministic failures block; the model review records a structured local verdict but has no comment, check, issue, or code-write output. | Automatic for relevant non-draft PR paths, with separately approval-gated manual dispatch. | `.github/workflows/holomart-agentic-qa.md:1-48`, `.github/workflows/holomart-agentic-qa.md:71-159`, `.github/workflows/holomart-agentic-qa.md:165-232`, `.github/workflows/holomart-agentic-qa.md:239-342` |
 | Conventional test and CI workflows | Run artifact validation, unit coverage, integration coverage, and Chromium E2E checks as independent jobs. | Read-only repository checkout; artifacts contain coverage or failure evidence. | Push and pull-request quality baseline. | `.github/workflows/ci.yml:1-36`, `.github/workflows/unit-tests.yml:1-41`, `.github/workflows/integration-tests.yml:1-41`, `.github/workflows/e2e-tests.yml:1-47` |
-| Skills | The required `roadmap-planning` skill can create upstream scope, acceptance, validation, dependencies, and human checkpoints. It is not a QA executor. | Preview-only until explicit remote-write approval. | Before QA, where product scope becomes testable delivery work. | `scripts/validate-artifacts.mjs:40-45`, `.github/skills/roadmap-planning/SKILL.md:1-14`, `.github/skills/roadmap-planning/SKILL.md:23-84` |
+| Skills | The required `roadmap-planning` skill can create upstream scope, acceptance, validation, dependencies, and human checkpoints. It is not a QA executor. | Preview-only until explicit remote-write approval. | Before QA, where product scope becomes testable delivery work. | `scripts/validate-artifacts.mjs:41-46`, `.github/skills/roadmap-planning/SKILL.md:1-14`, `.github/skills/roadmap-planning/SKILL.md:23-84` |
 
 ### Prompts, agents, skills, and workflows are different
 
 - A **prompt** is a named, reusable request. The three `/qa-*` prompts select `qa-engineer` in frontmatter and narrow its task (`.github/prompts/qa-test-plan.prompt.md:1-6`, `.github/prompts/qa-change-verification.prompt.md:1-6`, `.github/prompts/qa-bug-reproduction.prompt.md:1-6`).
 - An **agent** owns role, tools, operating modes, and mutation limits. `qa-engineer` is intentionally test-only when editing, while `issue-qa` can enter a narrowly authorized fix-and-verify mode (`.github/agents/qa-engineer.agent.md:13-39`, `.github/agents/issue-qa.agent.md:21-31`).
-- A **skill** supplies reusable domain procedure that can be invoked across requests. The current validated required-file set lists roadmap planning and no QA-specific skill (`scripts/validate-artifacts.mjs:40-45`, `.github/skills/roadmap-planning/SKILL.md:1-14`).
-- An **agentic workflow** is pull-request automation. It combines conventional setup and fixed acceptance code with a constrained agent that explains results through a safe output (`.github/workflows/qa-user-behaviour.md:59-185`, `.github/workflows/qa-user-behaviour.md:557-586`).
+- A **skill** supplies reusable domain procedure that can be invoked across requests. The current validated required-file set lists roadmap planning and no QA-specific skill (`scripts/validate-artifacts.mjs:41-46`, `.github/skills/roadmap-planning/SKILL.md:1-14`).
+- An **agentic workflow** combines deterministic setup with a constrained agent. `QA User Behaviour` publishes a safe PR comment and fixed check; `HoloMart Agentic QA` keeps its independent review inside a bounded artifact with no repository-write output (`.github/workflows/qa-user-behaviour.md:59-200`, `.github/workflows/holomart-agentic-qa.md:111-159`, `.github/workflows/holomart-agentic-qa.md:333-342`).
 - A **canvas extension** is an interactive local UI backed by deterministic code. QA Change-Risk exposes refresh, plan, manual-result, and export actions, and runs a loopback-only server for its panel (`.github/extensions/qa-change-risk/extension.mjs:731-824`, `.github/extensions/qa-change-risk/extension.mjs:868-995`).
 
-**Missing from the validated QA surface:** there is no dedicated QA `SKILL.md` in the required artifact set. QA reuse is presently implemented through prompts, the two agent definitions, the canvas, and the PR workflow. Adding a QA skill is a future human-owned design choice; it should not duplicate the existing agent policies.
+**Missing from the validated QA surface:** there is no dedicated QA `SKILL.md` in the required artifact set. QA reuse is presently implemented through prompts, the two agent definitions, the canvas, and the PR workflows. Adding a QA skill is a future human-owned design choice; it should not duplicate the existing agent policies.
 
 ## How QA fits into the delivery pipeline
 
@@ -117,16 +126,29 @@ QA Change-Risk:
 
 `npm test` runs unit then integration; `npm run test:all` adds E2E (`package.json:9-15`). Agents should start with the smallest relevant established command and broaden only when evidence requires it (`.github/agents/qa-engineer.agent.md:43-59`).
 
-### 5. Pull requests add fixed user-behaviour QA
+### 5. Pull requests add two bounded agentic QA paths
+
+#### 5.1 QA User Behaviour publishes a fixed browser check
 
 The `QA User Behaviour` workflow runs only for PR open, synchronize, reopen, and ready-for-review events and disables repository editing in the Copilot engine (`.github/workflows/qa-user-behaviour.md:1-19`). Its flow is:
 
-1. Start HoloMart locally and wait for `127.0.0.1:4173` (`.github/workflows/qa-user-behaviour.md:59-77`).
-2. Run fixed Playwright cases `QA-01` through `QA-07`, write `results.json` and `report.md`, and upload the evidence artifact (`.github/workflows/qa-user-behaviour.md:79-185`, `.github/workflows/qa-user-behaviour.md:427-434`).
-3. Let the constrained agent read those files, clarify failures with Playwright CLI when necessary, add clearly advisory observations, and publish exactly one safe PR comment (`.github/workflows/qa-user-behaviour.md:563-586`).
-4. After the agent job completes, validate that the artifact contains each fixed case exactly once with a valid status and non-empty evidence, then create a success/failure check from those results (`.github/workflows/qa-user-behaviour.md:449-553`).
+1. Install a pinned Playwright runtime, start HoloMart locally, and wait for `127.0.0.1:4173` (`.github/workflows/qa-user-behaviour.md:59-92`).
+2. Run fixed Playwright cases `QA-01` through `QA-07`, write `results.json` and `report.md`, and upload the evidence artifact (`.github/workflows/qa-user-behaviour.md:93-200`, `.github/workflows/qa-user-behaviour.md:202-449`).
+3. Let the constrained agent read those files, clarify failures with Playwright CLI when necessary, add clearly advisory observations, and publish exactly one safe PR comment (`.github/workflows/qa-user-behaviour.md:578-601`).
+4. After the agent job completes, validate that the artifact contains each fixed case exactly once with a valid status and non-empty evidence, then create a success/failure check from those results (`.github/workflows/qa-user-behaviour.md:464-568`).
 
 The source of truth is `.github/workflows/qa-user-behaviour.md`. Its `.lock.yml` is generated and must not be hand-edited; update the Markdown source and run `gh aw compile` (`.github/workflows/qa-user-behaviour.lock.yml:1-24`).
+
+#### 5.2 HoloMart Agentic QA separates blocking evidence from advisory review
+
+For relevant non-draft PR paths, `HoloMart Agentic QA` checks out the immutable head SHA and records the base SHA and deterministic seed (`.github/workflows/holomart-agentic-qa.md:5-48`, `.github/workflows/holomart-agentic-qa.md:59-69`). Its flow is:
+
+1. Provision pinned Playwright outside the checkout and prepare a bounded evidence directory (`.github/workflows/holomart-agentic-qa.md:165-193`).
+2. Run artifact validation, unit and integration suites, native Node QA harness tests, issue preview, and the seven-case browser harness (`scripts/agentic-qa-evidence.mjs:428-487`, `scripts/agentic-qa-browser.cjs:16-52`).
+3. Ask a fresh agent to challenge changed-test assertion strength and complete exactly three seeded exploratory charters without changing deterministic outcomes (`.github/workflows/holomart-agentic-qa.md:239-300`).
+4. Finalize revision, cleanliness, schema, review, size, and checksum evidence; upload it for seven days; then fail closed if the bundle is incomplete or a deterministic gate failed (`scripts/agentic-qa-evidence.mjs:746-864`, `.github/workflows/holomart-agentic-qa.md:200-232`).
+
+Its `workflow_dispatch` path is a remote mutation and remains separately approval-gated (`docs/agentic-qa-demo.md:199-219`).
 
 ### 6. A human makes the release or merge decision
 
@@ -137,18 +159,19 @@ The canvas stops at `Evidence complete: human sign-off required` even when every
 | Status | Limitation | Evidence and impact |
 | --- | --- | --- |
 | Partial | QA Change-Risk's targeted-test map names several legacy root-level paths such as `test/saved-searches.test.js`, while the active Vitest suites select `test/unit/**` and `test/integration/**`. | The canvas can still recommend full `npm test` or validation, but current targeted recommendations do not cover every active suite path (`.github/extensions/qa-change-risk/repo-config.mjs:5-38`, `vitest.unit.config.js:4-8`, `vitest.integration.config.js:4-8`). |
-| Partial | The QA Change-Risk extension has a `node:test` suite at `test/qa-change-risk.test.js`, but that root-level file is outside both Vitest include globs and no package script invokes it. | The extension's own tests are not part of the documented `npm test` or the three test CI workflows (`test/qa-change-risk.test.js:1-31`, `package.json:7-17`, `vitest.unit.config.js:4-8`, `vitest.integration.config.js:4-8`). |
-| Inferred risk | The fixed PR acceptance suite is embedded in the agentic workflow rather than shared with `test/e2e`, so the two browser suites can drift. | Keep journey changes synchronized between the inline fixed cases and Playwright E2E coverage (`.github/workflows/qa-user-behaviour.md:79-127`, `playwright.config.js:3-30`). |
-| Missing | No QA-specific skill is listed in the validated required artifact set. | Prompts and agents provide reuse today; whether a separate skill would reduce duplication is unresolved human design work (`scripts/validate-artifacts.mjs:40-45`, `.github/skills/roadmap-planning/SKILL.md:1-14`). |
+| Partial | The native QA harness tests remain outside `npm test` and the conventional unit and integration workflow globs. | HoloMart Agentic QA runs them explicitly as its `full-node-suite` gate, so that workflow must remain aligned with both root-level files (`package.json:9-15`, `vitest.unit.config.js:4-8`, `vitest.integration.config.js:4-8`, `scripts/agentic-qa-evidence.mjs:448-457`). |
+| Inferred risk | Browser journeys are implemented in the inline QA User Behaviour runner, the HoloMart Agentic QA browser harness, and the conventional Playwright E2E suite. | Keep shared journey contracts synchronized; passing one implementation does not prove the others are equivalent (`.github/workflows/qa-user-behaviour.md:94-142`, `scripts/agentic-qa-browser.cjs:16-52`, `playwright.config.js:3-30`). |
+| Missing | No QA-specific skill is listed in the validated required artifact set. | Prompts and agents provide reuse today; whether a separate skill would reduce duplication is unresolved human design work (`scripts/validate-artifacts.mjs:41-46`, `.github/skills/roadmap-planning/SKILL.md:1-14`). |
 | Unknown | Required-check and branch-protection policy is not stored here. | A published check is not automatically proof that GitHub requires it before merge. |
 
 ## Maintenance map
 
 | Change | Edit here | Follow-up |
 | --- | --- | --- |
-| QA role, authority, or verdict format | `.github/agents/qa-engineer.agent.md` or `.github/agents/issue-qa.agent.md` | Run `npm run validate`; the validator enforces QA prompt routing and the `qa-engineer` authority boundary (`scripts/validate-artifacts.mjs:269-310`). |
-| Reusable QA command | `.github/prompts/qa-*.prompt.md` | Keep `agent: qa-engineer`; artifact validation checks that routing (`scripts/validate-artifacts.mjs:269-293`). |
+| QA role, authority, or verdict format | `.github/agents/qa-engineer.agent.md` or `.github/agents/issue-qa.agent.md` | Run `npm run validate`; the validator enforces QA prompt routing and the `qa-engineer` authority boundary (`scripts/validate-artifacts.mjs:452-492`). |
+| Reusable QA command | `.github/prompts/qa-*.prompt.md` | Keep `agent: qa-engineer`; artifact validation checks that routing (`scripts/validate-artifacts.mjs:452-476`). |
 | Local change-risk mapping or safe command | `.github/extensions/qa-change-risk/repo-config.mjs` and `model.mjs` | Run `node --test test/qa-change-risk.test.js`; command construction is allowlisted (`.github/extensions/qa-change-risk/repo-config.mjs:208-254`). |
 | QA Change-Risk canvas lifecycle or UI | `.github/extensions/qa-change-risk/extension.mjs` or `renderer.mjs` | Run the extension test directly and visually review the canvas. |
-| Fixed PR journey or agent report | `.github/workflows/qa-user-behaviour.md` | Run `gh aw compile`; never edit the generated lock by hand (`.github/workflows/qa-user-behaviour.lock.yml:1-24`). |
+| Fixed PR journey, result check, or comment | `.github/workflows/qa-user-behaviour.md` | Validate and compile `qa-user-behaviour`; never edit the generated lock by hand (`.github/workflows/qa-user-behaviour.lock.yml:1-24`). |
+| Immutable Agentic QA gates, browser harness, or independent review | `scripts/agentic-qa-evidence.mjs`, `scripts/agentic-qa-browser.cjs`, or `.github/workflows/holomart-agentic-qa.md` | Run `node --test test/agentic-qa-evidence.test.js`, `npm run demo:check`, and the strict compile procedure in the runbook (`docs/agentic-qa-demo.md:58-113`). |
 | Unit, integration, or E2E contract | `test/**`, the matching config, `package.json`, and `.github/workflows/*-tests.yml` | Run the smallest affected layer before the wider suite. |

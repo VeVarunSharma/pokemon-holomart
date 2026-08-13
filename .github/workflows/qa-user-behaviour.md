@@ -57,12 +57,26 @@ safe-outputs:
 timeout-minutes: 30
 
 pre-agent-steps:
-  - name: Provision Chromium and start HoloMart
+  - name: Provision pinned Playwright and start HoloMart
     shell: bash
     run: |
       set -euo pipefail
-      playwright-cli install-browser
       mkdir -p /tmp/gh-aw/agent/qa/screenshots
+      runtime="$RUNNER_TEMP/qa-user-behaviour-playwright"
+      browsers="$RUNNER_TEMP/qa-user-behaviour-browsers"
+      npm install \
+        --prefix "$runtime" \
+        --no-save \
+        --ignore-scripts \
+        --no-audit \
+        --no-fund \
+        playwright@1.51.1
+      NODE_PATH="$runtime/node_modules" \
+        PLAYWRIGHT_BROWSERS_PATH="$browsers" \
+        node "$runtime/node_modules/playwright/cli.js" install --with-deps chromium
+      echo "NODE_PATH=$runtime/node_modules" >> "$GITHUB_ENV"
+      echo "PLAYWRIGHT_BROWSERS_PATH=$browsers" >> "$GITHUB_ENV"
+      playwright-cli install-browser chromium
       node scripts/serve.mjs > /tmp/gh-aw/agent/qa/server.log 2>&1 &
       echo "$!" > /tmp/gh-aw/agent/qa/server.pid
 
@@ -422,7 +436,7 @@ pre-agent-steps:
       });
       NODE
 
-      NODE_PATH="$(npm root --global)" node /tmp/gh-aw/agent/qa/run-acceptance.cjs
+      node /tmp/gh-aw/agent/qa/run-acceptance.cjs
 
   - name: Upload fixed QA evidence
     if: always()
