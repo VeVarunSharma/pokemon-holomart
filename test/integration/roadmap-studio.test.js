@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
@@ -15,18 +15,18 @@ import {
   resolveInitiativeFocus,
   resolveRenderFocus,
   validateRoadmap,
-} from "../.github/extensions/roadmap-studio/model.mjs";
-import { renderRoadmap, renderShell } from "../.github/extensions/roadmap-studio/renderer.mjs";
+} from "../../.github/extensions/roadmap-studio/model.mjs";
+import { renderRoadmap, renderShell } from "../../.github/extensions/roadmap-studio/renderer.mjs";
 
-const roadmap = JSON.parse(await readFile(new URL("../product/roadmap.json", import.meta.url), "utf8"));
-const schema = JSON.parse(await readFile(new URL("../product/roadmap.schema.json", import.meta.url), "utf8"));
+const roadmap = JSON.parse(await readFile(new URL("../../product/roadmap.json", import.meta.url), "utf8"));
+const schema = JSON.parse(await readFile(new URL("../../product/roadmap.schema.json", import.meta.url), "utf8"));
 
 test("validates the committed roadmap against its supported contract", () => {
   assert.equal(validateRoadmap(structuredClone(roadmap), schema).initiatives.length, 5);
 });
 
 test("loads the workspace artifact and rejects paths outside the JSON boundary", async () => {
-  const extensionUrl = new URL("../.github/extensions/roadmap-studio/extension.mjs", import.meta.url);
+  const extensionUrl = new URL("../../.github/extensions/roadmap-studio/extension.mjs", import.meta.url);
   assert.equal(projectWorkspaceFromExtension(extensionUrl), process.cwd());
   const loaded = await loadRoadmapFile(process.cwd(), "product/roadmap.json");
   assert.equal(loaded.durablePath, path.join("product", "roadmap.json"));

@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import process from "node:process";
@@ -21,7 +19,7 @@ const CHILD_CONTEXT = Object.freeze({
     ],
     "references": [
       "../src/features/saved-searches/storage.js#L3-L57",
-      "../test/saved-searches.test.js#L34-L68",
+      "../test/unit/saved-searches.test.js#L33-L67",
       "./saved-searches-spec.md#proposed-acceptance-boundaries"
     ],
     "validation": [
@@ -40,7 +38,7 @@ const CHILD_CONTEXT = Object.freeze({
       "SS-05"
     ],
     "references": [
-      "../app/app.js#L111-L248",
+      "../src/storefront/initialize-storefront.js#L172-L268",
       "../app/index.html#L124-L171",
       "./saved-searches-spec.md#proposed-acceptance-boundaries"
     ],
@@ -80,7 +78,7 @@ const CHILD_CONTEXT = Object.freeze({
     ],
     "references": [
       "../app/index.html#L114-L232",
-      "../app/app.js#L111-L248",
+      "../src/storefront/initialize-storefront.js#L155-L274",
       "../design/saved-searches-ux-brief.md#accessibility"
     ],
     "validation": [
