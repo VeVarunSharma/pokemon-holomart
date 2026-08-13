@@ -23,6 +23,10 @@ Verify <http://127.0.0.1:4173>:
 5. Add a listing to the demo cart.
 6. Confirm the footer identifies synthetic data and abstract card visuals.
 
+For the AI-assisted testing, independent assertion review, deterministic
+browser evidence, seeded exploratory replay, and approval-gated dispatch
+commands, use the [Agentic QA demo runbook](agentic-qa-demo.md).
+
 Ask Copilot to reload extensions and open Roadmap Studio focused on `init-saved-searches-preview`. Keep `product/roadmap.json`, `design/local-design-context.json`, and `npm run issues:preview:json` ready as fallbacks.
 
 ## Ports
