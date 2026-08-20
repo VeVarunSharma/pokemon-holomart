@@ -60,7 +60,8 @@ const requiredFiles = [
   "docs/agentic-qa-demo.md",
   "docs/demo-operations.md",
   "docs/github-projects-setup.md",
-  "docs/hands-on-keyboard-prompts.md"
+  "docs/hands-on-keyboard-prompts.md",
+  "docs/qa-architecture.md"
 ];
 
 function record(condition, message) {

@@ -186,6 +186,15 @@ function git(args, options = {}) {
   return result.stdout;
 }
 
+export function repositoryStatusViolations(status) {
+  assert(typeof status === "string", "repository status must be text");
+  return status
+    .split(/\r?\n/)
+    .filter(Boolean)
+    .filter((line) => !line.startsWith("?? .claude/skills/playwright-cli/"))
+    .join("\n");
+}
+
 async function writeJson(filePath, value) {
   await writeFile(filePath, `${JSON.stringify(value, null, 2)}\n`, "utf8");
 }
@@ -295,7 +304,11 @@ async function prepareEvidence() {
 
   const repositoryBefore = git(["status", "--porcelain=v1", "--untracked-files=all"]);
   await writeFile(path.join(context.artifactDir, "repository-before.txt"), repositoryBefore, "utf8");
-  assert(repositoryBefore.trim() === "", "repository checkout is dirty before QA execution");
+  const repositoryBeforeViolations = repositoryStatusViolations(repositoryBefore);
+  assert(
+    repositoryBeforeViolations === "",
+    `repository checkout is dirty before QA execution: ${repositoryBeforeViolations}`
+  );
 
   const changedFiles = git(["diff", "--name-status", `${context.baseSha}...${context.headSha}`]);
   const rawDiff = git(["diff", "--no-ext-diff", "--unified=20", `${context.baseSha}...${context.headSha}`], {
@@ -425,48 +438,40 @@ function markdownCell(value) {
   return String(value).replaceAll("|", "\\|").replace(/\r?\n/g, " ");
 }
 
-async function runDeterministicGates() {
-  const context = contextFromEnvironment();
-  const manifest = await readJson(path.join(context.artifactDir, "manifest.json"));
-  assert(manifest.testedRevision === context.headSha, "manifest revision does not match requested revision");
-  const gates = [
+export function deterministicGateDefinitions(
+  platform = process.platform,
+  commandShell = process.env.ComSpec
+) {
+  return [
     {
       id: "artifact-validation",
       category: "integration",
-      ...npmInvocation(["run", "validate"])
+      ...npmInvocation(["run", "validate"], platform, commandShell)
     },
     {
       id: "unit-contracts",
       category: "unit",
-      command: process.execPath,
-      args: [
-        "--test",
-        "test/csv.test.js",
-        "test/filter-state.test.js",
-        "test/saved-searches.test.js",
-        "test/share-state.test.js"
-      ]
+      ...npmInvocation(["run", "test:unit"], platform, commandShell)
     },
     {
       id: "integration-contracts",
       category: "integration",
-      command: process.execPath,
-      args: [
-        "--test",
-        "test/reset-demo.test.js",
-        "test/roadmap-to-issues.test.js",
-        "test/roadmap-studio.test.js"
-      ]
+      ...npmInvocation(["run", "test:integration"], platform, commandShell)
     },
     {
       id: "full-node-suite",
       category: "regression",
-      ...npmInvocation(["test"])
+      command: process.execPath,
+      args: [
+        "--test",
+        "test/qa-change-risk.test.js",
+        "test/agentic-qa-evidence.test.js"
+      ]
     },
     {
       id: "issue-preview",
       category: "integration",
-      ...npmInvocation(["run", "issues:preview:json"])
+      ...npmInvocation(["run", "issues:preview:json"], platform, commandShell)
     },
     {
       id: "browser-e2e",
@@ -475,6 +480,13 @@ async function runDeterministicGates() {
       args: [path.join(ROOT, "scripts", "agentic-qa-browser.cjs")]
     }
   ];
+}
+
+async function runDeterministicGates() {
+  const context = contextFromEnvironment();
+  const manifest = await readJson(path.join(context.artifactDir, "manifest.json"));
+  assert(manifest.testedRevision === context.headSha, "manifest revision does not match requested revision");
+  const gates = deterministicGateDefinitions();
 
   const results = [];
   for (const gate of gates) results.push(await runGate(context.artifactDir, gate));
@@ -755,10 +767,20 @@ async function finalizeEvidence() {
   let repositoryAfter = "";
   try {
     repositoryAfter = git(["status", "--porcelain=v1", "--untracked-files=all"]);
+    const repositoryBefore = await readFile(path.join(context.artifactDir, "repository-before.txt"), "utf8");
+    const repositoryBeforeViolations = repositoryStatusViolations(repositoryBefore);
+    const repositoryUnchanged = repositoryBeforeViolations === ""
+      && repositoryAfter === repositoryBefore;
     addCheck(
       "repository-clean",
-      repositoryAfter.trim() === "",
-      repositoryAfter.trim() === "" ? "no tracked or untracked checkout changes" : repositoryAfter.trim()
+      repositoryUnchanged,
+      repositoryUnchanged
+        ? repositoryBefore.trim() === ""
+          ? "no tracked or untracked checkout changes"
+          : "runtime-owned Playwright skill files remain the only untracked checkout entries"
+        : repositoryBeforeViolations
+          || repositoryAfter.trim()
+          || "checkout status no longer matches the pre-run runtime baseline"
     );
   } catch (error) {
     addCheck("repository-clean", false, cleanMessage(error));
