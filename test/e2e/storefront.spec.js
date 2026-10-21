@@ -18,7 +18,7 @@ test("loads the storefront with its synthetic catalog boundary", async ({ page }
   await expect(page).toHaveTitle(/HoloMart/);
   await expect(page.getByRole("heading", {
     level: 1,
-    name: "Find the card your binder is missing."
+    name: "Gotta Catch em' All"
   })).toBeVisible();
   await expect(page.getByRole("heading", {
     level: 2,
