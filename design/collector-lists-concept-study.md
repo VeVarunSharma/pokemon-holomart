@@ -19,6 +19,17 @@ The linked frames were not authenticated or inspected for this committed fallbac
 
 No observed workflow currently establishes that any stable list solves a recurring problem distinct from Saved Searches. The roadmap therefore keeps the initiative **later**, **candidate**, and **low confidence**, with the primary job deferred for human decision (`product/roadmap.json:589-649`).
 
+## Separate workflow observations
+
+| Workflow | What this study observed | Distinction and evidence gap |
+| --- | --- | --- |
+| Wishlisting | `MK-02` describes a generic market pattern for retaining stable card intent. | Intent concerns a specific card rather than changing listing criteria, but no HoloMart workflow was observed and recurrence was not established. |
+| Collection ownership | `MK-02` says ownership and search intent use different data models; no ownership-management workflow was observed. | Ownership would require an explicit declaration and correction lifecycle, not inference from save, cart, or purchase. Demand and recurrence remain unknown. |
+| Gifting | `CI-04` observed one fictional occasional buyer seeking guided recommendations rather than noticing a persistent personal tool. | This is a counter-signal to a durable gift list, not evidence of repeated gift planning, recipient management, or list reuse. |
+| Dynamic search | `MK-02` distinguishes changing search criteria from stable card intent, while `CI-04` did not notice Saved Searches. | A Saved Search reapplies criteria to changing listings and prices. These sources establish neither list demand nor broad Saved Search relevance. |
+
+**Study outcome:** a recurring wishlist, ownership-management, or gifting problem was **not established**. The sample contains one invented, low-confidence occasional-buyer observation and one invented generic market note; it includes no repeated workflow, no observed ownership lifecycle, and no HoloMart list behavior. “No new list” therefore remains a live option alongside the three stable-list concepts.
+
 ## Concepts to compare, not approve
 
 | Concept | Candidate job | Boundary to test |
