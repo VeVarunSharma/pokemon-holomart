@@ -3,7 +3,9 @@ import { filtersFromUrl, filtersToUrl } from "../features/share/share-state.js";
 import {
   createSavedSearch,
   readSavedSearches,
+  readSavedSearchesState,
   removeSearch,
+  renameSearch,
   saveSearch
 } from "../features/saved-searches/storage.js";
 
@@ -52,6 +54,8 @@ export function initializeStorefront({
     quickSave: documentRef.querySelector("#quick-save-button"),
     dialog: documentRef.querySelector("#save-search-dialog"),
     dialogForm: documentRef.querySelector("#save-search-form"),
+    dialogTitle: documentRef.querySelector("#save-dialog-title"),
+    dialogSubmit: documentRef.querySelector("#save-search-submit"),
     name: documentRef.querySelector("#search-name"),
     preview: documentRef.querySelector("#filter-preview"),
     searches: documentRef.querySelector("#saved-searches-list"),
@@ -68,6 +72,8 @@ export function initializeStorefront({
   let filters = filtersFromUrl(windowRef.location.href);
   let visibleCards = [];
   let cartCount = 0;
+  let activeSearchId = null;
+  let editingSearchId = null;
   let toastTimer;
 
   function escapeHtml(value) {
@@ -147,6 +153,7 @@ export function initializeStorefront({
     filters = normalizeFilters(next);
     syncControls();
     renderCatalog();
+    renderSavedSearches();
     if (replaceHistory) {
       windowRef.history.replaceState(null, "", filtersToUrl(filters, windowRef.location.href));
     }
@@ -169,27 +176,69 @@ export function initializeStorefront({
     return parts.length ? parts.join(" · ") : "All card listings";
   }
 
+  function sameFilters(first, second) {
+    return first.query === second.query
+      && first.rarity === second.rarity
+      && first.expansion === second.expansion;
+  }
+
+  function describeUnavailable(criteria, verb = "will be omitted") {
+    const descriptions = criteria.map(({ field, value }) => `${field} “${value}”`);
+    const joined = descriptions.length === 2
+      ? `${descriptions[0]} and ${descriptions[1]}`
+      : descriptions[0];
+    return `Unavailable ${joined} ${verb}.`;
+  }
+
+  function focusSavedSearchControl(attribute, id) {
+    [...elements.searches.querySelectorAll(`[${attribute}]`)]
+      .find((control) => control.getAttribute(attribute) === id)
+      ?.focus();
+  }
+
   function renderSavedSearches() {
-    const searches = readSavedSearches(storage);
-    elements.searches.innerHTML = searches.length
+    const { searches, issues } = readSavedSearchesState(storage);
+    if (activeSearchId && !searches.some((search) => search.id === activeSearchId)) {
+      activeSearchId = null;
+    }
+    const issueMessage = issues.length
+      ? `<p class="search-recovery" role="status">Some saved search data couldn’t be loaded. The catalog is still available.</p>`
+      : "";
+    elements.searches.innerHTML = issueMessage + (searches.length
       ? `<div class="search-list">${searches.map((search) => `
-          <div class="saved-search">
-            <button class="saved-search-apply" type="button" data-search-id="${escapeHtml(search.id)}">
+          <div class="saved-search${search.id === activeSearchId ? " is-active" : ""}">
+            <button class="saved-search-apply" type="button" data-search-id="${escapeHtml(search.id)}"${search.id === activeSearchId ? ' aria-current="true"' : ""}>
               <strong>${escapeHtml(search.name)}</strong>
               <small>${escapeHtml(describeFilters(search.filters))}</small>
             </button>
-            <button class="delete-search" type="button" data-delete-id="${escapeHtml(search.id)}" aria-label="Delete ${escapeHtml(search.name)}">×</button>
+            ${search.id === activeSearchId
+              ? `<span class="search-state" data-search-state>${sameFilters(filters, search.filters) ? "Active" : "Edited"}</span>`
+              : ""}
+            ${search.unavailableCriteria.length
+              ? `<p class="search-warning">${escapeHtml(describeUnavailable(search.unavailableCriteria))}</p>`
+              : ""}
+            <div class="saved-search-actions">
+              ${search.id === activeSearchId && !sameFilters(filters, search.filters)
+                ? `<button type="button" data-update-id="${escapeHtml(search.id)}" aria-label="Update ${escapeHtml(search.name)}">Update search</button>
+                   <button type="button" data-save-as-id="${escapeHtml(search.id)}" aria-label="Save edits to ${escapeHtml(search.name)} as new">Save as new</button>`
+                : ""}
+              <button type="button" data-rename-id="${escapeHtml(search.id)}" aria-label="Rename ${escapeHtml(search.name)}">Rename</button>
+              <button class="delete-search" type="button" data-delete-id="${escapeHtml(search.id)}" aria-label="Delete ${escapeHtml(search.name)}">Delete</button>
+            </div>
           </div>`).join("")}</div>`
       : `<div class="searches-empty">
           <span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4h12v16l-6-3-6 3z"/></svg></span>
           <strong>Save your first search</strong>
-          <p>Keep a shortcut to the cards and expansions you collect.</p>
-        </div>`;
+          <p>Keep a shortcut on this device to the cards and expansions you collect.</p>
+        </div>`);
   }
 
-  function openSaveDialog() {
-    elements.name.value = "";
-    const chips = describeFilters(filters).split(" · ");
+  function openSaveDialog(search = null) {
+    editingSearchId = search?.id ?? null;
+    elements.dialogTitle.textContent = search ? "Rename saved search" : "Save this search";
+    elements.dialogSubmit.textContent = search ? "Rename search" : "Save search";
+    elements.name.value = search?.name ?? "";
+    const chips = describeFilters(search?.filters ?? filters).split(" · ");
     elements.preview.innerHTML = chips.map((part) => `<span>${escapeHtml(part)}</span>`).join("");
     elements.dialog.showModal();
     windowRef.requestAnimationFrame(() => elements.name.focus());
@@ -217,8 +266,8 @@ export function initializeStorefront({
   listen(elements.form, "submit", (event) => event.preventDefault());
   listen(elements.clear, "click", () => updateFilters(DEFAULT_FILTERS));
   listen(elements.emptyClear, "click", () => updateFilters(DEFAULT_FILTERS));
-  listen(elements.openSave, "click", openSaveDialog);
-  listen(elements.quickSave, "click", openSaveDialog);
+  listen(elements.openSave, "click", () => openSaveDialog());
+  listen(elements.quickSave, "click", () => openSaveDialog());
   listen(elements.export, "click", () => {
     downloadAdapter(visibleCards);
     showToast(`Exported ${visibleCards.length} card listings`);
@@ -237,6 +286,22 @@ export function initializeStorefront({
     event.preventDefault();
     if (!elements.dialogForm.reportValidity()) return;
 
+    if (editingSearchId) {
+      const result = renameSearch(storage, editingSearchId, elements.name.value);
+      if (!result.ok) {
+        showToast("Couldn’t rename this saved search");
+        return;
+      }
+      elements.dialog.close();
+      renderSavedSearches();
+      showToast(`Renamed saved search to “${elements.name.value.trim()}”`);
+      [...elements.searches.querySelectorAll("[data-rename-id]")]
+        .find((button) => button.dataset.renameId === editingSearchId)
+        ?.focus();
+      editingSearchId = null;
+      return;
+    }
+
     const search = createSavedSearch({ name: elements.name.value, filters });
     const result = saveSearch(storage, search);
     if (!result.ok) {
@@ -245,26 +310,61 @@ export function initializeStorefront({
     }
 
     elements.dialog.close();
+    activeSearchId = search.id;
     renderSavedSearches();
     showToast(`Saved “${search.name}” on this device`);
   });
   listen(elements.searches, "click", (event) => {
     const applyButton = event.target.closest("[data-search-id]");
     const deleteButton = event.target.closest("[data-delete-id]");
+    const renameButton = event.target.closest("[data-rename-id]");
+    const updateButton = event.target.closest("[data-update-id]");
+    const saveAsButton = event.target.closest("[data-save-as-id]");
 
     if (applyButton) {
       const search = readSavedSearches(storage).find((item) => item.id === applyButton.dataset.searchId);
       if (search) {
+        activeSearchId = search.id;
         updateFilters(search.filters);
-        showToast(`Applied “${search.name}”`);
+        focusSavedSearchControl("data-search-id", search.id);
+        showToast(search.unavailableCriteria.length
+          ? `Applied “${search.name}”. ${describeUnavailable(search.unavailableCriteria, search.unavailableCriteria.length === 1 ? "was omitted" : "were omitted")}`
+          : `Applied “${search.name}”`);
       }
     }
 
     if (deleteButton) {
+      const search = readSavedSearches(storage).find((item) => item.id === deleteButton.dataset.deleteId);
+      if (!search || !windowRef.confirm(`Delete “${search.name}” from this device?`)) return;
       const result = removeSearch(storage, deleteButton.dataset.deleteId);
+      if (result.ok && activeSearchId === deleteButton.dataset.deleteId) activeSearchId = null;
       renderSavedSearches();
       showToast(result.ok ? "Saved search removed" : "Couldn’t remove this search");
+      if (result.ok) {
+        (elements.searches.querySelector("[data-search-id]") ?? elements.quickSave).focus();
+      }
     }
+
+    if (renameButton) {
+      const search = readSavedSearches(storage).find((item) => item.id === renameButton.dataset.renameId);
+      if (search) openSaveDialog(search);
+    }
+
+    if (updateButton) {
+      const search = readSavedSearches(storage).find((item) => item.id === updateButton.dataset.updateId);
+      if (!search) return;
+      const result = saveSearch(storage, {
+        ...search,
+        filters,
+        unavailableCriteria: [],
+        updatedAt: new Date().toISOString()
+      });
+      renderSavedSearches();
+      showToast(result.ok ? `Updated “${search.name}” on this device` : "Couldn’t update this saved search");
+      if (result.ok) focusSavedSearchControl("data-search-id", search.id);
+    }
+
+    if (saveAsButton) openSaveDialog();
   });
   listen(documentRef, "keydown", (event) => {
     if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k") {

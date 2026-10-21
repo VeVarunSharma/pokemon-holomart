@@ -121,6 +121,7 @@ test("persists a Saved Search across reload, then applies and deletes it", async
   expect(storedSearches).toHaveLength(1);
   expect(storedSearches[0]).toMatchObject({
     name: savedSearchName,
+    schemaVersion: 1,
     filters: {
       query: "",
       rarity: "Illustration Rare",
@@ -138,6 +139,8 @@ test("persists a Saved Search across reload, then applies and deletes it", async
   await savedSearch.click();
 
   await expect(page.getByRole("status")).toHaveText(`Applied “${savedSearchName}”`);
+  await expect(savedSearch).toBeFocused();
+  await expect(page.getByText("Active", { exact: true })).toBeVisible();
   await expect(rarity).toHaveValue("Illustration Rare");
   await expect(expansion).toHaveValue("Scarlet & Violet—151");
   await expect(page.getByRole("article")).toHaveCount(2);
@@ -146,7 +149,23 @@ test("persists a Saved Search across reload, then applies and deletes it", async
     expansion: "Scarlet & Violet—151"
   });
 
-  await page.getByRole("button", { name: `Delete ${savedSearchName}` }).click();
+  await page.getByRole("searchbox", { name: "Search cards" }).fill("illustration");
+  await expect(page.getByText("Edited", { exact: true })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Update ${savedSearchName}` })).toBeVisible();
+  await expect(page.getByRole("button", { name: `Save edits to ${savedSearchName} as new` })).toBeVisible();
+
+  await page.getByRole("button", { name: `Rename ${savedSearchName}` }).click();
+  const renameDialog = page.getByRole("dialog", { name: "Rename saved search" });
+  await expect(renameDialog.getByLabel("Search name")).toBeFocused();
+  await renameDialog.getByLabel("Search name").fill("151 favorites");
+  await renameDialog.getByRole("button", { name: "Rename search" }).click();
+  await expect(page.getByRole("button", { name: /^151 favorites/ })).toBeVisible();
+
+  page.once("dialog", async (confirmation) => {
+    expect(confirmation.message()).toBe("Delete “151 favorites” from this device?");
+    await confirmation.accept();
+  });
+  await page.getByRole("button", { name: "Delete 151 favorites" }).click();
 
   await expect(page.getByRole("status")).toHaveText("Saved search removed");
   await expect(page.getByText("Save your first search", { exact: true })).toBeVisible();
@@ -155,7 +174,7 @@ test("persists a Saved Search across reload, then applies and deletes it", async
 
   await page.reload();
   await expect(page.getByText("Save your first search", { exact: true })).toBeVisible();
-  await expect(page.getByRole("button", { name: new RegExp(`^${savedSearchName}`) })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /^151 favorites/ })).toHaveCount(0);
 });
 
 test("updates the demo cart count, accessible label, and visible status", async ({ page }) => {

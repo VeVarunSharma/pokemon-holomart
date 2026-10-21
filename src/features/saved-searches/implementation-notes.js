@@ -1,9 +1,10 @@
 /**
  * Saved Searches preview boundary
  *
- * IMPLEMENTED: create, read, apply, and delete personal searches in localStorage.
+ * IMPLEMENTED: versioned create, read, apply, rename, update, and delete flows
+ * with active/edited state and stale-criteria recovery in localStorage.
  * NOT IMPLEMENTED: account persistence, multi-device sync, price alerts,
- * alert preferences, migrations beyond defensive reads, usage telemetry,
+ * alert preferences, cross-device conflict handling, usage telemetry,
  * notification delivery, or complete browser/integration coverage.
  *
  * The local storage adapter is intentionally explicit rather than disguised
