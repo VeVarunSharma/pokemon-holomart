@@ -61,6 +61,15 @@ test("collector-list previews retain research and ownership boundaries", () => {
   assert.deepEqual(listModel.dependencies, ["work-lists-problem-study"]);
 });
 
+test("price-monitoring study preview retains research boundaries", () => {
+  const plan = JSON.parse(run("--initiative", "init-price-drop-alerts", "--format", "json"));
+  const jobStudy = plan.children.find(({ id }) => id === "work-alert-job-study");
+
+  assert.ok(jobStudy.references.includes("../design/price-monitoring-job-study.md#research-decision-matrix"));
+  assert.match(jobStudy.exclusions.join(" "), /No notification prototype/);
+  assert.deepEqual(jobStudy.dependencies, []);
+});
+
 test("dependency ordering is stable when authoritative input order changes", () => {
   const initiative = structuredClone(roadmap.initiatives[0]);
   const expected = buildPlan(roadmap, initiative).children.map(({ id }) => id);

@@ -21,6 +21,7 @@ const requiredFiles = [
   "product/evidence/usage-analytics.json",
   "product/evidence/market-notes.md",
   "design/collector-lists-concept-study.md",
+  "design/price-monitoring-job-study.md",
   "design/saved-searches-ux-brief.md",
   "design/local-design-context.json",
   ".github/copilot-instructions.md",
