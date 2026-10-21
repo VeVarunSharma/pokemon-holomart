@@ -1,4 +1,4 @@
-import test from "node:test";
+import { test } from "vitest";
 import assert from "node:assert/strict";
 import path from "node:path";
 import {
@@ -10,7 +10,7 @@ import {
   validateBrowserPayload,
   validateDeterministicPayload,
   validateIndependentReviewPayload
-} from "../scripts/agentic-qa-evidence.mjs";
+} from "../../scripts/agentic-qa-evidence.mjs";
 
 const REVISION = "0123456789abcdef0123456789abcdef01234567";
 const OTHER_REVISION = "89abcdef0123456789abcdef0123456789abcdef";

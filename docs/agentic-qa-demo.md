@@ -11,8 +11,8 @@ The implementation separates two kinds of evidence:
 - Six deterministic gates are blocking: artifact validation, focused unit
   contracts, integration contracts, the full Node suite, issue-preview
   integration, and seven browser journeys
-  (`scripts/agentic-qa-evidence.mjs:27-43`,
-  `scripts/agentic-qa-evidence.mjs:428-521`).
+  (`scripts/agentic-qa-evidence.mjs:25-41`,
+  `scripts/agentic-qa-evidence.mjs:426-506`).
 - A fresh workflow agent independently challenges changed-test assertion
   strength, then performs exactly three seed-selected exploratory charters. Its
   observations are advisory and cannot override a deterministic failure
@@ -28,7 +28,7 @@ The workflow source is
   head and base SHAs. The harness rejects a checkout or evidence bundle that
   names another revision
   (`.github/workflows/holomart-agentic-qa.md:5-48`,
-  `scripts/agentic-qa-evidence.mjs:286-372`).
+  `scripts/agentic-qa-evidence.mjs:284-370`).
 - Repository permissions are read-only. `copilot-requests: write` authorizes
   inference, not repository content mutation. GitHub and edit tools are
   disabled, checkout credentials do not persist, and the compiled lock contains
@@ -48,12 +48,12 @@ The workflow source is
   is retained for seven days. After a successful upload, its staging directory
   is removed before gh-aw assembles its compiler-managed diagnostic artifact,
   preventing a second copy with repository-default retention
-  (`scripts/agentic-qa-evidence.mjs:23-26`,
+  (`scripts/agentic-qa-evidence.mjs:21-24`,
   `.github/workflows/holomart-agentic-qa.md:200-232`).
 - Repository cleanliness is checked before and after execution so generated
   browser or tool files cannot silently become evidence
-  (`scripts/agentic-qa-evidence.mjs:286-299`,
-  `scripts/agentic-qa-evidence.mjs:749-765`).
+  (`scripts/agentic-qa-evidence.mjs:284-297`,
+  `scripts/agentic-qa-evidence.mjs:734-750`).
 
 ## 1. Compile and audit locally
 
@@ -83,7 +83,7 @@ Remove-Item .github\aw\actions-lock.json, .poutine.yml -ErrorAction SilentlyCont
 Run the repository and workflow-safety checks:
 
 ```powershell
-node --test test\agentic-qa-evidence.test.js
+npm run test:unit -- test/unit/agentic-qa-evidence.test.js
 npm run demo:check
 
 $lock = ".github\workflows\holomart-agentic-qa.lock.yml"
@@ -163,7 +163,7 @@ if ($runExit -ne 0 -or $finalizeExit -ne 0 -or $enforceExit -ne 0) {
 `prepare` starts only the known loopback server. `finalize` stops that recorded
 PID, checks the tested revision and clean checkout again, validates result
 schemas, inventories the bundle, and writes SHA-256 checksums
-(`scripts/agentic-qa-evidence.mjs:739-845`).
+(`scripts/agentic-qa-evidence.mjs:724-830`).
 
 To replay the same stochastic inputs, replace `auto` with the unsigned integer
 from `manifest.json`. The same head SHA, base SHA, seed, charter order, and paths
