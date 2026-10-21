@@ -1,5 +1,34 @@
 # HoloMart · Copilot for Product demo kit
 
+```text
+ _   _  ___  _      ___  __  __    _    ____ _____
+| | | |/ _ \| |    / _ \|  \/  |  / \  |  _ \_   _|
+| |_| | | | | |   | | | | |\/| | / _ \ | |_) || |
+|  _  | |_| | |___| |_| | |  | |/ ___ \|  _ < | |
+|_| |_|\___/|_____|\___/|_|  |_/_/   \_\_| \_\|_|
+
+           .-----------------------------------------.
+           |  SEARCH  *  COMPARE  *  SAVE  *  CART  |
+           '--------------------.--------------------'
+                                |
+        .-~~~~~~~~~~-.           |             \ | /
+     .-'    /\  /\    '-.        |          --- <*> ---
+    /      /  \/  \  HM  \       |             /|\
+   |       \  /\  /       |------+------.  .----'----.
+    \       \/  \/       /              | /  HOLOBOT  \
+     '-.______________.-'               ||  .-------.  |
+          HOLO ORB                      ||  | o   o |  |
+                                        |  |   ^   |  |
+                                        |  '---+---'  |
+                                        '---| /_\ |---'
+                                            |/___\|
+                                             / \
+
+                  SYNTHETIC / DEMO-ONLY
+```
+
+> **"Collect every holographic find!"**
+
 ## Product Track: From Repo Insight to Roadmap Action
 
 HoloMart is a fictional e-commerce marketplace for Pokémon TCG singles. The working demo lets shoppers search synthetic card listings by Pokémon, expansion, and rarity; compare price, condition, seller reputation, and market context; add cards to a demo cart; export the catalog; and save searches in the current browser.
