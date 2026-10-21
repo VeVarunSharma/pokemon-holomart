@@ -107,6 +107,10 @@ test("persists a Saved Search across reload, then applies and deletes it", async
 
   const dialog = page.getByRole("dialog", { name: "Save this search" });
   await expect(dialog).toBeVisible();
+  await dialog.getByRole("button", { name: "Close save search dialog" }).click();
+  await expect(dialog).toBeHidden();
+  await page.getByRole("button", { name: "Save this search", exact: true }).click();
+  await expect(dialog).toBeVisible();
   await dialog.getByLabel("Search name").fill(savedSearchName);
   await dialog.getByRole("button", { name: "Save search", exact: true }).click();
 

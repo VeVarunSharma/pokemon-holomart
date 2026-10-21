@@ -43,6 +43,8 @@ npm run demo:reset
 
 The test layers are deliberately separate:
 
+For how prompts, agents, skills, the QA Change-Risk canvas, conventional CI, and the pull-request agentic workflow fit together, see the [QA architecture and pipeline](docs/qa-architecture.md).
+
 | Layer | Implementation boundary |
 | --- | --- |
 | Unit | `test/unit/**/*.test.js`, selected by `vitest.unit.config.js`, runs module-level filter, URL state, CSV, and browser-local Saved Searches behavior in Vitest's Node environment. |
@@ -161,7 +163,9 @@ If custom commands are unavailable, name the corresponding file in `.github/prom
 | `product/evidence/` | Synthetic shopper, support, usage, and market signals |
 | `product/roadmap.json` | Authoritative five-initiative roadmap |
 | `design/` | Authentication-free UX brief, collector-list concept study, design context, and tokens |
-| `.github/prompts/`, `agents/`, `skills/` | Evidence-disciplined Copilot workflows |
+| `.github/prompts/`, `.github/agents/`, `.github/skills/` | Evidence-disciplined Copilot prompts, agents, and reusable skills |
+| `.github/workflows/qa-user-behaviour*` | Pull-request agentic QA source and generated workflow |
+| `.github/extensions/qa-change-risk/` | Interactive local diff risk and test-planning canvas |
 | `.github/extensions/roadmap-studio/` | Interactive read-only roadmap canvas |
 | `scripts/roadmap-to-issues.mjs` | Deterministic epic and child-issue preview |
 
@@ -193,5 +197,6 @@ Now/Next/Later are planning horizons, not promises. Every initiative preserves e
 - Agentic testing and evidence replay: [Agentic QA demo](docs/agentic-qa-demo.md)
 - Exact 45-minute script: [facilitator guide](docs/facilitator-guide.md)
 - Copy/paste conversation ladder: [hands-on-keyboard prompts](docs/hands-on-keyboard-prompts.md)
+- QA components and delivery pipeline: [QA architecture](docs/qa-architecture.md)
 - Optional Figma setup: [Figma MCP](docs/figma-mcp.md)
 - GitHub roadmap model: [GitHub Projects setup](docs/github-projects-setup.md)

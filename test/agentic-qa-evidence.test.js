@@ -2,9 +2,11 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import path from "node:path";
 import {
+  deterministicGateDefinitions,
   ensureExternalArtifactDirectory,
   npmInvocation,
   normalizeSeed,
+  repositoryStatusViolations,
   selectExplorationCharters,
   validateQaBaseUrl,
   validateBrowserPayload,
@@ -127,6 +129,24 @@ test("artifact output must stay outside the repository checkout", () => {
   );
 });
 
+test("repository status accepts only gh-aw Playwright skill files as the runtime baseline", () => {
+  const runtimeStatus = [
+    "?? .claude/skills/playwright-cli/SKILL.md",
+    "?? .claude/skills/playwright-cli/references/session-management.md",
+    ""
+  ].join("\n");
+
+  assert.equal(repositoryStatusViolations(runtimeStatus), "");
+  assert.equal(
+    repositoryStatusViolations(`${runtimeStatus}?? unexpected.txt\n`),
+    "?? unexpected.txt"
+  );
+  assert.equal(
+    repositoryStatusViolations(" M .claude/skills/playwright-cli/SKILL.md\n"),
+    " M .claude/skills/playwright-cli/SKILL.md"
+  );
+});
+
 test("QA base URL stays on explicit HTTP loopback", () => {
   assert.equal(validateQaBaseUrl(undefined).href, "http://127.0.0.1:4173/");
   assert.equal(validateQaBaseUrl("http://localhost:43175").href, "http://localhost:43175/");
@@ -153,6 +173,25 @@ test("npm gate invocation uses fixed tokens and a Windows command shell", () => 
     () => npmInvocation(["run", "validate&&whoami"], "win32", "cmd.exe"),
     /fixed command tokens/
   );
+});
+
+test("deterministic gates use the current Vitest and native Node suites", () => {
+  const gates = deterministicGateDefinitions("linux");
+  const byId = Object.fromEntries(gates.map((gate) => [gate.id, gate]));
+
+  assert.deepEqual(
+    { command: byId["unit-contracts"].command, args: byId["unit-contracts"].args },
+    { command: "npm", args: ["run", "test:unit"] }
+  );
+  assert.deepEqual(
+    { command: byId["integration-contracts"].command, args: byId["integration-contracts"].args },
+    { command: "npm", args: ["run", "test:integration"] }
+  );
+  assert.deepEqual(byId["full-node-suite"].args, [
+    "--test",
+    "test/qa-change-risk.test.js",
+    "test/agentic-qa-evidence.test.js"
+  ]);
 });
 
 test("deterministic evidence rejects stale revisions, missing gates, and inconsistent summaries", () => {

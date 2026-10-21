@@ -163,6 +163,10 @@ max-daily-ai-credits: -1
 timeout-minutes: 30
 
 pre-agent-steps:
+  - name: Install repository dependencies
+    shell: bash
+    run: npm ci
+
   - name: Provision the bounded browser runtime
     shell: bash
     continue-on-error: true
